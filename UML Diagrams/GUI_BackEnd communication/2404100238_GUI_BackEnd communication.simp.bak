@@ -584,7 +584,7 @@
               <stereotype name="abstraction" />
             </stereotypes>
             <stereotype-instances>
-              <stereotype id="_c" type="abstraction" creation-date="04/10/2024 02:36:53" ref="" />
+              <stereotype id="_c" type="abstraction" creation-date="04/10/2024 02:38:00" ref="" />
             </stereotype-instances>
           </item>
           <item id="cf9f6f3ddd5c418ab001bfc0bbb575d2" cid="I003" type="uml-interface-classifier" name="Observer" creator="" creation-date="04/10/2024 01:24:19">

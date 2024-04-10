@@ -135,7 +135,7 @@
       </counter>
       <counter>
         <item-type type-id="property" type="Property" />
-        <value>25</value>
+        <value>24</value>
       </counter>
       <counter>
         <item-type type-id="generalization" type="Generalization" />
@@ -522,7 +522,7 @@
           </item>
         </layer>
       </diagram>
-      <diagram type="uml-class" id="p8ba659bf30054a74a15abcfba99f1eda_183588675" name="GUI_Backend communication" order-index="2" overview-order-index="0" uid="" auto-routed-paths="false" default-line-style="default" view-location="-306,-24" zoom="1.6">
+      <diagram type="uml-class" id="p8ba659bf30054a74a15abcfba99f1eda_183588675" name="GUI_Backend communication" order-index="2" overview-order-index="0" uid="" auto-routed-paths="false" default-line-style="default" view-location="-216,-122" zoom="0.5">
         <size width="1" height="1" unit="px" type="ExpandableRightDown" />
         <style>
           <background-color index="1" color="#FFFFFFFF" />
@@ -556,7 +556,6 @@
               <attribute id="a501e30cf96084a31bdec97b1ef763ff7689" cid="PROP003" name="remainingTime" creation-date="04/10/2024 00:50:57" property-ref="49c3e487d03b4978b0334c74a7509791" />
               <attribute id="a82c1bc0890ed4fa490fe89d5dee3be44884" cid="PROP022" name="turnaroungTime" creation-date="04/10/2024 02:09:44" property-ref="f8212583e1b44fd786862cc8bf86793c" />
               <attribute id="a750f8bcb20d74dcb920e84c3185a1180362" cid="PROP023" name="WiatingTime" creation-date="04/10/2024 02:09:53" property-ref="a87bfe0b32084cdc98eca733bd1b5860" />
-              <attribute id="a0470154563a64db78c9c05ad52c12ff3135" cid="PROP024" name="Name" creation-date="04/10/2024 02:36:42" property-ref="0eb40e97b9f047deb876640dc6974a36" />
             </attributes>
             <operations>
               <operation id="o65ea30fa8813465aa7884c7e45fb1b9d73" cid="OP003" name="getters and setters" creation-date="04/10/2024 00:52:32" type="" type-id="" visibility="public" />
@@ -584,7 +583,7 @@
               <stereotype name="abstraction" />
             </stereotypes>
             <stereotype-instances>
-              <stereotype id="_c" type="abstraction" creation-date="04/10/2024 02:36:53" ref="" />
+              <stereotype id="_c" type="abstraction" creation-date="04/10/2024 02:18:00" ref="" />
             </stereotype-instances>
           </item>
           <item id="cf9f6f3ddd5c418ab001bfc0bbb575d2" cid="I003" type="uml-interface-classifier" name="Observer" creator="" creation-date="04/10/2024 01:24:19">
@@ -614,7 +613,6 @@
           <item id="8a7db4caa9d9442a9b65caf51a8cde9d" cid="PROP006" type="property" name="GUIComponents" owner="04f011bb679740e88b7d28b0a868da1b" creator="" creation-date="04/10/2024 01:06:43" visibility="private" />
           <item id="07c794ea34b949e19beabb4f7a1f8712" cid="GNR001" type="generalization" creator="" creation-date="04/10/2024 00:52:45" from="50fb1928279f4577837a71bdc0bb6516" to="38f11fffd941452b87871965275ab088" visibility="package" />
           <item id="461fc647b1a94c6c917b4a2a8084dad6" cid="REA001" type="realization" creator="" creation-date="04/10/2024 00:48:31" from="4d2f37d9cfc944b19a2733f728774e91" to="50df5b18507d41cc9124fa1b7ef37373" visibility="package" />
-          <item id="0eb40e97b9f047deb876640dc6974a36" cid="PROP024" type="property" name="Name" owner="38f11fffd941452b87871965275ab088" creator="" creation-date="04/10/2024 02:36:42" visibility="private" />
           <item id="50df5b18507d41cc9124fa1b7ef37373" cid="I001" type="uml-interface-classifier" name="SchedulingAlgo" creator="" creation-date="04/10/2024 00:45:19">
             <stereotypes>
               <stereotype name="interface" />
@@ -787,7 +785,7 @@
             <relation from="67a580a0a41d499aa45e60ff625a35d9" from-iid="78c3e0976944484abf70a58f554f3d73" to="50df5b18507d41cc9124fa1b7ef37373" to-iid="2626a8b411404471bc452e8f577fbf27" />
           </item>
           <item id="38f11fffd941452b87871965275ab088" iid="273cbfc10b4043b389e2d82abc1107f9" show-fields="true" creation-date="04/10/2024 00:49:47" order-index="11" type="entity">
-            <layout ax="-25" ay="57" awidth="155" aheight="174" x="-25" y="57" width="155" height="160" />
+            <layout ax="-25" ay="57" awidth="155" aheight="160" x="-25" y="57" width="155" height="160" />
             <classifier />
             <class />
           </item>
@@ -797,19 +795,19 @@
             <class />
           </item>
           <item id="07c794ea34b949e19beabb4f7a1f8712" iid="e5f8599feb084f3ea40936c9faa7ba01" creation-date="04/10/2024 00:52:45" order-index="13" type="relation">
-            <layout line-style="oblique" lock-to-fields="false" auto-path="" x1="57" y1="256" x2="56" y2="231" start-border-pos="0.11904762131827218" end-border-pos="0.6199596774193549" name-position="0,20">
+            <layout line-style="oblique" lock-to-fields="false" auto-path="" x1="57" y1="256" x2="55" y2="217" start-border-pos="0.11925700051443917" end-border-pos="0.6206192262711063" name-position="0,20">
               <points>
                 <point x="57" y="256" />
-                <point x="56" y="231" />
+                <point x="55" y="217" />
               </points>
             </layout>
             <relation from="50fb1928279f4577837a71bdc0bb6516" from-iid="ca0000f1a7d245b992dd484dcd4a854a" to="38f11fffd941452b87871965275ab088" to-iid="273cbfc10b4043b389e2d82abc1107f9" />
           </item>
           <item id="1ddd7233234341f8b29dd0daba1d9edc" iid="4a5580f7eb4e4e549602d4d3d44d5340" creation-date="04/10/2024 00:55:25" order-index="14" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" auto-path="" x1="710" y1="164" x2="-25" y2="165" start-border-pos="0.375" end-border-pos="0.8453125" name-position="0,20">
+            <layout start-role-position="25,15" end-role-position="25,-15" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" auto-path="" x1="446" y1="164" x2="130" y2="156" start-border-pos="0.375" end-border-pos="0.8453125" name-position="0,20">
               <points>
-                <point x="710" y="164" />
-                <point x="-25" y="165" />
+                <point x="446" y="164" />
+                <point x="130" y="156" />
               </points>
             </layout>
             <relation from="50df5b18507d41cc9124fa1b7ef37373" from-iid="2626a8b411404471bc452e8f577fbf27" to="38f11fffd941452b87871965275ab088" to-iid="273cbfc10b4043b389e2d82abc1107f9" />
@@ -885,10 +883,10 @@
             <layout ax="-217" ay="87" awidth="140" aheight="100" x="-217" y="87" width="140" height="100" />
           </item>
           <item id="dib154a4f8c3764daca2b374730a4f9c2d2148" iid="3b2603bd5f7a447ab01114ab8d025e96" creation-date="04/10/2024 01:17:48" order-index="25" type="comment-connector">
-            <layout line-style="oblique" lock-to-fields="false" auto-path="" x1="-77" y1="139" x2="-25" y2="141" start-border-pos="0.38115577697753905" end-border-pos="0.8788915831467201" name-position="0,20">
+            <layout line-style="oblique" lock-to-fields="false" auto-path="" x1="-77" y1="137" x2="-25" y2="137" start-border-pos="0.375" end-border-pos="0.875" name-position="0,20">
               <points>
-                <point x="-77" y="139" />
-                <point x="-25" y="141" />
+                <point x="-77" y="137" />
+                <point x="-25" y="137" />
               </points>
             </layout>
             <relation from="4c2b94f8b5bf43f3a9e62d3dad416cd6" from-iid="e0829bcd38c747aca561495c58f41770" to="38f11fffd941452b87871965275ab088" to-iid="273cbfc10b4043b389e2d82abc1107f9" />
