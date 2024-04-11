@@ -52,7 +52,9 @@ public class SchedulerViewController implements Initializable{
     );
 
     public void addNewProcess(ActionEvent actionEvent) {
-        PriorityProcess process = new PriorityProcess(parseInt(arrivalField.getText()),parseInt(burstField.getText()),parseInt(priorityField.getText()));
+        PriorityProcess process = new PriorityProcess(parseInt(arrivalField.getText()),
+                parseInt(burstField.getText()),
+                priorityField.getText() == null ? parseInt(priorityField.getText()):0 );
 
 
         list.add(process);
