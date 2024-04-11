@@ -58,7 +58,7 @@ public class SchedulerViewController implements Initializable{
         list.add(process);
         arrivalField.setText("");
         burstField.setText("");
-        priorityField.setText("");
+        priorityField.setText(" ");
 
     }
 
