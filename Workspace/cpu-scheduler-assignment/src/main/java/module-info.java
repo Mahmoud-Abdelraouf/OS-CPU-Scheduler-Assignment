@@ -3,6 +3,8 @@ module com.os.frontend {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
+    opens com.os.backend.Process to javafx.base;
+
 
     opens com.os.frontend to javafx.fxml;
     exports com.os.frontend;

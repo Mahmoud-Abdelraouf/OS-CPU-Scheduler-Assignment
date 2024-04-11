@@ -13,13 +13,12 @@ public class Process {
     }
 
     public Process(){
-        this(0,1);;
+        this(0,1);
     }
 
     // Getters and Setters
 
-
-    public int arrivalTime() {
+    public int getArrivalTime() {
         return arrivalTime;
     }
 
@@ -27,7 +26,7 @@ public class Process {
         this.arrivalTime = arrivalTime;
     }
 
-    public int burstTime() {
+    public int getBurstTime() {
         return burstTime;
     }
 
@@ -35,7 +34,7 @@ public class Process {
         this.burstTime = burstTime;
     }
 
-    public int remainingTime() {
+    public int getRemainingTime() {
         return remainingTime;
     }
 
@@ -43,7 +42,7 @@ public class Process {
         this.remainingTime = remainingTime;
     }
 
-    public int turnaroundTime() {
+    public int getTurnaroundTime() {
         return turnaroundTime;
     }
 
@@ -51,7 +50,7 @@ public class Process {
         this.turnaroundTime = turnaroundTime;
     }
 
-    public int waitingTime() {
+    public int getWaitingTime() {
         return waitingTime;
     }
 
