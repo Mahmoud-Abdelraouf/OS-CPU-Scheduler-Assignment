@@ -6,9 +6,6 @@ import java.util.List;
 
 public class SJF_Non extends SchedulingAlgo {
 
-    public SJF_Non(List<Process> processesList) {
-        super(processesList);
-    }
 
     @Override
     public void execute() {

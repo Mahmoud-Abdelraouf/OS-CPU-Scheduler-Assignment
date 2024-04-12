@@ -6,9 +6,6 @@ import java.util.List;
 
 public class RoundRobin extends SchedulingAlgo{
 
-    public RoundRobin(List<Process> processesList) {
-        super(processesList);
-    }
 
     @Override
     public void execute() {

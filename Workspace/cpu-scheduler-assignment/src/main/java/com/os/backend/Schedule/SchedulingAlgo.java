@@ -7,9 +7,7 @@ import java.util.List;
 public abstract class SchedulingAlgo {
     private List<Process> processesList;
 
-    public SchedulingAlgo(List<Process> processesList) {
-        this.processesList = processesList;
-    }
+    public SchedulingAlgo() {}
 
     public void addNewProcesses(List<Process> newProcesses){
         // TODO
@@ -17,7 +15,7 @@ public abstract class SchedulingAlgo {
 
     public abstract void execute();
 
-    public List<Process> processesList() {
+    public List<Process> getProcessesList() {
         return processesList;
     }
 

@@ -1,22 +1,32 @@
 package com.os.backend.Process;
 
 public class Process {
+    private int processNumber;
     private int arrivalTime;
     private int burstTime;
     private int remainingTime;
     private int turnaroundTime;
     private int waitingTime;
 
-    public Process(int arrivalTime, int burstTime) {
+    public Process(int processNumber, int arrivalTime, int burstTime) {
+        this.processNumber = processNumber;
         this.arrivalTime = arrivalTime;
         this.burstTime = burstTime;
     }
 
-    public Process(){
-        this(0,1);
+    public Process() {
+        this(0, 0, 1);
     }
 
     // Getters and Setters
+
+    public int getProcessNumber() {
+        return processNumber;
+    }
+
+    public void setProcessNumber(int processNumber) {
+        this.processNumber = processNumber;
+    }
 
     public int getArrivalTime() {
         return arrivalTime;
@@ -56,5 +66,17 @@ public class Process {
 
     public void setWaitingTime(int waitingTime) {
         this.waitingTime = waitingTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Process{" +
+                "processNumber=" + processNumber +
+                ", arrivalTime=" + arrivalTime +
+                ", burstTime=" + burstTime +
+                ", remainingTime=" + remainingTime +
+                ", turnaroundTime=" + turnaroundTime +
+                ", waitingTime=" + waitingTime +
+                '}';
     }
 }

@@ -45,14 +45,14 @@ public class SchedulerViewController implements Initializable{
     public Button startButton;
 
     ObservableList<Process> list  = FXCollections.observableArrayList(
-    new Process(5 , 6 ),
-    new Process(30 , 28 ),
-    new Process(1 , 7 )
+    new Process(0,5 , 6 ),
+    new Process(0, 30 , 28 ),
+    new Process(0, 1 , 7 )
 
     );
 
     public void addNewProcess(ActionEvent actionEvent) {
-        PriorityProcess process = new PriorityProcess(parseInt(arrivalField.getText()),parseInt(burstField.getText()),parseInt(priorityField.getText()));
+        PriorityProcess process = new PriorityProcess(0, parseInt(arrivalField.getText()),parseInt(burstField.getText()),parseInt(priorityField.getText()));
 
 
 

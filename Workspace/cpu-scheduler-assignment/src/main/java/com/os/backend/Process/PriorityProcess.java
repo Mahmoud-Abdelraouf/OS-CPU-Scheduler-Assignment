@@ -3,8 +3,8 @@ package com.os.backend.Process;
 public class PriorityProcess extends Process {
     private int priority;
 
-    public PriorityProcess(int arrivalTime, int burstTime, int priority) {
-        super(arrivalTime, burstTime);
+    public PriorityProcess(int processNumber, int arrivalTime, int burstTime, int priority) {
+        super(processNumber, arrivalTime, burstTime);
         this.priority = priority;
     }
 
@@ -17,11 +17,20 @@ public class PriorityProcess extends Process {
         this(0);
     }
 
-    public int priority() {
+    public int getPriority() {
         return priority;
     }
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    @Override
+    public String toString() {
+        return "PriorityProcess{" +
+                "priority=" + priority +
+                ", " +
+                super.toString() +
+                '}';
     }
 }

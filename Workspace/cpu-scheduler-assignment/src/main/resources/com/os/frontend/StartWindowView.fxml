@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="638.0" prefWidth="1070.0" stylesheets="@StartWindowView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.frontend.start_window.StartWindowController">
+   <StackPane prefHeight="176.0" prefWidth="1217.0">
+      <Label text="CPU Scheduler" textFill="#d7d7d7">
+         <font>
+            <Font name="Eras Medium ITC" size="86.0" />
+         </font>
+      </Label>
+   </StackPane>
+   <HBox prefHeight="333.0" prefWidth="1070.0">
+      <ScrollPane hbarPolicy="NEVER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="333.0" prefWidth="785.0" stylesheets="@StartWindowView.css">
+         <FlowPane fx:id="processesList" hgap="10.0" prefHeight="331.0" prefWidth="785.0" stylesheets="@StartWindowView.css" vgap="10.0">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMousePressed="#addNewProcess" prefHeight="120.0" prefWidth="245.0" text="+">
+               <font>
+                  <Font size="50.0" />
+               </font></Button>
+            <padding>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+         </FlowPane>
+      </ScrollPane>
+      <VBox alignment="TOP_CENTER" prefHeight="245.0" prefWidth="261.0" spacing="15.0">
+         <Label text="Scheduling Algorithm" textFill="#cdcdcd">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Label>
+         <ToggleButton fx:id="fcfsButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hidePriorityOnProcesses" selected="true" text="FCFS" textAlignment="CENTER">
+            <toggleGroup>
+               <ToggleGroup fx:id="toggleGroup1" />
+            </toggleGroup>
+            <font>
+               <Font size="14.0" />
+            </font>
+         </ToggleButton>
+         <ToggleButton maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hidePriorityOnProcesses" text="Round Robin" textAlignment="CENTER" toggleGroup="$toggleGroup1">
+            <font>
+               <Font size="14.0" />
+            </font></ToggleButton>
+         <ToggleButton layoutX="96.0" layoutY="167.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hidePriorityOnProcesses" text="Preemptive SJF" textAlignment="CENTER" toggleGroup="$toggleGroup1">
+            <font>
+               <Font size="14.0" />
+            </font></ToggleButton>
+         <ToggleButton layoutX="96.0" layoutY="192.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#hidePriorityOnProcesses" text="Non Preemptive SJF" textAlignment="CENTER" toggleGroup="$toggleGroup1">
+            <font>
+               <Font size="14.0" />
+            </font></ToggleButton>
+         <ToggleButton layoutX="96.0" layoutY="142.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showPriorityOnProcesses" text="Preemptive Priority" textAlignment="CENTER" toggleGroup="$toggleGroup1">
+            <font>
+               <Font size="14.0" />
+            </font></ToggleButton>
+         <ToggleButton layoutX="96.0" layoutY="167.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showPriorityOnProcesses" text="Non Preemptive Priority" textAlignment="CENTER" toggleGroup="$toggleGroup1">
+            <font>
+               <Font size="14.0" />
+            </font></ToggleButton>
+         <padding>
+            <Insets left="10.0" />
+         </padding>
+      </VBox>
+      <padding>
+         <Insets left="10.0" />
+      </padding>
+   </HBox>
+   <HBox alignment="CENTER" prefHeight="129.0" prefWidth="1070.0" spacing="30.0">
+      <Button mnemonicParsing="false" onAction="#createProcesses" prefHeight="60.0" prefWidth="140.0" text="Confirm">
+         <font>
+            <Font size="22.0" />
+         </font></Button>
+      <Button mnemonicParsing="false" onMouseClicked="#resetProcessList" prefHeight="60.0" prefWidth="140.0" text="Reset">
+         <font>
+            <Font size="22.0" />
+         </font></Button>
+   </HBox>
+</VBox>
