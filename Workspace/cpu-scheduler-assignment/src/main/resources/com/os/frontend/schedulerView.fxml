@@ -12,7 +12,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #212141;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.frontend.SchedulerViewController">
@@ -25,13 +24,13 @@
             <Insets top="10.0" />
          </padding>
       </Label>
-      <TableView fx:id="processTable" layoutX="64.0" layoutY="127.0" prefHeight="307.0" prefWidth="366.0">
+      <TableView fx:id="processTable" layoutX="64.0" layoutY="127.0" prefHeight="307.0" prefWidth="366.0" style="-fx-background-color: #30305f;" stylesheets="@../../../stylesheets/schedulerViewStylesheet.css">
         <columns>
           <TableColumn fx:id="pidColumn" prefWidth="73.2" resizable="false" text="PID" />
           <TableColumn fx:id="arrivalColumn" prefWidth="73.2" resizable="false" text="Arrival" />
            <TableColumn fx:id="burstColumn" prefWidth="73.2" resizable="false" text="Burst" />
-           <TableColumn fx:id="remainingColumn" minWidth="0.0" prefWidth="73.2" resizable="false" text="Remaning" />
            <TableColumn fx:id="priorityColumn" prefWidth="73.2" resizable="false" text="Priority" />
+           <TableColumn fx:id="remainingColumn" minWidth="0.0" prefWidth="73.2" resizable="false" text="Remaning" />
         </columns>
       </TableView>
       <Button fx:id="startButton" layoutX="567.0" layoutY="127.0" mnemonicParsing="false" style="-fx-background-color: #5ee060;" text="Start" textFill="WHITE">
@@ -69,246 +68,29 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <ScrollPane layoutX="59.0" layoutY="591.0" prefHeight="75.0" prefWidth="1060.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" hvalue="0.04" layoutX="59.0" layoutY="591.0" maxHeight="-Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefViewportHeight="0.5" prefViewportWidth="0.5" prefWidth="500.0" vbarPolicy="NEVER" vvalue="0.25" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
          <content>
-            <HBox fx:id="ganttBox" prefHeight="75.0" prefWidth="1060.0">
-               <children>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #139948;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #139989;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #bde7ff;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #bde7ff;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #bde7ff;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #bde7ff;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #47478d;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #47478d;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #9880ff;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #9e5d43;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #9e5d43;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #dfc238;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #dfc238;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #dfc238;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #dfc238;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #dfc238;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #dfc238;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #dfc238;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #dfc238;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #dfc238;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #dfc238;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #f57c00;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #f57c00;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #0b5528;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="75.0" prefWidth="50.0" style="-fx-background-color: #0b5528;">
-                     <children>
-                        <Label alignment="CENTER" text="P1" textAlignment="CENTER">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-               </children>
+            <HBox fx:id="ganttBox" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="75.0" prefWidth="1800.0" style="-fx-background-color: #30305f; -fx-border-color: #30305f;">
+               <!-- Add StackPane elements dynamically -->
             </HBox>
          </content>
       </ScrollPane>
-      <BarChart fx:id="barChart" layoutX="493.0" layoutY="186.0" prefHeight="266.0" prefWidth="366.0">
+      <BarChart fx:id="barChart" layoutX="493.0" layoutY="186.0" prefHeight="266.0" prefWidth="366.0" style="-fx-background-color: #323264; -fx-color: #156578;" stylesheets="@../../../stylesheets/schedulerViewStylesheet.css" AnchorPane.leftAnchor="492.80000000000007" AnchorPane.rightAnchor="164.60000000000002">
         <xAxis>
-          <CategoryAxis label="Processes" side="BOTTOM" tickLabelFill="WHITE" />
+          <CategoryAxis autoRanging="false" endMargin="0.5" label="Processes" startMargin="1.0" tickLabelFill="WHITE" tickLabelGap="0.0" tickLength="5.0" fx:id="xAxis" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" tickLabelFill="WHITE" />
+          <NumberAxis fx:id="yAxis" label="Remaining Time" side="LEFT" tickLabelFill="WHITE" />
         </yAxis>
       </BarChart>
+      <HBox alignment="CENTER" layoutX="450.3999938964844" layoutY="498.0" pickOnBounds="false" prefHeight="30.0" prefWidth="1071.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Button fx:id="executeButton" mnemonicParsing="false" onAction="#executeTest" style="-fx-background-color: #f8bc00;" text="احمد خالد">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
