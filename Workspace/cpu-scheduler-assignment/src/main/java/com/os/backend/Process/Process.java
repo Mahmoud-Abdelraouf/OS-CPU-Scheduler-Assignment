@@ -1,5 +1,9 @@
 package com.os.backend.Process;
 
+import javafx.beans.Observable;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class Process {
     private int arrivalTime;
     private int burstTime;
@@ -7,11 +11,11 @@ public class Process {
     private int turnaroundTime;
     private int waitingTime;
 
+
     public Process(int arrivalTime, int burstTime) {
         this.arrivalTime = arrivalTime;
         this.burstTime = burstTime;
     }
-
     public Process(){
         this(0,1);
     }
@@ -21,10 +25,10 @@ public class Process {
     public int getArrivalTime() {
         return arrivalTime;
     }
-
     public void setArrivalTime(int arrivalTime) {
-        this.arrivalTime = arrivalTime;
+        this.arrivalTime= arrivalTime;
     }
+
 
     public int getBurstTime() {
         return burstTime;
@@ -57,4 +61,6 @@ public class Process {
     public void setWaitingTime(int waitingTime) {
         this.waitingTime = waitingTime;
     }
+
+
 }
