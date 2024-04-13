@@ -104,7 +104,7 @@ public class ProcessBlockController extends AnchorPane implements Initializable 
         this.priority = 0;
         this.burstTime = 1;
         this.arrivalTime = 0;
-        
+
         this.arrivalSpinner.getValueFactory().setValue(0);
         this.burstSpinner.getValueFactory().setValue(1);
         this.prioritySpinner.getValueFactory().setValue(0);

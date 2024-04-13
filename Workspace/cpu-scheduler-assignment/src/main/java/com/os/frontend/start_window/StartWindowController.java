@@ -115,11 +115,6 @@ public class StartWindowController extends StackPane implements Initializable {
         //add a new process
         addProcessToList();
 
-
-        //reset scheduling algorithm
-        toggleGroup1.selectToggle(fcfsButton);
-        hidePriorityOnProcesses(null);
-
     }
 
     public void hidePriorityOnProcesses(ActionEvent ignoredActionEvent) {
