@@ -13,7 +13,7 @@ public abstract class SchedulingAlgo {
         // TODO
     }
 
-    public abstract void execute();
+    public abstract List<ProcessExecutionEvent> execute();
 
     public List<Process> getProcessesList() {
         return processesList;

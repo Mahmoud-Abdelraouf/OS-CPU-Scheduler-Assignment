@@ -1,14 +1,16 @@
 package com.os.backend.Schedule;
 
-import com.os.backend.Process.Process;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoundRobin extends SchedulingAlgo{
 
+    public RoundRobin() {
+    }
 
     @Override
-    public void execute() {
+    public List<ProcessExecutionEvent> execute() {
         //TODO
+        return new ArrayList<ProcessExecutionEvent>();
     }
 }
