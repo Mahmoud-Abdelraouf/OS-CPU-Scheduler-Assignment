@@ -18,11 +18,15 @@ public class Backend {
 
     public void startSchedule(){
         //TODO
+        scheduler.execute();
+        system.notify();
     }
 
     public void updateProcessesList(List<Process> newProcesses){
         this.processList = newProcesses;
         //TODO
+        system.notify();
+        scheduler.addNewProcesses(this.processList);
     }
 
     //For the observer
