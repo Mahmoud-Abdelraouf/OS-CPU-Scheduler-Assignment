@@ -5,7 +5,7 @@ import com.os.backend.Process.Process;
 import java.util.List;
 
 public abstract class SchedulingAlgo {
-    private List<Process> processesList;
+    protected List<Process> processesList;
 
     public SchedulingAlgo() {}
 

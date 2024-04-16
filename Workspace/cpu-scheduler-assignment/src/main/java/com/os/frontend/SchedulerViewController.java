@@ -63,7 +63,7 @@ public class SchedulerViewController implements Initializable{
     public Button startButton;
 
 
-    ObservableList<Process> list  = FXCollections.observableArrayList(
+    ObservableList<Process> processList  = FXCollections.observableArrayList(
     new Process(0,5 , 6 ),
     new Process(0, 30 , 28 ),
     new Process(0, 1 , 7 )
@@ -198,7 +198,7 @@ private void initializeChart() {
 
 
     public void addNewProcess(ActionEvent actionEvent) {
-        PriorityProcess process = new PriorityProcess(parseInt(arrivalField.getText()),
+        PriorityProcess process = new PriorityProcess(0, parseInt(arrivalField.getText()),
                 parseInt(burstField.getText()),
                 priorityField.getText() == null ? parseInt(priorityField.getText()):0 );
 

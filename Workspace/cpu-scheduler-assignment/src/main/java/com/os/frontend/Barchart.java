@@ -28,9 +28,9 @@ public class Barchart implements Initializable {
     private NumberAxis yAxis;
 
     ObservableList<Process> processList  = FXCollections.observableArrayList(
-            new Process(5 , 6 ),
-            new Process(30 , 28 ),
-            new Process(1 , 7 )
+            new Process(0, 5 , 6 ),
+            new Process(0, 30 , 28 ),
+            new Process(0, 1 , 7 )
 
     );
     private void initializeChart() {
