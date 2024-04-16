@@ -1,11 +1,14 @@
 package com.os.backend.Schedule;
 
+import com.os.backend.Process.ProcessExecutionEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class RoundRobin extends SchedulingAlgo{
-
-    public RoundRobin() {
+    private final int timeQuantum;
+    public RoundRobin(int timeQuantum) {
+        this.timeQuantum = timeQuantum;
     }
 
     @Override

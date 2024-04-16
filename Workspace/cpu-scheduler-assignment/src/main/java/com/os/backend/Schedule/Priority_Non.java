@@ -2,7 +2,8 @@ package com.os.backend.Schedule;
 
 import com.os.backend.Process.PriorityProcess;
 import com.os.backend.Process.Process;
-import javafx.scene.layout.Priority;
+import com.os.backend.Process.ProcessExecutionEvent;
+import com.os.backend.Process.ProcessState;
 
 import java.util.ArrayList;
 import java.util.List;

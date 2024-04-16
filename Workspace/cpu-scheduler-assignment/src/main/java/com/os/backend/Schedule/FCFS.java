@@ -1,17 +1,19 @@
 package com.os.backend.Schedule;
 
 import com.os.backend.Process.Process;
+import com.os.backend.Process.ProcessExecutionEvent;
+import com.os.backend.Process.ProcessState;
+import com.os.backend.Process.ProcessTable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FCFS extends SchedulingAlgo {
-
     public FCFS() {
     }
 
     @Override
-    public List<ProcessExecutionEvent> execute() {
+    public ProcessTable execute() {
         List<ProcessExecutionEvent> executionEvents = new ArrayList<>();
         int currentTime = 0;
 
@@ -40,12 +42,12 @@ public class FCFS extends SchedulingAlgo {
             currentTime++;
         }
 
-        return executionEvents;
+        return new ProcessTable(executionEvents);
     }
 
     private List<Process> getArrivedProcesses(int currentTime) {
         List<Process> arrivedProcesses = new ArrayList<>();
-        processesList.removeIf(process -> process.getArrivalTime() <= currentTime);
+        processesList.removeIf(process -> process.getArrivalTime() < currentTime);
         processesList.forEach(process -> {
             if (process.getArrivalTime() <= currentTime) {
                 arrivedProcesses.add(process);

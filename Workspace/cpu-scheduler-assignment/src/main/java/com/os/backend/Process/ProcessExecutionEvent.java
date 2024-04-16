@@ -1,4 +1,4 @@
-package com.os.backend.Schedule;
+package com.os.backend.Process;
 
 public class ProcessExecutionEvent {
     private int time;
