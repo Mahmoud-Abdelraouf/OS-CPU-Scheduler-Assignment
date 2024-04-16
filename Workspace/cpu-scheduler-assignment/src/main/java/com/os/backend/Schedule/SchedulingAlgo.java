@@ -9,8 +9,8 @@ public abstract class SchedulingAlgo {
 
     public SchedulingAlgo() {}
 
-    public void addNewProcesses(List<Process> newProcesses){
-        // TODO
+    public void addNewProcesses(List<Process> newProcesses) {
+        processesList.addAll(newProcesses);
     }
 
     public abstract List<ProcessExecutionEvent> execute();
