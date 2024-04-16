@@ -1,0 +1,31 @@
+.root{
+    -fx-background-color: #1C1C1C;
+}
+
+#processesList{
+    -fx-background-color: black;
+
+}
+
+#processesList .process-container {
+    /* Add your styling for the HBox container here */
+    -fx-background-color: white;
+
+}
+
+#processesList .remove-button {
+    /* Add your styling for the remove button here */
+    -fx-background-color: red;
+    -fx-text-fill: black;
+}
+
+#processesList .remove-button:hover {
+    /* Add your styling for the remove button here */
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+.toggle-button:selected {
+    -fx-background-color: green; /* Change the background color when selected */
+    -fx-text-fill: white; /* Change the text color when selected */
+}

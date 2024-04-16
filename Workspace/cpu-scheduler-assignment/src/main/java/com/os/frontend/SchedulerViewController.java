@@ -62,17 +62,17 @@ public class SchedulerViewController implements Initializable{
     public Button stopButton;
     public Button startButton;
 
-    ObservableList<Process> processList  = FXCollections.observableArrayList(
-    new Process(0 , 6 ),
-    new Process(4 , 10 ),
-    new Process(8 , 18 ),
-    new Process(12 , 2 ),
-        new Process(14 , 3 ),
-        new Process(18 , 6 )
+
+    ObservableList<Process> list  = FXCollections.observableArrayList(
+    new Process(0,5 , 6 ),
+    new Process(0, 30 , 28 ),
+    new Process(0, 1 , 7 )
 
     );
 
+
     private Map<Integer, String> seriesColors = new HashMap<>();
+
 
   /*  public void addNewProcess(ActionEvent actionEvent) {
         PriorityProcess process = new PriorityProcess(parseInt(arrivalField.getText()),
