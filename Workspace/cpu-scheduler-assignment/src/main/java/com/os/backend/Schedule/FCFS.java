@@ -14,7 +14,7 @@ public class FCFS extends SchedulingAlgo {
 
     @Override
     public ProcessTable execute() {
-        List<ProcessExecutionEvent> executionEvents = new ArrayList<>();
+        ProcessTable processTable = new ProcessTable();
         int currentTime = 0;
 
         while (true) {
@@ -24,10 +24,10 @@ public class FCFS extends SchedulingAlgo {
             // Execute the arrived processes
             for (Process process : arrivedProcesses) {
                 // Add event for process arrival
-                executionEvents.add(new ProcessExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.ARRIVED));
+                processTable.addExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.ARRIVED);
 
                 // Execute the process
-                executeProcess(process, executionEvents, currentTime);
+                executeProcess(process, processTable.getExecutionEvents(), currentTime);
 
                 // Update current time
                 currentTime += process.getBurstTime();
@@ -42,7 +42,7 @@ public class FCFS extends SchedulingAlgo {
             currentTime++;
         }
 
-        return new ProcessTable(executionEvents);
+        return processTable;
     }
 
     private List<Process> getArrivedProcesses(int currentTime) {
