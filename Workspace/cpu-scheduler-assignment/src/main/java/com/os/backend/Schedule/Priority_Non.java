@@ -13,6 +13,7 @@ public class Priority_Non extends SchedulingAlgo {
 
     @Override
     public ProcessTable execute() {
+
         ProcessTable processTable = new ProcessTable();
 
         int currentTime = 0;
@@ -61,6 +62,8 @@ public class Priority_Non extends SchedulingAlgo {
             processesList.remove(process);
         }
 
+
         return processTable;
+
     }
 }

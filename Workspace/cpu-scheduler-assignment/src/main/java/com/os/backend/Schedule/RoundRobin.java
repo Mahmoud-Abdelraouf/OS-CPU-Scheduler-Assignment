@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoundRobin extends SchedulingAlgo{
-    //private final int timeQuantum;
-    public RoundRobin(/*int timeQuantum*/) {
-        //this.timeQuantum = timeQuantum;
+    private final int timeQuantum;
+    public RoundRobin(int timeQuantum) {
+        this.timeQuantum = timeQuantum;
     }
 
     @Override
@@ -17,4 +17,7 @@ public class RoundRobin extends SchedulingAlgo{
         //TODO
         return new ProcessTable();
     }
+ public int getTimeQuantum() {
+        return timeQuantum;
+ }
 }
