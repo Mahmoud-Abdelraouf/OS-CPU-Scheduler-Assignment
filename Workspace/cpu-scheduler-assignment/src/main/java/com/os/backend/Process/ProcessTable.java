@@ -25,4 +25,3 @@ public class ProcessTable {
         return "ProcessTable{" + "executionEvents=" + executionEvents + '}';
     }
 }
-

@@ -1,9 +1,7 @@
 package com.os.backend.Schedule;
 
-import com.os.backend.Process.PriorityProcess;
+import com.os.backend.Process.*;
 import com.os.backend.Process.Process;
-import com.os.backend.Process.ProcessExecutionEvent;
-import com.os.backend.Process.ProcessState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +12,8 @@ public class Priority_Non extends SchedulingAlgo {
     }
 
     @Override
-    public List<ProcessExecutionEvent> execute() {
-        List<ProcessExecutionEvent> executionEvents = new ArrayList<>();
+    public ProcessTable execute() {
+        ProcessTable processTable = new ProcessTable();
 
         int currentTime = 0;
         while (!processesList.isEmpty()) { // Continue until all processes are executed
@@ -42,19 +40,19 @@ public class Priority_Non extends SchedulingAlgo {
             }
 
             // Add event for process arrival
-            executionEvents.add(new ProcessExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.ARRIVED));
+            processTable.addExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.ARRIVED);
 
             // Add event for process start
-            executionEvents.add(new ProcessExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.STARTED));
+            processTable.addExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.STARTED);
 
             // Simulate process execution
             int endTime = currentTime + process.getBurstTime();
             for (int i = currentTime + 1; i <= endTime; i++) {
-                executionEvents.add(new ProcessExecutionEvent(i, process.getProcessNumber(), ProcessState.RUNNING));
+                processTable.addExecutionEvent(i, process.getProcessNumber(), ProcessState.RUNNING);
             }
 
             // Add event for process completion
-            executionEvents.add(new ProcessExecutionEvent(endTime, process.getProcessNumber(), ProcessState.COMPLETED));
+            processTable.addExecutionEvent(endTime, process.getProcessNumber(), ProcessState.COMPLETED);
 
             // Update current time
             currentTime = endTime;
@@ -63,6 +61,6 @@ public class Priority_Non extends SchedulingAlgo {
             processesList.remove(process);
         }
 
-        return executionEvents;
+        return processTable;
     }
 }
