@@ -13,7 +13,8 @@ public class Priority_Non extends SchedulingAlgo {
 
     @Override
     public ProcessTable execute() {
-        List<ProcessExecutionEvent> executionEvents = new ArrayList<>();
+
+        ProcessTable processTable = new ProcessTable();
 
         int currentTime = 0;
         while (!processesList.isEmpty()) { // Continue until all processes are executed
@@ -40,19 +41,19 @@ public class Priority_Non extends SchedulingAlgo {
             }
 
             // Add event for process arrival
-            executionEvents.add(new ProcessExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.ARRIVED));
+            processTable.addExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.ARRIVED);
 
             // Add event for process start
-            executionEvents.add(new ProcessExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.STARTED));
+            processTable.addExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.STARTED);
 
             // Simulate process execution
             int endTime = currentTime + process.getBurstTime();
             for (int i = currentTime + 1; i <= endTime; i++) {
-                executionEvents.add(new ProcessExecutionEvent(i, process.getProcessNumber(), ProcessState.RUNNING));
+                processTable.addExecutionEvent(i, process.getProcessNumber(), ProcessState.RUNNING);
             }
 
             // Add event for process completion
-            executionEvents.add(new ProcessExecutionEvent(endTime, process.getProcessNumber(), ProcessState.COMPLETED));
+            processTable.addExecutionEvent(endTime, process.getProcessNumber(), ProcessState.COMPLETED);
 
             // Update current time
             currentTime = endTime;
@@ -61,6 +62,8 @@ public class Priority_Non extends SchedulingAlgo {
             processesList.remove(process);
         }
 
-        return null;
+
+        return processTable;
+
     }
 }

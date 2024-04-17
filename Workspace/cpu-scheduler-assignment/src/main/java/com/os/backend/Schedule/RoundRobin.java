@@ -15,10 +15,9 @@ public class RoundRobin extends SchedulingAlgo{
     @Override
     public ProcessTable execute() {
         //TODO
-        return null;
+        return new ProcessTable();
     }
-
-    public int getTimeQuantum() {
+ public int getTimeQuantum() {
         return timeQuantum;
-    }
+ }
 }

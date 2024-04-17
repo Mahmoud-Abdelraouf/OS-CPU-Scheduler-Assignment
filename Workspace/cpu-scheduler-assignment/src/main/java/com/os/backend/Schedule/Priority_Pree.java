@@ -13,7 +13,8 @@ public class Priority_Pree extends SchedulingAlgo {
 
     @Override
     public ProcessTable execute() {
-        List<ProcessExecutionEvent> executionEvents = new ArrayList<>();
+        ProcessTable processTable = new ProcessTable();
+
         int currentTime = 0;
 
         while (!processesList.isEmpty()) {
@@ -27,16 +28,17 @@ public class Priority_Pree extends SchedulingAlgo {
             }
 
             // Add event for process arrival
-            executionEvents.add(new ProcessExecutionEvent(currentTime, currentProcess.getProcessNumber(), ProcessState.ARRIVED));
+            processTable.addExecutionEvent(currentTime, currentProcess.getProcessNumber(), ProcessState.ARRIVED);
 
             // Execute the current process
-            executeProcess(currentProcess, executionEvents, currentTime);
+            executeProcess(currentProcess, processTable, currentTime);
 
             // Update current time
             currentTime += currentProcess.getBurstTime();
         }
 
-        return null;
+
+        return processTable;
     }
 
     private Process getHighestPriorityProcess(int currentTime) {
@@ -51,17 +53,17 @@ public class Priority_Pree extends SchedulingAlgo {
         return highestPriorityProcess;
     }
 
-    private void executeProcess(Process process, List<ProcessExecutionEvent> executionEvents, int startTime) {
+    private void executeProcess(Process process, ProcessTable processTable, int startTime) {
         // Add event for process start
-        executionEvents.add(new ProcessExecutionEvent(startTime, process.getProcessNumber(), ProcessState.STARTED));
+        processTable.addExecutionEvent(startTime, process.getProcessNumber(), ProcessState.STARTED);
 
         // Simulate process execution
         int endTime = startTime + process.getBurstTime();
         for (int i = startTime + 1; i <= endTime; i++) {
-            executionEvents.add(new ProcessExecutionEvent(i, process.getProcessNumber(), ProcessState.RUNNING));
+            processTable.addExecutionEvent(i, process.getProcessNumber(), ProcessState.RUNNING);
         }
 
         // Add event for process completion
-        executionEvents.add(new ProcessExecutionEvent(endTime, process.getProcessNumber(), ProcessState.COMPLETED));
+        processTable.addExecutionEvent(endTime, process.getProcessNumber(), ProcessState.COMPLETED);
     }
 }
