@@ -1,9 +1,7 @@
 package com.os.backend.Schedule;
 
-import com.os.backend.Process.PriorityProcess;
+import com.os.backend.Process.*;
 import com.os.backend.Process.Process;
-import com.os.backend.Process.ProcessExecutionEvent;
-import com.os.backend.Process.ProcessState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,7 @@ public class Priority_Pree extends SchedulingAlgo {
     }
 
     @Override
-    public List<ProcessExecutionEvent> execute() {
+    public ProcessTable execute() {
         List<ProcessExecutionEvent> executionEvents = new ArrayList<>();
         int currentTime = 0;
 
@@ -38,7 +36,7 @@ public class Priority_Pree extends SchedulingAlgo {
             currentTime += currentProcess.getBurstTime();
         }
 
-        return executionEvents;
+        return null;
     }
 
     private Process getHighestPriorityProcess(int currentTime) {
