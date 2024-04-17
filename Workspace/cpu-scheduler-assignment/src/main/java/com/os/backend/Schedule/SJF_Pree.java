@@ -14,8 +14,11 @@ public class SJF_Pree extends SchedulingAlgo {
     public static void main(String[] args) {
         // Create some sample processes
         Process p1 = new Process(1, 0, 5);
+        p1.setRemainingTime(4);
         Process p2 = new Process(2, 1, 3);
+        p2.setRemainingTime(1);
         Process p3 = new Process(3, 2, 2);
+        p3.setRemainingTime(2);
         Process p4 = new Process(4, 3, 5);
 
         // Add the processes to the SJF preemptive scheduling algorithm
@@ -37,72 +40,62 @@ public class SJF_Pree extends SchedulingAlgo {
     @Override
     public ProcessTable execute() {
         ProcessTable processTable = new ProcessTable();
-        PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getRemainingTime).thenComparing(Process::getArrivalTime));
+        PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getBurstTime));
         int currentTime = 0;
+        Process runningProcess = null;
 
-        while (true) {
-            // Check if there are any new processes arrived at the current time
+        while (!processesList.isEmpty() || runningProcess != null || !readyQueue.isEmpty()) {
             List<Process> arrivedProcesses = getArrivedProcesses(currentTime);
             readyQueue.addAll(arrivedProcesses);
 
-            // If no process is running and the ready queue is not empty, start the shortest job
-            if (readyQueue.isEmpty()) {
-                if (!processesList.isEmpty()) {
-                    currentTime = processesList.get(0).getArrivalTime();
-                    continue;
-                } else {
-                    break; // Exit the loop if there are no more processes
-                }
+            if (runningProcess == null && !readyQueue.isEmpty()) {
+                runningProcess = readyQueue.poll();
+                processTable.addExecutionEvent(currentTime, runningProcess.getProcessNumber(), ProcessState.STARTED);
             }
 
-            // Get the shortest job from the ready queue
-            Process runningProcess = readyQueue.poll();
-            int burstTime = runningProcess.getRemainingTime(); // Remaining time of the running process
+            if (runningProcess != null) {
+                int burstTime = runningProcess.getRemainingTime();
 
-            // Add event for process start
-            processTable.addExecutionEvent(currentTime, runningProcess.getProcessNumber(), ProcessState.STARTED);
+                // Simulate process execution
+                for (int i = 0; i < burstTime; i++) {
+                    int currentStatusTime = currentTime + i;
 
-            // Simulate process execution and track the status of each process for each unit of time
-            for (int i = 0; i < burstTime; i++) {
-                int currentStatusTime = currentTime + i;
+                    // Check for newly arrived processes during execution
+                    List<Process> newProcesses = getArrivedProcesses(currentTime + i + 1);
+                    readyQueue.addAll(newProcesses);
 
-                // Check if any new processes have arrived during execution
-                List<Process> newProcesses = getArrivedProcesses(currentTime + i + 1);
-                readyQueue.addAll(newProcesses);
-
-                // If there is a shorter job in the ready queue, preempt the current process
-                Process shortestJob = readyQueue.peek();
-                if (shortestJob != null && shortestJob.getRemainingTime() < burstTime - i) {
-                    // Add event for process interruption
-                    processTable.addExecutionEvent(currentTime + i, runningProcess.getProcessNumber(), ProcessState.INTERRUPTED);
-                    // Update remaining time for the interrupted process
-                    runningProcess.setRemainingTime(burstTime - i);
-                    readyQueue.add(runningProcess);
-                    // Get the new shortest job
-                    runningProcess = readyQueue.poll();
-                    // Add event for new process start
-                    processTable.addExecutionEvent(currentTime + i, runningProcess.getProcessNumber(), ProcessState.STARTED);
-                    // Update burst time for the new running process
-                    burstTime = runningProcess.getRemainingTime();
-                } else {
-                    // Add event for process running
-                    processTable.addExecutionEvent(currentStatusTime, runningProcess.getProcessNumber(), ProcessState.RUNNING);
+                    // Check if there is a shorter job in the queue
+                    Process shortestJob = readyQueue.peek();
+                    if (shortestJob != null && shortestJob.getBurstTime() < burstTime - i) {
+                        // Interrupt the current process
+                        processTable.addExecutionEvent(currentTime + i, runningProcess.getProcessNumber(), ProcessState.INTERRUPTED);
+                        // Add the interrupted process back to the queue with updated remaining time
+                        runningProcess.setRemainingTime(burstTime - i);
+                        readyQueue.add(runningProcess);
+                        // Get the new shortest job
+                        runningProcess = readyQueue.poll();
+                        // Add event for new process start
+                        processTable.addExecutionEvent(currentTime + i, runningProcess.getProcessNumber(), ProcessState.STARTED);
+                        // Update burst time for the new running process
+                        burstTime = runningProcess.getRemainingTime();
+                    } else {
+                        // Continue running the current process
+                        processTable.addExecutionEvent(currentTime + i, runningProcess.getProcessNumber(), ProcessState.RUNNING);
+                    }
                 }
-            }
 
-            // Add event for process completion
-            int completionTime = currentTime + runningProcess.getBurstTime();
-            processTable.addExecutionEvent(completionTime, runningProcess.getProcessNumber(), ProcessState.COMPLETED);
+                // Add event for process completion
+                int completionTime = currentTime + burstTime;
+                processTable.addExecutionEvent(completionTime, runningProcess.getProcessNumber(), ProcessState.COMPLETED);
 
-            // Update current time
-            currentTime = completionTime;
+                // Update current time
+                currentTime = completionTime;
 
-            // Remove the completed process from the processes list
-            processesList.remove(runningProcess);
-
-            // If there are no more processes, exit the loop
-            if (processesList.isEmpty() && readyQueue.isEmpty()) {
-                break;
+                // Remove the completed process from the list
+                processesList.remove(runningProcess);
+                runningProcess = null;
+            } else {
+                currentTime++;
             }
         }
 
