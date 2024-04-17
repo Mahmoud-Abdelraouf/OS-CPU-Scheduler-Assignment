@@ -5,13 +5,12 @@ import com.os.backend.Schedule.*;
 import com.os.backend.main.Backend;
 import com.os.frontend.Main;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -29,6 +28,8 @@ public class StartWindowController extends StackPane implements Initializable {
     private final List<ProcessBlockController> processControllers = new ArrayList<>();
     public ToggleGroup toggleGroup1;
     public ToggleButton fcfsButton;
+    public Spinner<Integer> timeQuantumSpinner;
+    public HBox controlButtons;
     private boolean priorityMode;
     private Main main;
 
@@ -41,6 +42,27 @@ public class StartWindowController extends StackPane implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         addProcessToList();
         hidePriorityOnProcesses(null);
+
+        this.timeQuantumSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
+        hideQuantumSpinner();
+
+
+    }
+
+    @FXML
+    private void hideQuantumSpinner() {
+        if (this.controlButtons.getChildren().size() != 3) {
+            return;
+        }
+        this.controlButtons.getChildren().remove(2);
+    }
+
+    @FXML
+    private void showQuantumSpinner() {
+        if (this.controlButtons.getChildren().size() == 3) {
+            return;
+        }
+        this.controlButtons.getChildren().add(this.timeQuantumSpinner);
     }
 
     public void setMain(Main main) {
@@ -86,7 +108,7 @@ public class StartWindowController extends StackPane implements Initializable {
     }
 
     private void removeProcess(HBox box, ProcessBlockController controller) {
-        if(processControllers.size() == 1){
+        if (processControllers.size() == 1) {
             processControllers.get(0).reset();
             return;
         }
@@ -112,25 +134,51 @@ public class StartWindowController extends StackPane implements Initializable {
         //reset counter
         ProcessBlockController.removeProcessBlock(size);
 
+        this.timeQuantumSpinner.getValueFactory().setValue(1);
+
         //add a new process
         addProcessToList();
 
     }
 
     public void hidePriorityOnProcesses(ActionEvent ignoredActionEvent) {
+        //todo: implement the prevention of clicking an already clicked button
+        if(ignoredActionEvent == null){
+            return;
+        }
+
+        ToggleButton toggleButton = (ToggleButton)(ignoredActionEvent.getSource());
+        if (toggleButton.isSelected()) {
+            toggleButton.setSelected(true);
+        }
+
         if (!priorityMode) {
             return;
         }
         this.priorityMode = false;
         processControllers.forEach(ProcessBlockController::hidePriority);
+
+
     }
 
     public void showPriorityOnProcesses(ActionEvent ignoredActionEvent) {
+        //todo: implement the prevention of clicking an already clicked button
+        if(ignoredActionEvent == null){
+            return;
+        }
+
+        ToggleButton toggleButton = (ToggleButton)(ignoredActionEvent.getSource());
+        if (toggleButton.isSelected()) {
+            toggleButton.setSelected(true);
+        }
+
         if (priorityMode) {
             return;
         }
         this.priorityMode = true;
         processControllers.forEach(ProcessBlockController::showPriority);
+
+
     }
 
     public void createProcesses(ActionEvent ignoredActionEvent) {
@@ -149,6 +197,9 @@ public class StartWindowController extends StackPane implements Initializable {
 
         System.out.println("Confirm button pressed");
         System.out.println(schedulingAlgo);
+        if (schedulingAlgo instanceof RoundRobin) {
+            System.out.println("Time quantum: " + ((RoundRobin) schedulingAlgo).getTimeQuantum());
+        }
         createdProcesses.forEach(System.out::println);
 
         //send backend to the main class, and move to the new window.
@@ -164,7 +215,7 @@ public class StartWindowController extends StackPane implements Initializable {
     private SchedulingAlgo chooseAlgorithm(String algorithm) {
         return switch (algorithm) {
             case "FCFS" -> new FCFS();
-            case "Round Robin" -> new RoundRobin();
+            case "Round Robin" -> new RoundRobin(this.timeQuantumSpinner.getValue());
             case "Preemptive Priority" -> new Priority_Pree();
             case "Non Preemptive Priority" -> new Priority_Non();
             case "Preemptive SJF" -> new SJF_Pree();
@@ -172,4 +223,5 @@ public class StartWindowController extends StackPane implements Initializable {
             default -> throw new IllegalArgumentException("Invalid algorithm: " + algorithm);
         };
     }
+
 }

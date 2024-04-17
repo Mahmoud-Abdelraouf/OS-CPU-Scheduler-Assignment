@@ -36,6 +36,7 @@ public class SJF_Pree extends SchedulingAlgo {
 
     @Override
     public ProcessTable execute() {
+
         ProcessTable processTable = new ProcessTable();
         PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getRemainingTime).thenComparing(Process::getArrivalTime));
         int currentTime = 0;

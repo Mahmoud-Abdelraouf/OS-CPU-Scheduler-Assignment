@@ -14,6 +14,7 @@ public class Priority_Pree extends SchedulingAlgo {
     @Override
     public ProcessTable execute() {
         ProcessTable processTable = new ProcessTable();
+
         int currentTime = 0;
 
         while (!processesList.isEmpty()) {
@@ -35,6 +36,7 @@ public class Priority_Pree extends SchedulingAlgo {
             // Update current time
             currentTime += currentProcess.getBurstTime();
         }
+
 
         return processTable;
     }
