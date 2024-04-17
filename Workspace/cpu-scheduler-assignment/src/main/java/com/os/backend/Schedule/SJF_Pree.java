@@ -5,10 +5,7 @@ import com.os.backend.Process.ProcessExecutionEvent;
 import com.os.backend.Process.ProcessState;
 import com.os.backend.Process.ProcessTable;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class SJF_Pree extends SchedulingAlgo {
     public static void main(String[] args) {
@@ -39,17 +36,23 @@ public class SJF_Pree extends SchedulingAlgo {
 
     @Override
     public ProcessTable execute() {
-
         ProcessTable processTable = new ProcessTable();
-        PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getBurstTime));
+        PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getBurstTime).thenComparing(Process::getArrivalTime));
         int currentTime = 0;
+        Map<Integer, ProcessState> processStates = new HashMap<>();
         Process runningProcess = null;
 
-        while (!processesList.isEmpty() || runningProcess != null || !readyQueue.isEmpty()) {
+        while (!processesList.isEmpty() || !readyQueue.isEmpty()) {
             List<Process> arrivedProcesses = getArrivedProcesses(currentTime);
             readyQueue.addAll(arrivedProcesses);
 
-            if (runningProcess == null && !readyQueue.isEmpty()) {
+            // Update process states for the current time
+            updateProcessStates(processStates, readyQueue, null, currentTime);
+
+            // Add process states to the event list
+            addProcessStatesToEventList(processTable, processStates, currentTime);
+
+            if (!readyQueue.isEmpty()) {
                 runningProcess = readyQueue.poll();
                 processTable.addExecutionEvent(currentTime, runningProcess.getProcessNumber(), ProcessState.STARTED);
             }
@@ -58,8 +61,14 @@ public class SJF_Pree extends SchedulingAlgo {
                 int burstTime = runningProcess.getRemainingTime();
 
                 // Simulate process execution
-                for (int i = 0; i < burstTime; i++) {
+                for (int i = 1; i < burstTime; i++) {
                     int currentStatusTime = currentTime + i;
+
+                    // Update process states for the current time
+                    updateProcessStates(processStates, readyQueue, runningProcess, currentStatusTime);
+
+                    // Add process states to the event list
+                    addProcessStatesToEventList(processTable, processStates, currentStatusTime);
 
                     // Check for newly arrived processes during execution
                     List<Process> newProcesses = getArrivedProcesses(currentTime + i + 1);
@@ -76,6 +85,7 @@ public class SJF_Pree extends SchedulingAlgo {
                         // Get the new shortest job
                         runningProcess = readyQueue.poll();
                         // Add event for new process start
+                        assert runningProcess != null;
                         processTable.addExecutionEvent(currentTime + i, runningProcess.getProcessNumber(), ProcessState.STARTED);
                         // Update burst time for the new running process
                         burstTime = runningProcess.getRemainingTime();
@@ -101,6 +111,29 @@ public class SJF_Pree extends SchedulingAlgo {
         }
 
         return processTable;
+    }
+
+    private void updateProcessStates(Map<Integer, ProcessState> processStates, PriorityQueue<Process> readyQueue, Process runningProcess, int currentTime) {
+        processStates.clear();
+        if (runningProcess != null) {
+            processStates.put(runningProcess.getProcessNumber(), ProcessState.RUNNING);
+        }
+        for (Process process : readyQueue) {
+            processStates.put(process.getProcessNumber(), ProcessState.READY);
+        }
+        for (Process process : processesList) {
+            if (process.getArrivalTime() <= currentTime) {
+                if (!processStates.containsKey(process.getProcessNumber())) {
+                    processStates.put(process.getProcessNumber(), ProcessState.ARRIVED);
+                }
+            }
+        }
+    }
+
+    private void addProcessStatesToEventList(ProcessTable processTable, Map<Integer, ProcessState> processStates, int currentTime) {
+        for (Map.Entry<Integer, ProcessState> entry : processStates.entrySet()) {
+            processTable.addExecutionEvent(currentTime, entry.getKey(), entry.getValue());
+        }
     }
 
     // Helper method to get arrived processes at a given time
