@@ -13,9 +13,9 @@ public class SJF_Pree extends SchedulingAlgo {
         Process p1 = new Process(1, 0, 5);
         p1.setRemainingTime(4);
         Process p2 = new Process(2, 1, 3);
-        p2.setRemainingTime(1);
+        p2.setRemainingTime(2);
         Process p3 = new Process(3, 2, 2);
-        p3.setRemainingTime(2);
+        p3.setRemainingTime(1);
         Process p4 = new Process(4, 3, 5);
 
         // Add the processes to the SJF preemptive scheduling algorithm
@@ -37,22 +37,29 @@ public class SJF_Pree extends SchedulingAlgo {
     @Override
     public ProcessTable execute() {
         ProcessTable processTable = new ProcessTable();
-        PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getBurstTime).thenComparing(Process::getArrivalTime));
+        PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getBurstTime));
         int currentTime = 0;
         Map<Integer, ProcessState> processStates = new HashMap<>();
         Process runningProcess = null;
 
-        while (!processesList.isEmpty() || !readyQueue.isEmpty()) {
+        while (!processesList.isEmpty() || runningProcess != null || !readyQueue.isEmpty()) {
             List<Process> arrivedProcesses = getArrivedProcesses(currentTime);
             readyQueue.addAll(arrivedProcesses);
 
             // Update process states for the current time
-            updateProcessStates(processStates, readyQueue, null, currentTime);
+            updateProcessStates(processStates, readyQueue, runningProcess, currentTime);
 
             // Add process states to the event list
             addProcessStatesToEventList(processTable, processStates, currentTime);
 
-            if (!readyQueue.isEmpty()) {
+            // Check if there is a newly arrived process
+            if (!arrivedProcesses.isEmpty()) {
+                // Sort the ready queue again to ensure the shortest job is at the front
+                readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getBurstTime));
+                readyQueue.addAll(arrivedProcesses);
+            }
+
+            if (runningProcess == null && !readyQueue.isEmpty()) {
                 runningProcess = readyQueue.poll();
                 processTable.addExecutionEvent(currentTime, runningProcess.getProcessNumber(), ProcessState.STARTED);
             }
@@ -61,7 +68,7 @@ public class SJF_Pree extends SchedulingAlgo {
                 int burstTime = runningProcess.getRemainingTime();
 
                 // Simulate process execution
-                for (int i = 1; i < burstTime; i++) {
+                for (int i = 0; i < burstTime; i++) {
                     int currentStatusTime = currentTime + i;
 
                     // Update process states for the current time
@@ -85,7 +92,6 @@ public class SJF_Pree extends SchedulingAlgo {
                         // Get the new shortest job
                         runningProcess = readyQueue.poll();
                         // Add event for new process start
-                        assert runningProcess != null;
                         processTable.addExecutionEvent(currentTime + i, runningProcess.getProcessNumber(), ProcessState.STARTED);
                         // Update burst time for the new running process
                         burstTime = runningProcess.getRemainingTime();
@@ -135,6 +141,7 @@ public class SJF_Pree extends SchedulingAlgo {
             processTable.addExecutionEvent(currentTime, entry.getKey(), entry.getValue());
         }
     }
+
 
     // Helper method to get arrived processes at a given time
     private List<Process> getArrivedProcesses(int currentTime) {
