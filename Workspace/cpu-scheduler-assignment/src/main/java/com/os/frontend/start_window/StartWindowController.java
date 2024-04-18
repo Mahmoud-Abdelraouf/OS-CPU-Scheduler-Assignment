@@ -4,6 +4,7 @@ import com.os.backend.Process.Process;
 import com.os.backend.Schedule.*;
 import com.os.backend.main.Backend;
 import com.os.frontend.Main;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,9 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,6 +30,11 @@ import java.util.ResourceBundle;
 public class StartWindowController extends StackPane implements Initializable {
 
     public FlowPane processesList;
+
+    @FXML
+    private Label schedulingAlgorithmsLabel;
+    @FXML
+    private Label CPUScheduler;
     private final List<ProcessBlockController> processControllers = new ArrayList<>();
     public ToggleGroup toggleGroup1;
     public ToggleButton fcfsButton;
@@ -43,6 +52,8 @@ public class StartWindowController extends StackPane implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        startCPULabelAnimation();
+        startSchedulingAlgorithmsLabel();
         addProcessToList();
         hidePriorityOnProcesses(null);
 
@@ -230,4 +241,59 @@ public class StartWindowController extends StackPane implements Initializable {
         };
     }
 
+    public void startCPULabelAnimation()
+    {
+        // Define the color transition values
+        Color startColor = Color.BLACK;
+        Color endColor = Color.rgb(118, 171, 174); // Color 2l lon 2l metarshm
+
+        // Create a timeline animation
+        Timeline timeline = new Timeline();
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(2),
+                new KeyValue(CPUScheduler.textFillProperty(), endColor));
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.setAutoReverse(true);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+//        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(1), CPUScheduler);
+//        translateTransition.setByY(-20); // Move up by 20 pixels
+//        translateTransition.setAutoReverse(true);
+//        translateTransition.setCycleCount(TranslateTransition.INDEFINITE);
+//        translateTransition.play();
+
+        TranslateTransition moveInTransition = new TranslateTransition(Duration.seconds(1), CPUScheduler);
+        moveInTransition.setFromY(0); // Starting position
+        moveInTransition.setToY(-20); // Move in by 20 pixels
+
+        // Create translate transition for moving out
+        TranslateTransition moveOutTransition = new TranslateTransition(Duration.seconds(1), CPUScheduler);
+        moveOutTransition.setFromY(-20); // Starting position
+        moveOutTransition.setToY(0); // Move out to original position
+
+        // Chain the two transitions
+        moveInTransition.setOnFinished(event -> moveOutTransition.play());
+        moveOutTransition.setOnFinished(event -> moveInTransition.play());
+
+        // Start the initial animation
+        moveInTransition.play();
+
+
+    }
+
+    public void startSchedulingAlgorithmsLabel()
+    {
+        // Define the color transition values
+        Color startColor = Color.BLACK;
+        Color endColor = Color.rgb(118, 171, 174); // Color 2l lon 2l metarshm
+
+        // Create a timeline animation
+        Timeline timeline = new Timeline();
+        KeyFrame keyFrame = new KeyFrame(Duration.seconds(2),
+                new KeyValue(schedulingAlgorithmsLabel.textFillProperty(), endColor));
+        timeline.getKeyFrames().add(keyFrame);
+        timeline.setAutoReverse(true);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
 }

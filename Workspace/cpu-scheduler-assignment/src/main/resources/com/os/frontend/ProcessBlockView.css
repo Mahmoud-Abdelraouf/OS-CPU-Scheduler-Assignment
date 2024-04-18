@@ -16,12 +16,12 @@
 }
 #anchorPane {
     -fx-background-color : #31363F;
-
+    -fx-background-radius: 10 0 0 0;
 }
 #pLabel {
     -fx-text-fill : #76ABAE;
 }
 #hBox {
     -fx-background-color : #31363F;
-
+    -fx-background-radius: 0 0 0 10;
 }
