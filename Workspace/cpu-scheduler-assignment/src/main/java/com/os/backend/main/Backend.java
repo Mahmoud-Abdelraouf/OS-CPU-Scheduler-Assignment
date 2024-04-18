@@ -4,18 +4,20 @@ import com.os.backend.Process.Process;
 import com.os.backend.Process.ProcessTable;
 import com.os.backend.Schedule.SchedulingAlgo;
 import com.os.frontend.schedulling_window.observers.Observer;
-import com.os.frontend.schedulling_window.observers.ProcessesTable;
 
 import java.util.List;
 
 public class Backend {
+
     private SchedulingAlgo scheduler;
-    private System system;
+    private SystemScheduler systemScheduler;
     private List<Process> processList;
     private ProcessTable table;
+    private int time;
 
     public Backend(){
-        this.system = new System(this);
+        this.systemScheduler = new SystemScheduler(this);
+        time = 0;
     }
 
     public void setAlgo(SchedulingAlgo scheduler){
@@ -25,7 +27,20 @@ public class Backend {
 
     public void startSchedule(){
         //TODO: Start timer
-        system.notifyObservers();
+        // Check for empty ProcessTable
+        if( this.table.getExecutionEvents().isEmpty()) return;
+
+        // Start processing from time t=0
+        // checking every 1 sec for running process
+        // till there is no process running on CPU
+        Thread processing = new Thread(systemScheduler);
+        processing.start();
+
+        /* Finished Processing
+        // User needs to press start again
+        // if User added a new process
+        // scheduler will not work
+        */
     }
 
     public void updateProcessesList(List<Process> newProcesses){
@@ -37,7 +52,7 @@ public class Backend {
 
     //For the observer
     public void attach(Observer observer){
-        system.attach(observer);
+        systemScheduler.attach(observer);
     }
 
     public List<Process> getProcessList() {
@@ -46,5 +61,9 @@ public class Backend {
 
     public ProcessTable getTable() {
         return table;
+    }
+
+    public SchedulingAlgo getScheduler() {
+        return scheduler;
     }
 }

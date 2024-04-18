@@ -1,11 +1,13 @@
 package com.os.backend.Process;
 
 public class ProcessExecutionEvent {
+    private Process process;
     private int time;
     private int processNumber;
     private ProcessState state;
 
-    public ProcessExecutionEvent(int time, int processNumber, ProcessState state) {
+    public ProcessExecutionEvent(Process process,int time, int processNumber, ProcessState state) {
+        this.process = process;
         this.time = time;
         this.processNumber = processNumber;
         this.state = state;
@@ -18,6 +20,8 @@ public class ProcessExecutionEvent {
     public void setTime(int time) {
         this.time = time;
     }
+
+    public Process getProcess(){ return process; }
 
     public int getProcessNumber() {
         return processNumber;

@@ -3,22 +3,19 @@ package com.os.backend.main;
 import com.os.backend.Process.*;
 import com.os.backend.Process.Process;
 import com.os.backend.Schedule.FCFS;
-import com.os.backend.Schedule.SchedulingAlgo;
 import com.os.frontend.schedulling_window.observers.Observer;
-import org.controlsfx.control.tableview2.filter.filtereditor.SouthFilter;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class System {
+public class SystemScheduler implements Runnable{
 
     // Test block
     public static void main(String[] args) {
         Backend backend = new Backend();
         backend.setAlgo(new FCFS());
 
-        List<Process> pList = new ArrayList<Process>();
+        List<Process> pList = new ArrayList<>();
         pList.add(new Process(1,0,3));
         pList.add(new Process(2,2,2));
         pList.add(new Process(3,3,4));
@@ -27,13 +24,31 @@ public class System {
 
     }
 
+    // Thread used in backend
+    //
+    // Updates Observers every 1 sec
+    @Override
+    public void run() {
+        try {
+            do {
+                this.currentRunningProcess = getCurrentProcess(backend.getTable(), time);
+                this.processesAtTime = getCurrentProcessesTable();
+                time++;
+                notifyObservers();
+                Thread.sleep(1000);
+            }while(currentRunningProcess != null);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
-
+    }
 
     private final Backend backend;
     private final List<Observer> observersList = new ArrayList<>(4);
+    private Process currentRunningProcess;
+    private List<ProcessAtTime> processesAtTime;
     private int time;
-    public System(Backend backend) {
+    public SystemScheduler(Backend backend) {
         this.backend = backend;
         time = 0;
     }
@@ -47,21 +62,18 @@ public class System {
     }
 
 
-    public int getCurrentProcess(ProcessTable pTable,int time){
+    public Process getCurrentProcess(ProcessTable pTable,int time){
         //TODO
         // get processExecutionEvent at time t
         List<ProcessExecutionEvent> pExecEventList = pTable.getProcessesList(time);
         //  search for running process at current time
         for(ProcessExecutionEvent e: pExecEventList){
-
-            if( e.getState() == ProcessState.RUNNING ){
-                return e.getProcessNumber();
-            }
-            else{
-                System.out.println("No Process Running...");
+            if( e.getState() == ProcessState.RUNNING || e.getState() == ProcessState.STARTED){
+                return e.getProcess();
             }
         }
-        return -1;
+        System.out.println("No Process Running...");
+        return null;
     }
 
     public List<ProcessAtTime> getCurrentProcessesTable(){
@@ -71,5 +83,13 @@ public class System {
             result.add(new ProcessAtTime(process, time, backend.getTable()));
         }
         return result;
+    }
+
+    public Process getCurrentRunningProcess() {
+        return currentRunningProcess;
+    }
+
+    public List<ProcessAtTime> getProcessesAtTime() {
+        return processesAtTime;
     }
 }
