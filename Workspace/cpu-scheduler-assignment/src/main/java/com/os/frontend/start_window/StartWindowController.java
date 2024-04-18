@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +34,8 @@ public class StartWindowController extends StackPane implements Initializable {
     private boolean priorityMode;
     private Main main;
 
+    @FXML
+    private VBox priorityBlock;
     @Override
     public Node getStyleableNode() {
         return this;
@@ -55,6 +58,7 @@ public class StartWindowController extends StackPane implements Initializable {
             return;
         }
         this.controlButtons.getChildren().remove(2);
+
     }
 
     @FXML
@@ -62,7 +66,9 @@ public class StartWindowController extends StackPane implements Initializable {
         if (this.controlButtons.getChildren().size() == 3) {
             return;
         }
-        this.controlButtons.getChildren().add(this.timeQuantumSpinner);
+
+        //this.controlButtons.getChildren().add(this.timeQuantumSpinner);
+        this.controlButtons.getChildren().add(this.priorityBlock);
     }
 
     public void setMain(Main main) {

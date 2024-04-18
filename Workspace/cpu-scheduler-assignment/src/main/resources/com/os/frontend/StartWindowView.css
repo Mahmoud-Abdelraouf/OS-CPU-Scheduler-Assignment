@@ -44,7 +44,7 @@
 }
 
 .toggle-button:hover {
-    -fx-background-color: #76ABAE; /* Background color when hovered */
+    -fx-background-color: #5B8694; /* Background color when hovered */
     -fx-text-fill: #EEEEEE; /* Text color when selected */
 }
 
@@ -63,7 +63,7 @@
 
 .button-class:hover {
     -fx-background-color: #222831; /* Main color on hover */
-    -fx-border-color: #76ABAE; /* 2l lon 2l metarshm color on hover */
+    -fx-border-color: #5B8694; /* 2l lon 2l metarshm color on hover */
 }
 
 .button-class:pressed {
@@ -159,7 +159,7 @@
     -fx-background-color: #f0f0f0; /* Background color */
     -fx-text-fill: #333333; /* Text color */
     -fx-font-size: 14px; /* Font size */
-    -fx-padding: 5px 10px; /* Padding */
+    -fx-padding: 2.5px 5px; /* Padding */
     -fx-background-radius: 5px; /* Border radius */
     -fx-border-radius: 5px; /* Border radius */
     -fx-border-color: #cccccc; /* Border color */
