@@ -21,10 +21,10 @@
          </font>
       </Label>
    </StackPane>
-   <HBox prefHeight="333.0" prefWidth="1070.0">
+   <HBox fx:id="processListHBox" prefHeight="333.0" prefWidth="1070.0">
       <ScrollPane hbarPolicy="NEVER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="333.0" prefWidth="785.0" stylesheets="@StartWindowView.css">
          <FlowPane fx:id="processesList" hgap="10.0" prefHeight="331.0" prefWidth="785.0" stylesheets="@StartWindowView.css" vgap="10.0">
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMousePressed="#addNewProcess" prefHeight="120.0" prefWidth="245.0" text="+">
+            <Button fx:id="plusButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMousePressed="#addNewProcess" prefHeight="120.0" prefWidth="245.0" text="+">
                <font>
                   <Font size="50.0" />
                </font></Button>
