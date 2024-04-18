@@ -1,3 +1,7 @@
+/*main color -> #222831*/
+/* secondary color -> #31363F*/
+/* 2l lon 2l metarshm -> #76ABAE*/
+/* bright color -> #EEEEEE*/
 .root{
     -fx-background-color: #1C1C1C;
 }
@@ -25,7 +29,21 @@
     -fx-text-fill: black;
 }
 
-.toggle-button:selected {
-    -fx-background-color: green; /* Change the background color when selected */
-    -fx-text-fill: white; /* Change the text color when selected */
+/* ToggleButtonStyle.css */
+.toggle-button {
+    -fx-background-color: #EEEEEE; /* Default background color */
+    -fx-text-fill: #31363F; /* Default text color */
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 5px 10px; /* Padding */
+    -fx-background-radius: 15px; /* Border radius */
 }
+
+.toggle-button:selected {
+    -fx-background-color: #76ABAE; /* Background color when selected */
+    -fx-text-fill: #EEEEEE; /* Text color when selected */
+}
+
+.toggle-button:hover {
+    -fx-background-color: #76ABAE; /* Background color when hovered */
+}
+
