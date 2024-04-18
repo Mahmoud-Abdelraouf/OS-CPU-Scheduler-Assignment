@@ -30,8 +30,11 @@ public class Bar extends AnchorPane implements Observer, Initializable {
     @FXML
     public BarChart<String, Double> Bar;
 
+    private List<Process> processList;
     @Override
     public void update(System system) {
+        //TODO: update bars with the new data, ignore the system
+
     }
 
     @Override
@@ -70,5 +73,9 @@ public class Bar extends AnchorPane implements Observer, Initializable {
             series.getData().add(new XYChart.Data("",16));
             Bar.getData().add(series);
         }
+    }
+
+    public void setProcessList(List<Process> processList) {
+        this.processList = processList;
     }
 }
