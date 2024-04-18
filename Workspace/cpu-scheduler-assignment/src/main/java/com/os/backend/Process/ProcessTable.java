@@ -3,10 +3,10 @@ package com.os.backend.Process;
 import java.util.List;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProcessTable {
-    private List<ProcessExecutionEvent> executionEvents;
+    private final List<ProcessExecutionEvent> executionEvents;
 
     public ProcessTable() {
         this.executionEvents = new ArrayList<>();
@@ -24,4 +24,11 @@ public class ProcessTable {
     public String toString() {
         return "ProcessTable{" + "executionEvents=" + executionEvents + '}';
     }
+
+    public List<ProcessExecutionEvent> getProcessesList(int time){
+        return executionEvents.stream()
+                .filter(e -> e.getTime() == time)
+                .collect(Collectors.toList());
+    }
+
 }

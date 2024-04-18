@@ -3,6 +3,7 @@ module com.os.frontend {
     requires javafx.fxml;
 
     requires org.controlsfx.controls;
+    requires java.desktop;
     opens com.os.backend.Process to javafx.base;
 
 
@@ -14,4 +15,5 @@ module com.os.frontend {
     exports com.os.backend.Process;
     exports com.os.backend.main;
     exports com.os.backend.Schedule;
+    exports com.os.frontend.schedulling_window.observers;
 }

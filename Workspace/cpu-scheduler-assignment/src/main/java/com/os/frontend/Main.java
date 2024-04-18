@@ -1,6 +1,7 @@
 package com.os.frontend;
 
 import com.os.backend.main.Backend;
+import com.os.frontend.schedulling_window.observers.ProcessesTable;
 import com.os.frontend.start_window.StartWindowController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -30,9 +31,27 @@ public class Main extends Application {
     }
 
     public void moveToSchedulerView() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("SchedulerView.fxml"));
+        //Original code
+
+        /*FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("SchedulerView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         this.stage.setScene(scene);
+        //TODO: attach observers*/
+
+        //----------------------------------------------------------------
+        // For Testing
+        // TODO: add this code to the scheduler view
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ProcessesTableView.fxml"));
+        // set the new scene
+        Scene scene = new Scene(fxmlLoader.load());
+        // attach and init the controller
+        ProcessesTable processesTableController = fxmlLoader.getController();
+        this.backend.attach(processesTableController);
+        // make the backend notify the observers
+        this.backend.startSchedule();
+
+        this.stage.setScene(scene);
+        //----------------------------------------------------------------
 
         //TODO: start scheduling
     }
