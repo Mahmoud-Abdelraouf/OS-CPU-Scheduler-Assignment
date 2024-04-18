@@ -76,11 +76,11 @@
       </padding>
    </HBox>
    <HBox fx:id="controlButtons" alignment="CENTER" prefHeight="129.0" prefWidth="1070.0" spacing="30.0">
-      <Button mnemonicParsing="false" onAction="#createProcesses" prefHeight="60.0" prefWidth="140.0" text="Confirm">
+      <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#createProcesses" prefHeight="60.0" prefWidth="140.0" styleClass="button-class" text="Confirm">
          <font>
             <Font size="22.0" />
          </font></Button>
-      <Button mnemonicParsing="false" onMouseClicked="#resetProcessList" prefHeight="60.0" prefWidth="140.0" text="Reset">
+      <Button mnemonicParsing="false" onMouseClicked="#resetProcessList" prefHeight="60.0" prefWidth="140.0" styleClass="button-class" text="Reset">
          <font>
             <Font size="22.0" />
          </font></Button>

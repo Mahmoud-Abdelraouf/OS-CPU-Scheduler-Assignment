@@ -45,5 +45,34 @@
 
 .toggle-button:hover {
     -fx-background-color: #76ABAE; /* Background color when hovered */
+    -fx-text-fill: #EEEEEE; /* Text color when selected */
 }
 
+/************************ Style control Buttons ***********************************/
+/* ButtonStyle.css */
+.button-class {
+    -fx-background-color: #31363F; /* Secondary color */
+    -fx-text-fill: #EEEEEE; /* Bright color for text */
+    -fx-font-size: 14px; /* Font size */
+    -fx-padding: 10px 20px; /* Padding */
+    -fx-background-radius: 10px; /* Border radius */
+    -fx-border-radius: 10px; /* Border radius */
+    -fx-border-color: #76ABAE; /* 2l lon 2l metarshm color */
+    -fx-border-width: 2px; /* Border width */
+}
+
+.button-class:hover {
+    -fx-background-color: #222831; /* Main color on hover */
+    -fx-border-color: #76ABAE; /* 2l lon 2l metarshm color on hover */
+}
+
+.button-class:pressed {
+    -fx-background-color: #222831; /* Main color when pressed */
+    -fx-border-color: #76ABAE; /* 2l lon 2l metarshm color when pressed */
+}
+
+/* Change Confirm Button style suggestion */
+#confirmButton {
+    /* -fx-background-color: #aaa; */ /* Secondary color */
+/*    -fx-text-fill: #222831; *//* Bright color for text */
+}
