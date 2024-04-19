@@ -7,8 +7,33 @@ import com.os.backend.Process.ProcessTable;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class FCFS extends SchedulingAlgo {
+
+    public static void main(String[] args) {
+        // Create some sample processes
+        Process p1 = new Process(1, 0, 5);
+        Process p2 = new Process(2, 1, 3);
+        Process p3 = new Process(3, 2, 2);
+        Process p4 = new Process(4, 3, 5);
+
+        // Add the processes to a list
+        List<Process> processesList = new ArrayList<>(List.of(p1, p2, p3, p4));
+
+        // Create an instance of your scheduling algorithm
+        FCFS fcfs = new FCFS();
+
+        // Set the list of processes for the algorithm to execute
+        fcfs.addNewProcesses(processesList);
+
+        // Execute the algorithm
+        ProcessTable processTable = fcfs.execute();
+
+        // Output the execution events
+        for (ProcessExecutionEvent event : processTable.getExecutionEvents()) {
+            System.out.println(event);
+        }
+    }
+
     public FCFS() {
     }
 
