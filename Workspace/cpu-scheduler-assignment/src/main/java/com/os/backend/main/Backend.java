@@ -32,15 +32,8 @@ public class Backend {
 
         // Start processing from time t=0
         // checking every 1 sec for running process
-        // till there is no process running on CPU
         Thread processing = new Thread(this.system);
         processing.start();
-
-        /* Finished Processing
-        // User needs to press start again
-        // if User added a new process
-        // scheduler will not work
-        */
     }
 
     public void updateProcessesList(List<Process> newProcesses){
