@@ -28,7 +28,7 @@ public class Priority_Pree extends SchedulingAlgo {
             }
 
             // Add event for process arrival
-            processTable.addExecutionEvent(currentTime, currentProcess.getProcessNumber(), ProcessState.ARRIVED);
+            processTable.addExecutionEvent(currentProcess, currentTime, currentProcess.getProcessNumber(), ProcessState.ARRIVED);
 
             // Execute the current process
             executeProcess(currentProcess, processTable, currentTime);
@@ -55,15 +55,15 @@ public class Priority_Pree extends SchedulingAlgo {
 
     private void executeProcess(Process process, ProcessTable processTable, int startTime) {
         // Add event for process start
-        processTable.addExecutionEvent(startTime, process.getProcessNumber(), ProcessState.STARTED);
+        processTable.addExecutionEvent(process, startTime, process.getProcessNumber(), ProcessState.STARTED);
 
         // Simulate process execution
         int endTime = startTime + process.getBurstTime();
         for (int i = startTime + 1; i <= endTime; i++) {
-            processTable.addExecutionEvent(i, process.getProcessNumber(), ProcessState.RUNNING);
+            processTable.addExecutionEvent(process, i, process.getProcessNumber(), ProcessState.RUNNING);
         }
 
         // Add event for process completion
-        processTable.addExecutionEvent(endTime, process.getProcessNumber(), ProcessState.COMPLETED);
+        processTable.addExecutionEvent(process, endTime, process.getProcessNumber(), ProcessState.COMPLETED);
     }
 }

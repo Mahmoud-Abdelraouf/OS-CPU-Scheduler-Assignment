@@ -60,10 +60,10 @@ public class SJF_Pree extends SchedulingAlgo {
             assert runningProcess != null;
 
             // Add event for process arrival
-            processTable.addExecutionEvent(currentTime, runningProcess.getProcessNumber(), ProcessState.ARRIVED);
+            processTable.addExecutionEvent(runningProcess, currentTime, runningProcess.getProcessNumber(), ProcessState.ARRIVED);
 
             // Add event for process start
-            processTable.addExecutionEvent(currentTime, runningProcess.getProcessNumber(), ProcessState.STARTED);
+            processTable.addExecutionEvent(runningProcess, currentTime, runningProcess.getProcessNumber(), ProcessState.STARTED);
 
             Set<Integer> processedProcesses = new HashSet<>(); // Set to keep track of processed process numbers
 
@@ -85,23 +85,23 @@ public class SJF_Pree extends SchedulingAlgo {
                     Process nextProcess = readyQueue.peek();
                     if (nextProcess != null && nextProcess != runningProcess) {
                         // Process is interrupted
-                        processTable.addExecutionEvent(i, runningProcess.getProcessNumber(), ProcessState.INTERRUPTED);
+                        processTable.addExecutionEvent(runningProcess, i, runningProcess.getProcessNumber(), ProcessState.INTERRUPTED);
                         assert readyQueue.peek() != null;
                         processedProcesses.remove(readyQueue.peek().getProcessNumber());
                         runningProcess = readyQueue.poll();
                         assert runningProcess != null;
-                        processTable.addExecutionEvent(i, runningProcess.getProcessNumber(), ProcessState.ARRIVED);
-                        processTable.addExecutionEvent(i, runningProcess.getProcessNumber(), ProcessState.STARTED);
+                        processTable.addExecutionEvent(runningProcess, i, runningProcess.getProcessNumber(), ProcessState.ARRIVED);
+                        processTable.addExecutionEvent(runningProcess, i, runningProcess.getProcessNumber(), ProcessState.STARTED);
                         burstTime = runningProcess.getRemainingTime();
                     } else {
                         // Process continues running
-                        processTable.addExecutionEvent(i, runningProcess.getProcessNumber(), ProcessState.RUNNING);
+                        processTable.addExecutionEvent(runningProcess, i, runningProcess.getProcessNumber(), ProcessState.RUNNING);
                     }
                 }
                 endTime = i;
             }
 
-            processTable.addExecutionEvent(endTime, runningProcess.getProcessNumber(), ProcessState.COMPLETED);
+            processTable.addExecutionEvent(runningProcess, endTime, runningProcess.getProcessNumber(), ProcessState.COMPLETED);
 
             // Remove the executed process from the list
             processesList.remove(runningProcess);

@@ -3,7 +3,7 @@ package com.os.backend.main;
 import com.os.backend.Process.Process;
 import com.os.backend.Process.ProcessTable;
 import com.os.backend.Schedule.SchedulingAlgo;
-import com.os.frontend.schedulling_window.observers.Observer;
+import com.os.frontend.scheduling_window.observers.Observer;
 
 import java.util.List;
 

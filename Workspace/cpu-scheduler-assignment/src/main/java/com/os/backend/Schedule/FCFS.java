@@ -58,15 +58,15 @@ public class FCFS extends SchedulingAlgo {
 
     private void executeProcess(Process process, List<ProcessExecutionEvent> executionEvents, int startTime) {
         // Add event for process start
-        executionEvents.add(new ProcessExecutionEvent(startTime, process.getProcessNumber(), ProcessState.STARTED));
+        executionEvents.add(new ProcessExecutionEvent(process, startTime, process.getProcessNumber(), ProcessState.STARTED));
 
         // Simulate process execution
         int endTime = startTime + process.getBurstTime();
         for (int i = startTime + 1; i <= endTime; i++) {
-            executionEvents.add(new ProcessExecutionEvent(i, process.getProcessNumber(), ProcessState.RUNNING));
+            executionEvents.add(new ProcessExecutionEvent(process, i, process.getProcessNumber(), ProcessState.RUNNING));
         }
 
         // Add event for process completion
-        executionEvents.add(new ProcessExecutionEvent(endTime, process.getProcessNumber(), ProcessState.COMPLETED));
+        executionEvents.add(new ProcessExecutionEvent(process, endTime, process.getProcessNumber(), ProcessState.COMPLETED));
     }
 }

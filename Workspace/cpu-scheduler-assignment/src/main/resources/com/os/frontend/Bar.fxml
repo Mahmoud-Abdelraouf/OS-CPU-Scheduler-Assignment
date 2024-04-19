@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="428.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.frontend.schedulling_window.observers.Bar">
+<AnchorPane prefHeight="428.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.frontend.scheduling_window.observers.Bar">
    <children>
       <BarChart fx:id="bar" layoutX="50.0" layoutY="49.0" prefHeight="390.0" prefWidth="587.0" stylesheets="@../../../stylesheets/Bar.css" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="50.0">
         <xAxis>

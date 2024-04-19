@@ -1,7 +1,7 @@
 package com.os.frontend;
 
 import com.os.backend.main.Backend;
-import com.os.frontend.schedulling_window.observers.ProcessesTable;
+import com.os.frontend.scheduling_window.observers.ProcessesTable;
 import com.os.frontend.start_window.StartWindowController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +23,7 @@ public class Main extends Application {
         stage.show();
 
         this.stage = stage;
-        ((StartWindowController)fxmlLoader.getController()).setMain(this);
+        ((StartWindowController)    fxmlLoader.getController()).setMain(this);
     }
 
     public void setBackend(Backend backend) {

@@ -56,19 +56,19 @@ public class SJF_Non extends SchedulingAlgo {
             Process shortestProcess = arrivedProcesses.get(0);
 
             // Add event for process arrival
-            processTable.addExecutionEvent(currentTime, shortestProcess.getProcessNumber(), ProcessState.ARRIVED);
+            processTable.addExecutionEvent(shortestProcess, currentTime, shortestProcess.getProcessNumber(), ProcessState.ARRIVED);
 
             // Add event for process start
-            processTable.addExecutionEvent(currentTime, shortestProcess.getProcessNumber(), ProcessState.STARTED);
+            processTable.addExecutionEvent(shortestProcess, currentTime, shortestProcess.getProcessNumber(), ProcessState.STARTED);
 
             // Simulate process execution
             int endTime = currentTime + shortestProcess.getBurstTime();
             for (int i = currentTime + 1; i <= endTime; i++) {
-                processTable.addExecutionEvent(i, shortestProcess.getProcessNumber(), ProcessState.RUNNING);
+                processTable.addExecutionEvent(shortestProcess, i, shortestProcess.getProcessNumber(), ProcessState.RUNNING);
             }
 
             // Add event for process completion
-            processTable.addExecutionEvent(endTime, shortestProcess.getProcessNumber(), ProcessState.COMPLETED);
+            processTable.addExecutionEvent(shortestProcess, endTime, shortestProcess.getProcessNumber(), ProcessState.COMPLETED);
 
             // Update current time
             currentTime = endTime;
