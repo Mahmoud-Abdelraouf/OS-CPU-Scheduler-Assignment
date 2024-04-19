@@ -4,7 +4,7 @@ import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Process {
+public class Process implements Cloneable{
     private int processNumber;
     private int arrivalTime;
     private int burstTime;
@@ -84,5 +84,21 @@ public class Process {
                 ", turnaroundTime=" + turnaroundTime +
                 ", waitingTime=" + waitingTime +
                 '}';
+    }
+
+    @Override
+    public Process clone() {
+        try {
+            Process clone = (Process) super.clone();
+            clone.processNumber = this.processNumber;
+            clone.arrivalTime = this.arrivalTime;
+            clone.burstTime = this.burstTime;
+            clone.remainingTime = this.remainingTime;
+            clone.waitingTime = this.waitingTime;
+            clone.turnaroundTime = this.turnaroundTime;
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
