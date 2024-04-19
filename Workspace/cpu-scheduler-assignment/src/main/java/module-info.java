@@ -16,4 +16,5 @@ module com.os.frontend {
     exports com.os.backend.main;
     exports com.os.backend.Schedule;
     exports com.os.frontend.scheduling_window.observers;
+    exports com.os.frontend.scheduling_window.components;
 }

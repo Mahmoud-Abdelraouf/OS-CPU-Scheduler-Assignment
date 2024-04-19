@@ -109,4 +109,13 @@ public class ProcessBlockController extends AnchorPane implements Initializable 
         this.burstSpinner.getValueFactory().setValue(1);
         this.prioritySpinner.getValueFactory().setValue(0);
     }
+
+    public void incrementProcessNumber(){
+        this.number++;
+    }
+
+    public void setArrivalTime(int arrivalTime) {
+        this.arrivalTime = arrivalTime;
+        ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.arrivalSpinner.getValueFactory()).setMin(arrivalTime);
+    }
 }
