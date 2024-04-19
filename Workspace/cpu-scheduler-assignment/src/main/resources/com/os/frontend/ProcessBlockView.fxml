@@ -8,13 +8,13 @@
 <?import javafx.scene.text.Font?>
 
 <VBox stylesheets="@ProcessBlockView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.frontend.start_window.ProcessBlockController">
-   <AnchorPane prefHeight="49.0" prefWidth="221.0" stylesheets="@ProcessBlockView.css">
-      <Label alignment="TOP_CENTER" layoutX="2.0" layoutY="-1.0" prefHeight="61.0" prefWidth="219.0" text="Process" textFill="#2c2b2b">
+   <AnchorPane fx:id="anchorPane" prefHeight="49.0" prefWidth="221.0" stylesheets="@ProcessBlockView.css">
+      <Label alignment="TOP_CENTER" layoutX="2.0" layoutY="-1.0" prefHeight="61.0" prefWidth="219.0" text="Process" textFill="#222831">
          <font>
             <Font name="Eras Bold ITC" size="50.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="11.0" layoutY="-4.0" prefHeight="40.0" prefWidth="55.0" text="P" textFill="#9a8d8d">
+      <Label fx:id="pLabel" alignment="TOP_LEFT" layoutX="11.0" layoutY="-4.0" prefHeight="40.0" prefWidth="55.0" text="P" >
          <font>
             <Font name="Eras Bold ITC" size="52.0" />
          </font>

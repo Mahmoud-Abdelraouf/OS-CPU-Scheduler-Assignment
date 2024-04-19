@@ -15,16 +15,16 @@
 
 <VBox prefHeight="638.0" prefWidth="1070.0" stylesheets="@StartWindowView.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.frontend.start_window.StartWindowController">
    <StackPane prefHeight="176.0" prefWidth="1217.0">
-      <Label text="CPU Scheduler" textFill="#d7d7d7">
+      <Label fx:id="CPUScheduler" text="CPU Scheduler" textFill="#d7d7d7">
          <font>
             <Font name="Eras Medium ITC" size="86.0" />
          </font>
       </Label>
    </StackPane>
-   <HBox prefHeight="333.0" prefWidth="1070.0">
-      <ScrollPane hbarPolicy="NEVER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="333.0" prefWidth="785.0" stylesheets="@StartWindowView.css">
+   <HBox fx:id="processListHBox" prefHeight="333.0" prefWidth="1070.0">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="333.0" prefWidth="785.0" stylesheets="@StartWindowView.css">
          <FlowPane fx:id="processesList" hgap="10.0" prefHeight="331.0" prefWidth="785.0" stylesheets="@StartWindowView.css" vgap="10.0">
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMousePressed="#addNewProcess" prefHeight="120.0" prefWidth="245.0" text="+">
+            <Button fx:id="plusButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMousePressed="#addNewProcess" prefHeight="120.0" prefWidth="245.0" text="+">
                <font>
                   <Font size="50.0" />
                </font></Button>
@@ -34,7 +34,7 @@
          </FlowPane>
       </ScrollPane>
       <VBox alignment="TOP_CENTER" prefHeight="245.0" prefWidth="261.0" spacing="15.0">
-         <Label text="Scheduling Algorithm" textFill="#cdcdcd">
+         <Label fx:id="schedulingAlgorithmsLabel" text="Scheduling Algorithm" textFill="#cdcdcd">
             <font>
                <Font size="24.0" />
             </font>
@@ -84,6 +84,25 @@
          <font>
             <Font size="22.0" />
          </font></Button>
-      <Spinner fx:id="timeQuantumSpinner" prefHeight="25.0" prefWidth="104.0" />
+      <VBox fx:id="priorityBlock" alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0">
+         <children>
+            <Label text="Priority" textFill="#cdcdcd">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="20.0" />
+               </VBox.margin>
+            </Label>
+            <Spinner fx:id="timeQuantumSpinner" prefHeight="25.0" prefWidth="104.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets top="6.0" />
+               </VBox.margin>
+            </Spinner>
+         </children>
+      </VBox>
    </HBox>
 </VBox>
