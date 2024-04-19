@@ -93,4 +93,11 @@ public class SystemScheduler implements Runnable{
         return processesAtTime;
     }
 
+    public void setCurrentRunningProcess(Process currentRunningProcess) {
+        this.currentRunningProcess = currentRunningProcess;
+    }
+
+    public void setProcessesAtTime(List<ProcessAtTime> processesAtTime) {
+        this.processesAtTime = processesAtTime;
+    }
 }
