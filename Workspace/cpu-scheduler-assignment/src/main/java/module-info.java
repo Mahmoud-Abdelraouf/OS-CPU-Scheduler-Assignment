@@ -4,6 +4,7 @@ module com.os.frontend {
 
     requires org.controlsfx.controls;
     requires java.desktop;
+    requires java.management;
     opens com.os.backend.Process to javafx.base;
 
 

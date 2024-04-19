@@ -4,7 +4,9 @@ import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class Process {
+import javax.management.InvalidAttributeValueException;
+
+public class Process implements Cloneable{
     private int processNumber;
     private int arrivalTime;
     private int burstTime;
@@ -17,6 +19,7 @@ public class Process {
         this.processNumber = processNumber;
         this.arrivalTime = arrivalTime;
         this.burstTime = burstTime;
+        this.remainingTime = burstTime;
     }
 
     public Process() {
@@ -47,6 +50,7 @@ public class Process {
 
     public void setBurstTime(int burstTime) {
         this.burstTime = burstTime;
+        this.remainingTime = burstTime;
     }
 
     public int getRemainingTime() {
@@ -72,7 +76,14 @@ public class Process {
     public void setWaitingTime(int waitingTime) {
         this.waitingTime = waitingTime;
     }
-
+    public void decrementRemainingTime() {
+        if(remainingTime==0){
+            throw new RuntimeException(
+                    "Process "+ this.processNumber + "has been accessed illegally."
+            );
+        }
+        this.remainingTime--;
+    }
 
     @Override
     public String toString() {
@@ -84,5 +95,21 @@ public class Process {
                 ", turnaroundTime=" + turnaroundTime +
                 ", waitingTime=" + waitingTime +
                 '}';
+    }
+
+    @Override
+    public Process clone() {
+        try {
+            Process clone = (Process) super.clone();
+            clone.processNumber = this.processNumber;
+            clone.arrivalTime = this.arrivalTime;
+            clone.burstTime = this.burstTime;
+            clone.remainingTime = this.remainingTime;
+            clone.waitingTime = this.waitingTime;
+            clone.turnaroundTime = this.turnaroundTime;
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

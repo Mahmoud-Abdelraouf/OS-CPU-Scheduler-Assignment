@@ -1,7 +1,8 @@
 package com.os.backend.Process;
 
-public class PriorityProcess extends Process {
+public class PriorityProcess extends Process implements Cloneable{
     private int priority;
+
 
     public PriorityProcess(int processNumber, int arrivalTime, int burstTime, int priority) {
         super(processNumber, arrivalTime, burstTime);
@@ -32,5 +33,12 @@ public class PriorityProcess extends Process {
                 ", " +
                 super.toString() +
                 '}';
+    }
+
+    @Override
+    public PriorityProcess clone() {
+        PriorityProcess clone = (PriorityProcess) super.clone();
+        clone.priority = this.priority;
+        return clone;
     }
 }

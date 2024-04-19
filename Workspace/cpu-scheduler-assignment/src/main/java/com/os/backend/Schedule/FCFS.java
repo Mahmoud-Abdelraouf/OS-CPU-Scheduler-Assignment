@@ -7,7 +7,6 @@ import com.os.backend.Process.ProcessTable;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class FCFS extends SchedulingAlgo {
 
     public static void main(String[] args) {

@@ -7,6 +7,7 @@ import com.os.frontend.scheduling_window.observers.Observer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.Animation;
+import javafx.application.Platform;
 import javafx.util.Duration;
 
 import java.util.Collections;
@@ -38,7 +39,8 @@ public class Backend {
                         event -> {
                             system.setCurrentRunningProcess(system.getCurrentProcess(this.getTable(), time));
                             system.setProcessesAtTime(system.getCurrentProcessesTable());
-                            if(system.getCurrentRunningProcess() != null) { system.notifyObservers(); }
+                            system.notifyObservers();
+                            time++;
                         }
                 ),
                 new KeyFrame(Duration.seconds(1)) // Trigger every second
@@ -47,7 +49,24 @@ public class Backend {
         // Start the timeline
         timeline.play();
 
-
+//        Platform.runLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    do {
+//                        // fetch current running process
+//                        system.setCurrentRunningProcess(system.getCurrentProcess(Backend.this.getTable(), time));
+//                        system.setProcessesAtTime(system.getProcessesAtTime());
+//                        time++;
+//                        if(system.getCurrentRunningProcess() != null)system.notifyObservers();
+//                        Thread.sleep(1000);
+//                    }while(true);
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        });
+//
 
 
 //        // Check for empty ProcessTable
