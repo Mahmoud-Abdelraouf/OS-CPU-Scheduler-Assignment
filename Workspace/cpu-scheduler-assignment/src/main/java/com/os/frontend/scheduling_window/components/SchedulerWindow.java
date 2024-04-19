@@ -53,7 +53,7 @@ public class SchedulerWindow extends StackPane implements Initializable {
     }
     private void ganttCharInit() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/os/frontend/GanttChartView.fxml"));
-        barAndTableBox.getChildren().add(fxmlLoader.load());
+        ganttChartBox.getChildren().add(fxmlLoader.load());
         // add to observers
         this.observers.add(fxmlLoader.getController());
     }
