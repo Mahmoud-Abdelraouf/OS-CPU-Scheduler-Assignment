@@ -10,13 +10,13 @@ import java.util.List;
 public class Backend {
 
     private SchedulingAlgo scheduler;
-    private SystemScheduler systemScheduler;
+    private SystemScheduler system;
     private List<Process> processList;
     private ProcessTable table;
     private int time;
 
     public Backend(){
-        this.systemScheduler = new SystemScheduler(this);
+        this.system = new SystemScheduler(this);
         time = 0;
     }
 
@@ -33,7 +33,7 @@ public class Backend {
         // Start processing from time t=0
         // checking every 1 sec for running process
         // till there is no process running on CPU
-        Thread processing = new Thread(systemScheduler);
+        Thread processing = new Thread(this.system);
         processing.start();
 
         /* Finished Processing
@@ -52,7 +52,7 @@ public class Backend {
 
     //For the observer
     public void attach(Observer observer){
-        systemScheduler.attach(observer);
+        system.attach(observer);
     }
 
     public List<Process> getProcessList() {

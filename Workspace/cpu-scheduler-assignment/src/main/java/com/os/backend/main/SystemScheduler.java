@@ -72,7 +72,6 @@ public class SystemScheduler implements Runnable{
                 return e.getProcess();
             }
         }
-        System.out.println("No Process Running...");
         return null;
     }
 
