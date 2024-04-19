@@ -41,19 +41,19 @@ public class Priority_Non extends SchedulingAlgo {
             }
 
             // Add event for process arrival
-            processTable.addExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.ARRIVED);
+            processTable.addExecutionEvent(process, currentTime, process.getProcessNumber(), ProcessState.ARRIVED);
 
             // Add event for process start
-            processTable.addExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.STARTED);
+            processTable.addExecutionEvent(process, currentTime, process.getProcessNumber(), ProcessState.STARTED);
 
             // Simulate process execution
             int endTime = currentTime + process.getBurstTime();
             for (int i = currentTime + 1; i <= endTime; i++) {
-                processTable.addExecutionEvent(i, process.getProcessNumber(), ProcessState.RUNNING);
+                processTable.addExecutionEvent(process, i, process.getProcessNumber(), ProcessState.RUNNING);
             }
 
             // Add event for process completion
-            processTable.addExecutionEvent(endTime, process.getProcessNumber(), ProcessState.COMPLETED);
+            processTable.addExecutionEvent(process, endTime, process.getProcessNumber(), ProcessState.COMPLETED);
 
             // Update current time
             currentTime = endTime;

@@ -3,7 +3,7 @@ package com.os.frontend.schedulling_window.observers;
 import com.os.backend.Process.Process;
 import com.os.backend.Process.ProcessAtTime;
 import com.os.backend.main.Backend;
-import com.os.backend.main.System;
+import com.os.backend.main.SystemScheduler;
 import com.os.frontend.Colors.Colors;
 import com.os.frontend.Main;
 import com.os.frontend.start_window.StartWindowController;
@@ -49,7 +49,7 @@ public class Bar extends AnchorPane implements Observer, Initializable {
         this.bar = new BarChart(xAxis, yAxis);
     }
     @Override
-    public void update(System system) {
+    public void update(SystemScheduler SystemScheduler) {
         bar.getData().clear();
         //TODO: update bars with the new data, ignore the system
         for (Process process : processList) {
