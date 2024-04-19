@@ -147,7 +147,7 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
         ganttBox.getChildren().addAll(sp1, sp2,sp3 ,sp4);
 */
         // Start a separate thread to continuously add VBoxes
-        Thread addVBoxesThread = new Thread(() -> {
+        /*Thread addVBoxesThread = new Thread(() -> {
             while (true) {
                 try {
                     Thread.sleep(200); // Sleep for 200 milliseconds
@@ -158,9 +158,9 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
                     e.printStackTrace();
                 }
             }
-        });
-        addVBoxesThread.setDaemon(true);
-        addVBoxesThread.start();
+        });*/
+        /*addVBoxesThread.setDaemon(true);
+        addVBoxesThread.start();*/
 
 
     }

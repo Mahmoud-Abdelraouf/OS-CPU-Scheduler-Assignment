@@ -7,6 +7,7 @@ import com.os.frontend.Main;
 import com.os.frontend.scheduling_window.observers.Bar;
 import com.os.frontend.scheduling_window.observers.Observer;
 import com.os.frontend.start_window.ProcessBlockController;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
@@ -21,12 +22,9 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.animation.Animation;
 
 
 public class SchedulerWindow extends StackPane implements Initializable {
@@ -40,6 +38,7 @@ public class SchedulerWindow extends StackPane implements Initializable {
     // used for attaching observers to the backend
     private final List<Observer> observers = new ArrayList<>(3);
     private int seconds;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -51,30 +50,35 @@ public class SchedulerWindow extends StackPane implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
     private void ganttCharInit() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/os/frontend/GanttChartView.fxml"));
         ganttChartBox.getChildren().add(fxmlLoader.load());
         // add to observers
         this.observers.add(fxmlLoader.getController());
     }
+
     private void barChartInit() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/os/frontend/Bar.fxml"));
         barAndTableBox.getChildren().add(fxmlLoader.load());
         // add to observers
         this.observers.add(fxmlLoader.getController());
     }
+
     private void tableInit() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/os/frontend/ProcessesTableView.fxml"));
         barAndTableBox.getChildren().add(fxmlLoader.load());
         // add to observers
         this.observers.add(fxmlLoader.getController());
     }
+
     private void addProcessInit() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/os/frontend/ProcessBlockView.fxml"));
-        this.addProcessBox.getChildren().add(1, fxmlLoader.load());
+        this.addProcessBox.getChildren().add(2, fxmlLoader.load());
         this.processBlockController = fxmlLoader.getController();
     }
-    private void timerInit(){
+
+    private void timerInit() {
         // Create a timeline that triggers every second
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0),
@@ -104,15 +108,15 @@ public class SchedulerWindow extends StackPane implements Initializable {
         // attach observers to the backend
         this.observers.forEach(backend::attach);
         //set the processBlock into the priority mode.
-        if(this.backend.getProcessList().get(0) instanceof PriorityProcess){
+        if (this.backend.getProcessList().get(0) instanceof PriorityProcess) {
             // priority mode
             this.processBlockController.showPriority();
-        } else{
+        } else {
             this.processBlockController.hidePriority();
         }
 
         //set process list to the bar chart
-        ((Bar)this.observers.get(2)).setProcessList(this.backend.getProcessList());
+        ((Bar) this.observers.get(2)).setProcessList(this.backend.getProcessList());
 
         //timer init
         timerInit();
