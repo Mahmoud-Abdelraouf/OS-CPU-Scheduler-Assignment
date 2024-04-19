@@ -169,7 +169,7 @@ private void initializeChart() {
         series.getData().forEach(data -> {
             data.nodeProperty().addListener((observable, oldValue, newNode) -> {
                 if (newNode != null) {
-                    System.out.println(colorStyle);
+                    SystemScheduler.out.println(colorStyle);
                     newNode.setStyle("-fx-bar-fill: "+colorStyle +";");
 
                 }
@@ -300,7 +300,7 @@ private void initializeChart() {
             box.setPrefWidth(50);
             String colorStyle = Colors.getColor(processList.indexOf(process));
             box.setStyle("-fx-background-color:"+  colorStyle); // Set the background color
-            //System.out.println("Default color for process " + (processList.indexOf(process) + 1) + ": " + seriesColor);
+            //SystemScheduler.out.println("Default color for process " + (processList.indexOf(process) + 1) + ": " + seriesColor);
             Label label = new Label("P" + (processList.indexOf(process)+1));
             label.setStyle("-fx-font-size: 12; -fx-font-weight: bold");
             box.getChildren().add(label);

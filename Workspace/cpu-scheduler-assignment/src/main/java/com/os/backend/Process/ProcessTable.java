@@ -12,8 +12,8 @@ public class ProcessTable {
         this.executionEvents = new ArrayList<>();
     }
 
-    public void addExecutionEvent(int time, int processNumber, ProcessState state) {
-        this.executionEvents.add(new ProcessExecutionEvent(time, processNumber, state));
+    public void addExecutionEvent(Process process,int time, int processNumber, ProcessState state) {
+        this.executionEvents.add(new ProcessExecutionEvent(process, time, processNumber, state));
     }
 
     public List<ProcessExecutionEvent> getExecutionEvents() {

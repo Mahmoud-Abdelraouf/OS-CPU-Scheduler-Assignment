@@ -24,7 +24,7 @@ public class FCFS extends SchedulingAlgo {
             // Execute the arrived processes
             for (Process process : arrivedProcesses) {
                 // Add event for process arrival
-                processTable.addExecutionEvent(currentTime, process.getProcessNumber(), ProcessState.ARRIVED);
+                processTable.addExecutionEvent(process, currentTime, process.getProcessNumber(), ProcessState.ARRIVED);
 
                 // Execute the process
                 executeProcess(process, processTable.getExecutionEvents(), currentTime);

@@ -298,9 +298,9 @@
       <comment>getters and setters for all fields </comment>
     </item>
     <item id="5600313b835842fbb6c37797379e9384" cid="CMT002" type="comment" name="Comment" creator="" creation-date="04/10/2024 01:16:20">
-      <comment>-Start Schedule: starts the system to show outputs, also it'll start the timer.
+      <comment>-Start Schedule: starts the systemScheduler to show outputs, also it'll start the timer.
 
--updateProcesses: Add new process live while the system is running.</comment>
+-updateProcesses: Add new process live while the systemScheduler is running.</comment>
     </item>
     <item id="4624e304485b4cda87c744d24987eac5" cid="LL001" type="lifeline" name="MainGui" creation-date="04/10/2024 01:28:48" visibility="undefined">
       <owned-items />
@@ -1259,7 +1259,7 @@
             </sequence-action>
           </item>
           <item id="7f3c9207b0d7436facdaab1edb4ed556" cid="CMT005" type="comment" creator="" creation-date="04/10/2024 02:01:19">
-            <comment>excecute(): start timer and and notify on the system
+            <comment>excecute(): start timer and and notify on the systemScheduler
 
 Check updateDiagrams_SeqDiagram</comment>
           </item>
@@ -1267,7 +1267,7 @@ Check updateDiagrams_SeqDiagram</comment>
             <activation-bar lifeline-ref="e32637317a55479da2472acc021e97f1" />
           </item>
           <item id="cedd5211eecc4b2c977505714cbed7cd" cid="SM023" type="sequence-action" name="Message23" creator="" creation-date="04/10/2024 01:49:51" from="84bdbfdd72014e58ba71679e96c99a8f" visibility="package">
-            <sequence-action type="call" message="show charts and system" is-asynchronous="false" return-value="" assign-to-variable="">
+            <sequence-action type="call" message="show charts and systemScheduler" is-asynchronous="false" return-value="" assign-to-variable="">
               <parameters />
             </sequence-action>
           </item>
@@ -1652,7 +1652,7 @@ Check updateDiagrams_SeqDiagram</comment>
             <comment>then the scheduling algo will update its processes table with the new data.</comment>
           </item>
           <item id="6b0fa35bc61a41bdbc3ddd547250e948" cid="CMT006" type="comment" creator="" creation-date="04/10/2024 02:03:04">
-            <comment>then the BackEnd calls the notify() method on the system object.</comment>
+            <comment>then the BackEnd calls the notify() method on the systemScheduler object.</comment>
           </item>
         </abstract-items>
         <layer id="4e52df517abe4982a4d8fc5cadf0042f" name="Default" visible="true" enabled="true" locked="false">

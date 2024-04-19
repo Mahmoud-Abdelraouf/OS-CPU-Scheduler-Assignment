@@ -1,7 +1,7 @@
 package com.os.frontend.schedulling_window.observers;
 
 import com.os.backend.Process.ProcessAtTime;
-import com.os.backend.main.System;
+import com.os.backend.main.SystemScheduler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
@@ -38,9 +38,9 @@ public class ProcessesTable extends AnchorPane implements Observer, Initializabl
     private boolean priorityInit = false;
 
     @Override
-    public void update(System system) {
+    public void update(SystemScheduler systemScheduler) {
 
-        processAtTimeList = system.getCurrentProcessesTable();
+        processAtTimeList = systemScheduler.getCurrentProcessesTable();
 
         //Init the priority column
         if (!priorityInit) {
