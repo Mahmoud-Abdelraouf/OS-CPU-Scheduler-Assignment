@@ -1,6 +1,8 @@
 package com.os.frontend.schedulling_window.observers;
 
+import com.os.backend.Process.Process;
 import com.os.backend.Process.ProcessAtTime;
+import com.os.backend.main.Backend;
 import com.os.backend.main.System;
 import com.os.frontend.Colors.Colors;
 import com.os.frontend.Main;
@@ -10,7 +12,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -28,51 +33,37 @@ public class Bar extends AnchorPane implements Observer, Initializable {
     private List<ProcessAtTime> processAtTimeList;
 
     @FXML
-    public BarChart<String, Double> Bar;
+    public BarChart<String, Double> bar;
+    private CategoryAxis xAxis;
+    private NumberAxis yAxis;
 
     private List<Process> processList;
+
+    public Bar(){
+        this.xAxis = new CategoryAxis();
+        this.yAxis = new NumberAxis();
+
+        // Set labels for the axes
+        this.xAxis.setLabel("Process");
+        this.yAxis.setLabel("Waiting time");
+        this.bar = new BarChart(xAxis, yAxis);
+    }
     @Override
     public void update(System system) {
+        bar.getData().clear();
         //TODO: update bars with the new data, ignore the system
-
+        for (Process process : processList) {
+            var series = new XYChart.Series();
+            series.setName(String.valueOf(process.getProcessNumber()));
+            series.getData().add(new XYChart.Data("", process.getWaitingTime()));
+            bar.getData().add(series);
+        }
     }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        var series1=new XYChart.Series();
-        series1.setName("P1");
-        series1.getData().add(new XYChart.Data("",40));
 
-
-        var series2=new XYChart.Series();
-        series2.setName("P2");
-        series2.getData().add(new XYChart.Data("",50));
-
-        var series3=new XYChart.Series();
-        series3.setName("P3");
-        series3.getData().add(new XYChart.Data("",12));
-        var series4=new XYChart.Series();
-        series4.setName("P4");
-        series4.getData().add(new XYChart.Data("",16));
-
-//        new Thread(()->{
-//            try {
-//                Thread.sleep(5000);
-//                Platform.runLater(()->series1.getNode().setStyle("-fx-bar-fill: green;"));
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }).start();
-
-
-        Bar.getData().addAll(series1,series2,series3,series4);
-
-        for(int i=0;i<40;i++){
-            var series=new XYChart.Series();
-            series.setName("P"+(i+5));
-            series.getData().add(new XYChart.Data("",16));
-            Bar.getData().add(series);
-        }
     }
 
     public void setProcessList(List<Process> processList) {
