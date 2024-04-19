@@ -86,7 +86,7 @@
          </font></Button>
       <VBox fx:id="priorityBlock" alignment="TOP_CENTER" minHeight="-Infinity" prefHeight="100.0" prefWidth="100.0">
          <children>
-            <Label text="Priority" textFill="#cdcdcd">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="114.0" text="Q Time" textAlignment="CENTER" textFill="#cdcdcd">
                <font>
                   <Font size="18.0" />
                </font>

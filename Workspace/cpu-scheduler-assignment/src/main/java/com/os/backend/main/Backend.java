@@ -5,6 +5,7 @@ import com.os.backend.Process.ProcessTable;
 import com.os.backend.Schedule.SchedulingAlgo;
 import com.os.frontend.scheduling_window.observers.Observer;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Backend {
@@ -65,5 +66,10 @@ public class Backend {
 
     public SchedulingAlgo getScheduler() {
         return scheduler;
+    }
+
+    public void addProcess(Process process) {
+        scheduler.addNewProcesses(Collections.singletonList(process));
+        this.table = scheduler.execute();
     }
 }
