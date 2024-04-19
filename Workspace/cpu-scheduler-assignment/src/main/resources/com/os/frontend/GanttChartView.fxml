@@ -6,9 +6,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane xmlns="http://javafx.com/javafx"
+<ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.os.frontend.scheduling_window.observers.GanttChart"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="75" prefWidth="1080"
+            hbarPolicy="ALWAYS"
+            hvalue="0.04"
+            maxHeight="-Infinity"
+            maxWidth="Infinity"
+            minHeight="-Infinity"
+            minWidth="-Infinity"
+            prefViewportHeight="0.5" prefViewportWidth="0.5"
+            vbarPolicy="NEVER"
+            vvalue="0.25">
+</ScrollPane>
 
-</StackPane>
