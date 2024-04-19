@@ -4,11 +4,17 @@ import com.os.backend.Process.Process;
 import com.os.backend.main.SystemScheduler;
 import com.os.frontend.Colors.Colors;
 import com.os.frontend.scheduling_window.observers.Observer;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 import javax.swing.*;
 import java.net.URL;
@@ -16,68 +22,145 @@ import java.util.ResourceBundle;
 
 public class GanttChart extends ScrollPane implements Observer, Initializable {
 
-    private int time;
+    public HBox ganttBox;
+    private int time =0;
     @Override
     public void update(SystemScheduler system) {
         Process currentProcess = system.getCurrentRunningProcess();
         int index = currentProcess.getProcessNumber();
 
-        StackPane box;
+        VBox vbox;
 
         if (currentProcess == null) {
-            box = addIdlebox();
+            vbox = addIdlebox();
         } else {
-           box =  addProcessBox(index);
+           vbox =  addProcessBox(index);
         }
 
-        this.getChildren().add(box);
-        this.setPrefWidth(this.getPrefWidth()+9);
-        scrolViewChange();
+        ganttBox.getChildren().add(vbox);
+
 
     }
+    private void enlargeGanntBox (){
+        scrolViewChange();
+
+
+    }
+
 
 
     private void scrolViewChange(){
-        time++;
-        if (time>19)
-            this.setHvalue(1);
+        if (time>19){
+            ScrollPane sp = this;
+            sp.setHvalue(1);
+
+        ganttBox.setPrefWidth(ganttBox.getPrefWidth()+10);}
 
     }
-    public  StackPane addProcessBox(int index ){
+    public  VBox addProcessBox(int index ){
+        VBox vbox = new VBox();
+        vbox.setPrefHeight(75);
+        vbox.setPrefWidth(50);
+
         StackPane box = new StackPane();
-        box.setPrefHeight(75);
+        box.setPrefHeight(55);
         box.setPrefWidth(50);
         String colorStyle = Colors.getColor(index);
         box.setStyle("-fx-background-color:"+  colorStyle);
+        vbox.setStyle("-fx-background-color:"+  colorStyle);
         Label label = new Label("P" + (index));
         label.setStyle("-fx-font-size: 12; -fx-font-weight: bold");
         box.getChildren().add(label);
-        return box;
+
+        time++;
+        Label timestamp = new Label(""+this.time);
+        timestamp.setStyle("-fx-font-size: 10; ");
+        timestamp.setPadding(new Insets(0, 2, 0, 0));
+
+        vbox.getChildren().addAll(box,timestamp);
+        vbox.setAlignment(Pos.CENTER_RIGHT);
+
+
+        enlargeGanntBox ();
+
+
+
+
+        return vbox;
 
     }
 
-    public  StackPane addIdlebox( ){
+    public  VBox addIdlebox( ){
+        VBox vbox = new VBox();
+        vbox.setPrefHeight(75);
+        vbox.setPrefWidth(50);
+
         StackPane box = new StackPane();
-        box.setPrefHeight(75);
+        box.setPrefHeight(55);
         box.setPrefWidth(50);
-        box.setStyle("-fx-background-color:  #bcbfba");
+        box.setStyle("-fx-background-color:  #ccefbf");
+        vbox.setStyle("-fx-background-color:  #ccefbf");
         Label label = new Label("Idle");
-        label.setStyle("-fx-font-size: 10; -fx-font-weight: bold");
+        label.setStyle("-fx-font-size: 12; -fx-font-weight: bold");
         box.getChildren().add(label);
-        return box;
+
+        time++;
+        Label timestamp = new Label(""+this.time);
+        timestamp.setStyle("-fx-font-size: 10; ");
+        timestamp.setPadding(new Insets(0, 2, 0, 0));
+
+        vbox.getChildren().addAll(box,timestamp);
+        vbox.setAlignment(Pos.CENTER_RIGHT);
+
+
+        enlargeGanntBox ();
+
+
+        return vbox;
+
     }
 
+    public HBox initializeGanttBox() {
+        ganttBox = new HBox();
+        ganttBox.setAlignment(Pos.CENTER_LEFT);
+        ganttBox.setMaxWidth(Double.MAX_VALUE);
+        ganttBox.setPrefHeight(75.0);
+        ganttBox.setPrefWidth(1800.0);
+        ganttBox.setStyle("-fx-background-color: #30305f; -fx-border-color: #30305f;");
+        return ganttBox;
+    }
 
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        StackPane sp1 = addProcessBox(1);
-        StackPane sp2 = addProcessBox(2);
-        StackPane sp3 = addProcessBox(3);
-        StackPane sp4 = addProcessBox(4);
+        /*ganttBox = initializeGanttBox();*/
+        this.setStyle("-fx-background-color: #561154");
+/*
+        VBox sp1 = addProcessBox(1);
+        VBox sp2 = addProcessBox(2);
+        VBox sp3 = addProcessBox(3);
+        VBox sp4 = addIdlebox();
+        VBox sp5 = addIdlebox();
+        VBox sp6 = addIdlebox();
 
-        this.getChildren().addAll(sp1, sp2,sp3 ,sp4);
+        ganttBox.getChildren().addAll(sp1, sp2,sp3 ,sp4);
+*/
+        // Start a separate thread to continuously add VBoxes
+        Thread addVBoxesThread = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(200); // Sleep for 200 milliseconds
+                    Platform.runLater(() -> ganttBox.getChildren().add(addProcessBox(time + 1))); // Add a new process box
+                    System.out.print(time+ "  ");
+                    System.out.println(this.getHvalue());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        addVBoxesThread.setDaemon(true);
+        addVBoxesThread.start();
 
 
     }
