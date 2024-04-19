@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="SchedularContainer" alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1100.0" stylesheets="@../../../stylesheets/schedularViewStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.frontend.scheduling_window.components.SchedulerWindow">
+<VBox fx:id="SchedularContainer" alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1300.0" stylesheets="@../../../stylesheets/schedularViewStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.frontend.scheduling_window.components.SchedulerWindow">
    <Label fx:id="CPUScheduler" text="CPU Scheduler" textFill="#d7d7d7">
       <font>
          <Font name="Eras Medium ITC" size="48.0" />

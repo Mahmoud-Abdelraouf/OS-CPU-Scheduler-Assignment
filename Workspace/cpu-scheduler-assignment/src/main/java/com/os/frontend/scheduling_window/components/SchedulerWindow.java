@@ -5,6 +5,7 @@ import com.os.backend.Process.Process;
 import com.os.backend.main.Backend;
 import com.os.frontend.Main;
 import com.os.frontend.scheduling_window.observers.Bar;
+import com.os.frontend.scheduling_window.observers.GanttChart;
 import com.os.frontend.scheduling_window.observers.Observer;
 import com.os.frontend.start_window.ProcessBlockController;
 import javafx.animation.Animation;
@@ -34,6 +35,7 @@ public class SchedulerWindow extends StackPane implements Initializable {
     public VBox timerBox;
     public Label timeLabel;
     private Backend backend;
+    private GanttChart ganttChart;
     private ProcessBlockController processBlockController;
     // used for attaching observers to the backend
     private final List<Observer> observers = new ArrayList<>(3);
@@ -56,6 +58,9 @@ public class SchedulerWindow extends StackPane implements Initializable {
         ganttChartBox.getChildren().add(fxmlLoader.load());
         // add to observers
         this.observers.add(fxmlLoader.getController());
+        this.ganttChart = fxmlLoader.getController();
+        this.ganttChart.setHvalue(1);
+
     }
 
     private void barChartInit() throws IOException {

@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 public class GanttChart extends ScrollPane implements Observer, Initializable {
 
     public HBox ganttBox;
+    public ScrollPane scrollPane;
     private int time =0;
     @Override
     public void update(SystemScheduler system) {
@@ -51,8 +52,8 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
 
     private void scrolViewChange(){
         if (time>19){
-            ScrollPane sp = this;
-            sp.setHvalue(1);
+            //ScrollPane sp = this;
+            this.scrollPane.setHvalue(1);
 
         ganttBox.setPrefWidth(ganttBox.getPrefWidth()+10);}
 
@@ -81,7 +82,7 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
         vbox.setAlignment(Pos.CENTER_RIGHT);
 
 
-        enlargeGanntBox ();
+        enlargeGanntBox();
 
 
 

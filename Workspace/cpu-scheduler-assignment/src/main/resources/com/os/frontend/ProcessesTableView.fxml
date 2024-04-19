@@ -139,11 +139,8 @@
         </HBox>
     </GridPane>
     <HBox fx:id="importantBox" alignment="CENTER" prefHeight="50.0" prefWidth="589.0" spacing="40.0">
-        <padding>
-            <Insets top="10.0" />
-        </padding>
         <HBox alignment="CENTER" styleClass="importantBoxChild">
-            <Label text="Average waiting time: " textFill="#76abae">
+            <Label text="Average waiting: " textFill="#76abae">
                 <font>
                     <Font name="System Bold" size="16.0" />
                 </font>
@@ -155,7 +152,7 @@
             </Label>
         </HBox>
         <HBox alignment="CENTER" styleClass="importantBoxChild">
-            <Label text="Average turnaround time: " textFill="#76abae">
+            <Label text="Average turnaround: " textFill="#76abae">
                 <font>
                     <Font name="System Bold" size="16.0" />
                 </font>
@@ -166,5 +163,8 @@
                 </font>
             </Label>
         </HBox>
+      <padding>
+         <Insets top="10.0" />
+      </padding>
     </HBox>
 </VBox>

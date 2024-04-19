@@ -1,10 +1,8 @@
 package com.os.frontend;
-import com.os.backend.Process.Process;
+
 import com.os.backend.Process.PriorityProcess;
+import com.os.backend.Process.Process;
 import com.os.frontend.Colors.Colors;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,7 +29,7 @@ import java.util.ResourceBundle;
 
 import static java.lang.Integer.parseInt;
 
-public class SchedulerViewController implements Initializable{
+public class SchedulerViewController implements Initializable {
 
 
     public ScrollPane scrollPane;
@@ -42,7 +40,7 @@ public class SchedulerViewController implements Initializable{
     @FXML
     private TableColumn<Process, Integer> arrivalColumn;
     @FXML
-    private TableColumn<Process, Integer>  burstColumn;
+    private TableColumn<Process, Integer> burstColumn;
     @FXML
     private TableColumn<Process, Integer> priorityColumn;
     @FXML
@@ -70,10 +68,10 @@ public class SchedulerViewController implements Initializable{
     public Button startButton;
 
 
-    ObservableList<Process> processList  = FXCollections.observableArrayList(
-    new Process(0,5 , 6 ),
-    new Process(0, 30 , 28 ),
-    new Process(0, 1 , 7 )
+    ObservableList<Process> processList = FXCollections.observableArrayList(
+            new Process(0, 5, 6),
+            new Process(0, 30, 28),
+            new Process(0, 1, 7)
 
     );
 
@@ -102,7 +100,6 @@ public class SchedulerViewController implements Initializable{
         scrollPane.setHvalue(0);
 
 
-
     }
    /* private void updateChart(Process process){
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
@@ -126,51 +123,49 @@ public class SchedulerViewController implements Initializable{
     }*/
 
 
-
-    public  void initializeTable (){
+    public void initializeTable() {
         schedularViewAnimation();
         //TODO: pidColumn.setCellFactory(new PropertyValueFactory<Process,Integer>()); Handle pid
-        arrivalColumn.setCellValueFactory(new PropertyValueFactory<Process,Integer>("arrivalTime"));
-        burstColumn.setCellValueFactory(new PropertyValueFactory<Process,Integer>("burstTime"));
+        arrivalColumn.setCellValueFactory(new PropertyValueFactory<Process, Integer>("arrivalTime"));
+        burstColumn.setCellValueFactory(new PropertyValueFactory<Process, Integer>("burstTime"));
         //TODO:remainingColumn.setCellValueFactory(new PropertyValueFactory<Process,Integer>("arrivalTime"));
 
         processTable.setItems(processList);
     }
 
-///////////////////////////////////////Adding a category instead of a series
-private void initializeChart() {
-    xAxis.setLabel("Processes");
-    yAxis.setLabel("Burst Time");
+    ///////////////////////////////////////Adding a category instead of a series
+    private void initializeChart() {
+        xAxis.setLabel("Processes");
+        yAxis.setLabel("Burst Time");
 
-    // Create a list to store the categories
-    ObservableList<String> categories = FXCollections.observableArrayList();
+        // Create a list to store the categories
+        ObservableList<String> categories = FXCollections.observableArrayList();
 
-    // Add category names for each process in the list
-    for (Process process : processList) {
-        categories.add("P" + (processList.indexOf(process) + 1));
+        // Add category names for each process in the list
+        for (Process process : processList) {
+            categories.add("P" + (processList.indexOf(process) + 1));
+        }
+
+        // Set the categories on the X-axis
+        xAxis.setCategories(categories);
+
+        // Create a series for each process and add it to the chart
+        for (Process process : processList) {
+            int seriesIndex = processList.indexOf(process);
+            XYChart.Series<String, Integer> series = new XYChart.Series<>();
+            series.setName("P" + (seriesIndex + 1)); // Set a unique name for each series
+            series.getData().add(new XYChart.Data<>(series.getName(), process.getBurstTime()));
+
+            //set Fill Color for series
+            setBarColorForSeries(series, seriesIndex);
+
+
+            barChart.getData().add(series);
+        }
     }
 
-    // Set the categories on the X-axis
-    xAxis.setCategories(categories);
 
-    // Create a series for each process and add it to the chart
-    for (Process process : processList) {
-        int seriesIndex = processList.indexOf(process);
-        XYChart.Series<String, Integer> series = new XYChart.Series<>();
-        series.setName("P" + (seriesIndex + 1)); // Set a unique name for each series
-        series.getData().add(new XYChart.Data<>(series.getName(), process.getBurstTime()));
-
-        //set Fill Color for series
-        setBarColorForSeries (series,  seriesIndex);
-
-
-        barChart.getData().add(series);
-    }
-}
-
-
-
-    private void setBarColorForSeries(XYChart.Series<String, Integer> series , int seriesIndex ){
+    private void setBarColorForSeries(XYChart.Series<String, Integer> series, int seriesIndex) {
 /*
         // Set the fill color of the series based on its index
         String colorStyle = Colors.getColor(seriesIndex);
@@ -202,13 +197,10 @@ private void initializeChart() {
     }
 
 
-
-
-
     public void addNewProcess(ActionEvent actionEvent) {
         PriorityProcess process = new PriorityProcess(0, parseInt(arrivalField.getText()),
                 parseInt(burstField.getText()),
-                priorityField.getText() == null ? parseInt(priorityField.getText()):0 );
+                priorityField.getText() == null ? parseInt(priorityField.getText()) : 0);
 
         processList.add(process);
         arrivalField.setText("");
@@ -227,8 +219,7 @@ private void initializeChart() {
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
         series.setName("P" + (processList.size())); // Set a unique name for each series
         series.getData().add(new XYChart.Data<>(series.getName(), process.getBurstTime()));
-        setBarColorForSeries (series,  processList.indexOf(process));
-
+        setBarColorForSeries(series, processList.indexOf(process));
 
 
         // Add the series to the chart
@@ -244,7 +235,6 @@ private void initializeChart() {
     }
 
 
-
     public void executeTest(ActionEvent actionEvent) {
         // Get the index of the selected process in the table
         int selectedIndex = processTable.getSelectionModel().getSelectedIndex();
@@ -255,19 +245,19 @@ private void initializeChart() {
         }
     }
 
-    private void executeProcess (int index){
+    private void executeProcess(int index) {
         Process process = processList.get(index);
-        if (process.getBurstTime()>0) {
+        if (process.getBurstTime() > 0) {
             process.setBurstTime(process.getBurstTime() - 1);
             System.out.println(process.getBurstTime());
-            updateChart(index,process);
-            updateTable(index,process);
+            updateChart(index, process);
+            updateTable(index, process);
             ganttChartUpdate(process);
 
         }
     }
 
-    private void updateChart(int index, Process process){
+    private void updateChart(int index, Process process) {
         XYChart.Series<String, Integer> series = barChart.getData().get(index);
 
         // Get the last data point and update its value
@@ -278,8 +268,9 @@ private void initializeChart() {
         setBarColorForSeries(series, processList.indexOf(process));
 
 
-   //     barChart.getData().add(series);
+        //     barChart.getData().add(series);
     }
+
     private void updateTable(int index, Process process) {
         // Get the process at the specified index in the table
         Process updatedProcess = processTable.getItems().get(index);
@@ -299,40 +290,39 @@ private void initializeChart() {
         //TODO:Get the color or the bar
 
         // Get the default color of the series
-     //   String seriesColor = getDefaultSeriesColor(process);
+        //   String seriesColor = getDefaultSeriesColor(process);
 
 
-            // Create and style the StackPane with the same color as the series
-            StackPane box = new StackPane();
-            box.setPrefHeight(75);
-            box.setPrefWidth(50);
-            String colorStyle = Colors.getColor(processList.indexOf(process));
-            box.setStyle("-fx-background-color:"+  colorStyle); // Set the background color
-            //SystemScheduler.out.println("Default color for process " + (processList.indexOf(process) + 1) + ": " + seriesColor);
-            Label label = new Label("P" + (processList.indexOf(process)+1));
-            label.setStyle("-fx-font-size: 12; -fx-font-weight: bold");
-            box.getChildren().add(label);
+        // Create and style the StackPane with the same color as the series
+        StackPane box = new StackPane();
+        box.setPrefHeight(75);
+        box.setPrefWidth(50);
+        String colorStyle = Colors.getColor(processList.indexOf(process));
+        box.setStyle("-fx-background-color:" + colorStyle); // Set the background color
+        //SystemScheduler.out.println("Default color for process " + (processList.indexOf(process) + 1) + ": " + seriesColor);
+        Label label = new Label("P" + (processList.indexOf(process) + 1));
+        label.setStyle("-fx-font-size: 12; -fx-font-weight: bold");
+        box.getChildren().add(label);
 
-            // Add the StackPane to the ganttBox
-            ganttBox.getChildren().add(box);
+        // Add the StackPane to the ganttBox
+        ganttBox.getChildren().add(box);
 
-            //عشان خاطر اسلام
-            ganttBox.setPrefWidth(ganttBox.getPrefWidth()+9);
-            double viewValue = (double) (ganttBox.getChildren().size() * 75 +250) /1060 ;
-
-
+        //عشان خاطر اسلام
+        ganttBox.setPrefWidth(ganttBox.getPrefWidth() + 9);
+        double viewValue = (double) (ganttBox.getChildren().size() * 75 + 250) / 1060;
 
 
-            //سيب دي عشان انا فلاح
-            scrolViewChange();
+        //سيب دي عشان انا فلاح
+        scrolViewChange();
 
     }
 
-    private void scrolViewChange(){
+    private void scrolViewChange() {
         scrolViewChange++;
-        if (scrolViewChange>19)
+        if (scrolViewChange > 19) {
             System.out.println(scrollPane.getHvalue());
             scrollPane.setHvalue(1);
+        }
 
     }
 
@@ -359,8 +349,7 @@ private void initializeChart() {
         return null; // Default color not found
     }
 
-    private void schedularViewAnimation()
-    {
+    private void schedularViewAnimation() {
         TranslateTransition moveInTransition = new TranslateTransition(Duration.seconds(1), CPUScheduler);
         moveInTransition.setFromY(0); // Starting position
         moveInTransition.setToY(-20); // Move in by 20 pixels
