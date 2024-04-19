@@ -20,6 +20,16 @@ public class ProcessTable {
         return executionEvents;
     }
 
+    public boolean contains(Process process) {
+        for (ProcessExecutionEvent event : executionEvents) {
+            if (event.getProcess().equals(process)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     @Override
     public String toString() {
         return "ProcessTable{" + "executionEvents=" + executionEvents + '}';

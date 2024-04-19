@@ -6,7 +6,11 @@ import com.os.backend.Process.ProcessState;
 import com.os.backend.Process.ProcessTable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Iterator;
+
 public class FCFS extends SchedulingAlgo {
 
     public static void main(String[] args) {
@@ -42,29 +46,39 @@ public class FCFS extends SchedulingAlgo {
         ProcessTable processTable = new ProcessTable();
         int currentTime = 0;
 
-        while (true) {
-            // Check if there are any new processes arrived at the current time
+        while (!processesList.isEmpty()) { // Continue until all processes are executed
+            // Get the processes that have arrived by the current time
             List<Process> arrivedProcesses = getArrivedProcesses(currentTime);
 
-            // Execute the arrived processes
-            for (Process process : arrivedProcesses) {
-                // Add event for process arrival
-                processTable.addExecutionEvent(process, currentTime, process.getProcessNumber(), ProcessState.ARRIVED);
-
-                // Execute the process
-                executeProcess(process, processTable.getExecutionEvents(), currentTime);
-
-                // Update current time
-                currentTime += process.getBurstTime();
+            if (arrivedProcesses.isEmpty()) {
+                // If no processes have arrived, increment current time
+                currentTime++;
+                continue;
             }
 
-            // Check if there are no more processes remaining
-            if (processesList.isEmpty()) {
-                break; // Exit the loop if there are no more processes
+            // Get the process that arrived first (FCFS)
+            Process firstProcess = arrivedProcesses.get(0);
+
+            // Add event for process arrival
+            processTable.addExecutionEvent(firstProcess, currentTime, firstProcess.getProcessNumber(), ProcessState.ARRIVED);
+
+            // Add event for process start
+            processTable.addExecutionEvent(firstProcess, currentTime, firstProcess.getProcessNumber(), ProcessState.STARTED);
+
+            // Simulate process execution
+            int endTime = currentTime + firstProcess.getBurstTime();
+            for (int i = currentTime + 1; i <= endTime; i++) {
+                processTable.addExecutionEvent(firstProcess, i, firstProcess.getProcessNumber(), ProcessState.RUNNING);
             }
 
-            // Increment current time to check the next time unit
-            currentTime++;
+            // Add event for process completion
+            processTable.addExecutionEvent(firstProcess, endTime, firstProcess.getProcessNumber(), ProcessState.COMPLETED);
+
+            // Update current time
+            currentTime = endTime;
+
+            // Remove the executed process from the list
+            processesList.remove(firstProcess);
         }
 
         return processTable;
@@ -72,26 +86,11 @@ public class FCFS extends SchedulingAlgo {
 
     private List<Process> getArrivedProcesses(int currentTime) {
         List<Process> arrivedProcesses = new ArrayList<>();
-        processesList.removeIf(process -> process.getArrivalTime() < currentTime);
-        processesList.forEach(process -> {
+        for (Process process : processesList) {
             if (process.getArrivalTime() <= currentTime) {
                 arrivedProcesses.add(process);
             }
-        });
-        return arrivedProcesses;
-    }
-
-    private void executeProcess(Process process, List<ProcessExecutionEvent> executionEvents, int startTime) {
-        // Add event for process start
-        executionEvents.add(new ProcessExecutionEvent(process, startTime, process.getProcessNumber(), ProcessState.STARTED));
-
-        // Simulate process execution
-        int endTime = startTime + process.getBurstTime();
-        for (int i = startTime + 1; i <= endTime; i++) {
-            executionEvents.add(new ProcessExecutionEvent(process, i, process.getProcessNumber(), ProcessState.RUNNING));
         }
-
-        // Add event for process completion
-        executionEvents.add(new ProcessExecutionEvent(process, endTime, process.getProcessNumber(), ProcessState.COMPLETED));
+        return arrivedProcesses;
     }
 }
