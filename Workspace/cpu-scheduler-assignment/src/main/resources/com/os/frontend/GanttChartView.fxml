@@ -19,6 +19,5 @@
             prefViewportHeight="0.5" prefViewportWidth="0.5"
             vbarPolicy="NEVER"
             vvalue="0.25">
-
-
 </ScrollPane>
+
