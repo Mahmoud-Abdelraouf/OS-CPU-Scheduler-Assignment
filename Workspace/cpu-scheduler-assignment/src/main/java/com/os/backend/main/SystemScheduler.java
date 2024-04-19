@@ -42,6 +42,17 @@ public class SystemScheduler{
         observersList.forEach(observer -> observer.update(this));
     }
 
+    public void updateTimeForProcess(Process process, int time){
+        // Assuming no finished process will enter the function
+        // process => WAITING
+        if(process.getArrivalTime() < time && process.getRemainingTime() != 0){
+            // increment waiting
+            process.setWaitingTime(process.getWaitingTime() + 1);
+            process.setTurnaroundTime(process.getWaitingTime() + process.getBurstTime());
+        }
+
+
+    }
 
     public Process getCurrentProcess(ProcessTable pTable,int time){
         //TODO
@@ -49,7 +60,17 @@ public class SystemScheduler{
         List<ProcessExecutionEvent> pExecEventList = pTable.getProcessesList(time);
         //  search for running process at current time
         for(ProcessExecutionEvent e: pExecEventList){
-            if( e.getState() == ProcessState.RUNNING || e.getState() == ProcessState.STARTED){
+            if( e.getState() == ProcessState.RUNNING || e.getState() == ProcessState.STARTED) {
+                // 1. update remaining time for current process
+                // assuming remaining time is initially equal to burst time
+                Process tempCurrentRunningProcess = e.getProcess();
+                tempCurrentRunningProcess.setRemainingTime(tempCurrentRunningProcess.getRemainingTime() - 1);
+                // 2. update waiting time for other processes
+                for(Process p : backend.getProcessList()){
+                    if (p == tempCurrentRunningProcess) continue;
+                    updateTimeForProcess(p, time);
+                }
+                // 3. return current running process
                 return e.getProcess();
             }
         }
