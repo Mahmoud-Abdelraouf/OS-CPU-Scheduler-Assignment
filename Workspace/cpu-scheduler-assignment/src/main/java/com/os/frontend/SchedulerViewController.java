@@ -323,6 +323,7 @@ private void initializeChart() {
     private void scrolViewChange(){
         scrolViewChange++;
         if (scrolViewChange>19)
+            System.out.println(scrollPane.getHvalue());
             scrollPane.setHvalue(1);
 
     }
