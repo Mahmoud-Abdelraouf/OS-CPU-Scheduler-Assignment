@@ -8,7 +8,7 @@ import com.os.frontend.scheduling_window.observers.Observer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SystemScheduler implements Runnable{
+public class SystemScheduler{
 
     // Test block
     public static void main(String[] args) {
@@ -21,26 +21,6 @@ public class SystemScheduler implements Runnable{
         pList.add(new Process(3,3,4));
         backend.updateProcessesList(pList);
         backend.startSchedule();
-
-    }
-
-    // Thread Task used in Backend
-    //
-    // Notify Observers every 1 sec
-    @Override
-    public void run() {
-        try {
-            do {
-                // fetch current running process
-                this.currentRunningProcess = getCurrentProcess(backend.getTable(), time);
-                this.processesAtTime = getCurrentProcessesTable();
-                time++;
-                if(currentRunningProcess != null) { notifyObservers(); }
-                Thread.sleep(1000);
-            }while(true);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
 
     }
 
