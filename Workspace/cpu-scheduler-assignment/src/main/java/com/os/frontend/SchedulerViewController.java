@@ -2,6 +2,10 @@ package com.os.frontend;
 import com.os.backend.Process.Process;
 import com.os.backend.Process.PriorityProcess;
 import com.os.frontend.Colors.Colors;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +22,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -43,6 +48,8 @@ public class SchedulerViewController implements Initializable{
     @FXML
     private TableColumn<Process, Integer> remainingColumn;
 
+    @FXML
+    private Label CPUScheduler;
     @FXML
     private BarChart<String, Integer> barChart;
     XYChart.Series<String, Integer> processSeries = new XYChart.Series<>();
@@ -121,6 +128,7 @@ public class SchedulerViewController implements Initializable{
 
 
     public  void initializeTable (){
+        schedularViewAnimation();
         //TODO: pidColumn.setCellFactory(new PropertyValueFactory<Process,Integer>()); Handle pid
         arrivalColumn.setCellValueFactory(new PropertyValueFactory<Process,Integer>("arrivalTime"));
         burstColumn.setCellValueFactory(new PropertyValueFactory<Process,Integer>("burstTime"));
@@ -350,5 +358,23 @@ private void initializeChart() {
         return null; // Default color not found
     }
 
+    private void schedularViewAnimation()
+    {
+        TranslateTransition moveInTransition = new TranslateTransition(Duration.seconds(1), CPUScheduler);
+        moveInTransition.setFromY(0); // Starting position
+        moveInTransition.setToY(-20); // Move in by 20 pixels
+
+        // Create translate transition for moving out
+        TranslateTransition moveOutTransition = new TranslateTransition(Duration.seconds(1), CPUScheduler);
+        moveOutTransition.setFromY(-20); // Starting position
+        moveOutTransition.setToY(0); // Move out to original position
+
+        // Chain the two transitions
+        moveInTransition.setOnFinished(event -> moveOutTransition.play());
+        moveOutTransition.setOnFinished(event -> moveInTransition.play());
+
+        // Start the initial animation
+        moveInTransition.play();
+    }
 
 }

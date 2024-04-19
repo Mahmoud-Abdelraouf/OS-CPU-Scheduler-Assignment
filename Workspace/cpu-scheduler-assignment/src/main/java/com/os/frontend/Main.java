@@ -33,7 +33,8 @@ public class Main extends Application {
     public void moveToSchedulerView() throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/os/frontend/schedulerView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load(),1200,750);
+
         SchedulerWindow schedulerWindowController = fxmlLoader.getController();
         //set the backend -->  attach observers automatically
         schedulerWindowController.setBackend(backend);

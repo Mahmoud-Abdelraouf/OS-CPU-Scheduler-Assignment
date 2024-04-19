@@ -1,0 +1,29 @@
+#tableContainerCss {
+    -fx-border-color: #76ABAE; /* 2l lon 2l metarshm color */
+    -fx-border-width: 2px; /* Border width */
+    -fx-background-color: #31363F; /* Secondary color */
+    -fx-padding : 10px;
+    -fx-background-radius: 10px; /* Border radius */
+    -fx-min-width: 200px;        /* Minimum width */
+/*    -fx-margin: 20px 0 0 0;      *//* Top margin */
+}
+
+#tableContainerCss #gridPaneOfColors .label {
+    -fx-text-fill: #AAA; /* #76ABAE */
+    -fx-font-weight: bold;   /* Bold text */
+}
+#importantBox .hbox{
+    -fx-border-color: #76ABAE; /* 2l lon 2l metarshm color */
+    -fx-border-width: 2px; /* Border width */
+}
+#importantBox .label{
+    -fx-text-fill: #76ABAE; /* #76ABAE */
+    -fx-font-weight: bold;
+
+}
+.importantBoxChild {
+    -fx-border-color: #76ABAE; /* 2l lon 2l metarshm color */
+    -fx-border-width: 2px;     /* Border width */
+    -fx-padding: 10px;           /* Padding */
+    -fx-background-radius: 10px; /* Border radius */
+}
