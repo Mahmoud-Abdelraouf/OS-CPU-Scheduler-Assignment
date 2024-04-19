@@ -24,19 +24,20 @@ public class SystemScheduler implements Runnable{
 
     }
 
-    // Thread used in backend
+    // Thread Task used in Backend
     //
-    // Updates Observers every 1 sec
+    // Notify Observers every 1 sec
     @Override
     public void run() {
         try {
             do {
+                // fetch current running process
                 this.currentRunningProcess = getCurrentProcess(backend.getTable(), time);
                 this.processesAtTime = getCurrentProcessesTable();
                 time++;
-                notifyObservers();
+                if(currentRunningProcess != null) { notifyObservers(); }
                 Thread.sleep(1000);
-            }while(currentRunningProcess != null);
+            }while(true);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -72,7 +73,6 @@ public class SystemScheduler implements Runnable{
                 return e.getProcess();
             }
         }
-        System.out.println("No Process Running...");
         return null;
     }
 
@@ -93,4 +93,11 @@ public class SystemScheduler implements Runnable{
         return processesAtTime;
     }
 
+    public void setCurrentRunningProcess(Process currentRunningProcess) {
+        this.currentRunningProcess = currentRunningProcess;
+    }
+
+    public void setProcessesAtTime(List<ProcessAtTime> processesAtTime) {
+        this.processesAtTime = processesAtTime;
+    }
 }

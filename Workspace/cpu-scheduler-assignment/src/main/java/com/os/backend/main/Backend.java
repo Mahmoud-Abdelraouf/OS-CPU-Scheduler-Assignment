@@ -4,6 +4,10 @@ import com.os.backend.Process.Process;
 import com.os.backend.Process.ProcessTable;
 import com.os.backend.Schedule.SchedulingAlgo;
 import com.os.frontend.scheduling_window.observers.Observer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.animation.Animation;
+import javafx.util.Duration;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,13 +15,13 @@ import java.util.List;
 public class Backend {
 
     private SchedulingAlgo scheduler;
-    private SystemScheduler systemScheduler;
+    private SystemScheduler system;
     private List<Process> processList;
     private ProcessTable table;
     private int time;
 
     public Backend(){
-        this.systemScheduler = new SystemScheduler(this);
+        this.system = new SystemScheduler(this);
         time = 0;
     }
 
@@ -28,20 +32,31 @@ public class Backend {
 
     public void startSchedule(){
         //TODO: Start timer
-        // Check for empty ProcessTable
-        if( this.table.getExecutionEvents().isEmpty()) return;
+        // Create a timeline that triggers every second
+        Timeline timeline = new Timeline(
+                new KeyFrame(Duration.seconds(0),
+                        event -> {
+                            system.setCurrentRunningProcess(system.getCurrentProcess(this.getTable(), time));
+                            system.setProcessesAtTime(system.getCurrentProcessesTable());
+                            if(system.getCurrentRunningProcess() != null) { system.notifyObservers(); }
+                        }
+                ),
+                new KeyFrame(Duration.seconds(1)) // Trigger every second
+        );
+        timeline.setCycleCount(Animation.INDEFINITE); // Run indefinitely
+        // Start the timeline
+        timeline.play();
 
-        // Start processing from time t=0
-        // checking every 1 sec for running process
-        // till there is no process running on CPU
-        Thread processing = new Thread(systemScheduler);
-        processing.start();
 
-        /* Finished Processing
-        // User needs to press start again
-        // if User added a new process
-        // scheduler will not work
-        */
+
+
+//        // Check for empty ProcessTable
+//        if( this.table.getExecutionEvents().isEmpty()) return;
+//
+//        // Start processing from time t=0
+//        // checking every 1 sec for running process
+//        Thread processing = new Thread(this.system);
+//        processing.start();
     }
 
     public void updateProcessesList(List<Process> newProcesses){
@@ -53,7 +68,7 @@ public class Backend {
 
     //For the observer
     public void attach(Observer observer){
-        systemScheduler.attach(observer);
+        system.attach(observer);
     }
 
     public List<Process> getProcessList() {
