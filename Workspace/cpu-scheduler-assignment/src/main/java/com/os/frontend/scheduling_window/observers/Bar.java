@@ -1,28 +1,15 @@
-package com.os.frontend.schedulling_window.observers;
+package com.os.frontend.scheduling_window.observers;
 
 import com.os.backend.Process.Process;
 import com.os.backend.Process.ProcessAtTime;
-import com.os.backend.main.Backend;
 import com.os.backend.main.SystemScheduler;
-import com.os.frontend.Colors.Colors;
-import com.os.frontend.Main;
-import com.os.frontend.start_window.StartWindowController;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.fxml.FXML;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;

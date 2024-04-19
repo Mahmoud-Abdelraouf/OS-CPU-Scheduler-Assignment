@@ -1,4 +1,4 @@
-package com.os.frontend.schedulling_window.observers;
+package com.os.frontend.scheduling_window.observers;
 
 import com.os.backend.main.SystemScheduler;
 

@@ -3,7 +3,7 @@ package com.os.backend.main;
 import com.os.backend.Process.*;
 import com.os.backend.Process.Process;
 import com.os.backend.Schedule.FCFS;
-import com.os.frontend.schedulling_window.observers.Observer;
+import com.os.frontend.scheduling_window.observers.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
