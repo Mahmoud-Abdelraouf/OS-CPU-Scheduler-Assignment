@@ -3,20 +3,17 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="428.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.os.frontend.scheduling_window.observers.Bar">
    <children>
-      <BarChart fx:id="bar" animated="false" layoutX="50.0" layoutY="49.0" prefHeight="390.0" prefWidth="587.0" stylesheets="@../../../stylesheets/Bar.css" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="50.0">
+    <BarChart fx:id="barChart" layoutX="50.0" layoutY="49.0" prefHeight="390.0" prefWidth="587.0" style="-fx-background-color: #1c1c1c; -fx-color: #156578;" stylesheets="@../../../stylesheets/schedulerViewStylesheet.css">
         <xAxis>
-          <CategoryAxis side="BOTTOM" />
+            <CategoryAxis autoRanging="false" endMargin="0.5" label="Processes" startMargin="1.0" tickLabelFill="WHITE" tickLabelGap="0.0" tickLength="5.0" fx:id="xAxis" />
         </xAxis>
         <yAxis>
-          <NumberAxis side="LEFT" />
+            <NumberAxis fx:id="yAxis" label="Remaining Time" side="LEFT" tickLabelFill="WHITE" />
         </yAxis>
-      </BarChart>
-      <Label layoutX="10.0" layoutY="14.0" text="Waiting time" />
-      <Label layoutX="589.0" layoutY="397.0" text="Process" />
-   </children>
+    </BarChart>
+    </children>
 </AnchorPane>

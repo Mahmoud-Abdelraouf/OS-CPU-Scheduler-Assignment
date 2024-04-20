@@ -6,6 +6,7 @@ module com.os.frontend {
     requires java.desktop;
     requires java.management;
     opens com.os.backend.Process to javafx.base;
+    opens com.os.frontend.scheduling_window.observers to javafx.fxml;
 
 
     opens com.os.frontend to javafx.fxml;

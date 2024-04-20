@@ -34,7 +34,7 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
         if (currentProcess == null) {
             vbox = addIdlebox();
         } else {
-             int index = currentProcess.getProcessNumber();
+            int index = currentProcess.getProcessNumber()-1;
             vbox =  addProcessBox(index);
         }
 
