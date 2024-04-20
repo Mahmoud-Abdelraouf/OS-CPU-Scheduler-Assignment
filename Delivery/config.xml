@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>D:\Engineering\04- Senior 1\Spring\OS\Project\Repo\OS-CPU-Scheduler-Assignment\Workspace\cpu-scheduler-assignment\out\artifacts\cpu_scheduler_assignment_jar\cpu-scheduler-assignment.jar</jar>
+  <outfile>D:\Engineering\04- Senior 1\Spring\OS\Project\Repo\OS-CPU-Scheduler-Assignment\Delivery\Spu-Scheduler.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>D:\Downloads\processor.ico</icon>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>true</requires64Bit>
+    <minVersion></minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+</launch4jConfig>
