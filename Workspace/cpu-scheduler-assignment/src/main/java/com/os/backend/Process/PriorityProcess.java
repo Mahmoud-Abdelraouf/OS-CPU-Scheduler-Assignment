@@ -1,6 +1,6 @@
 package com.os.backend.Process;
 
-public class PriorityProcess extends Process implements Cloneable{
+public class PriorityProcess extends Process implements Cloneable, Comparable<PriorityProcess> {
     private int priority;
 
 
@@ -14,7 +14,7 @@ public class PriorityProcess extends Process implements Cloneable{
         this.priority = priority;
     }
 
-    public PriorityProcess(){
+    public PriorityProcess() {
         this(0);
     }
 
@@ -40,5 +40,21 @@ public class PriorityProcess extends Process implements Cloneable{
         PriorityProcess clone = (PriorityProcess) super.clone();
         clone.priority = this.priority;
         return clone;
+    }
+
+    @Override
+    public int compareTo(PriorityProcess o) {
+        int priorityComparison = Integer.compare(this.priority, o.priority);
+        if (priorityComparison != 0) {
+            return priorityComparison; // Higher priority value means lower priority
+        }
+
+        int arrivalTimeComparison = Integer.compare(this.getArrivalTime(), o.getArrivalTime());
+        if (arrivalTimeComparison != 0) {
+            return arrivalTimeComparison;
+        }
+
+        // If priority and arrival time are equal, compare process numbers
+        return Integer.compare(this.getProcessNumber(), o.getProcessNumber());
     }
 }
