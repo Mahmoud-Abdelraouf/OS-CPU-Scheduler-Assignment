@@ -6,12 +6,12 @@ import com.os.backend.Process.ProcessState;
 import com.os.backend.Process.ProcessTable;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Iterator;
+import java.util.stream.Collectors;
 
 public class FCFS extends SchedulingAlgo {
+
+    private List<Process> clonedProcesses;
 
     public static void main(String[] args) {
         // Create some sample processes
@@ -46,7 +46,7 @@ public class FCFS extends SchedulingAlgo {
         ProcessTable processTable = new ProcessTable();
         int currentTime = 0;
 
-        while (!processesList.isEmpty()) { // Continue until all processes are executed
+        while ( !this.clonedProcesses.isEmpty()) { // Continue until all processes are executed
             // Get the processes that have arrived by the current time
             List<Process> arrivedProcesses = getArrivedProcesses(currentTime);
 
@@ -69,6 +69,10 @@ public class FCFS extends SchedulingAlgo {
             int endTime = currentTime + firstProcess.getBurstTime();
             for (int i = currentTime + 1; i <= endTime; i++) {
                 processTable.addExecutionEvent(firstProcess, i, firstProcess.getProcessNumber(), ProcessState.RUNNING);
+                List<Process> hackProcess = getCurrentProcesses(i);
+//                if (!hackProcess.isEmpty()) {
+//                    processTable.addExecutionEvent(hackProcess.get(i), i, hackProcess.get(i).getProcessNumber(), ProcessState.ARRIVED);
+//                }
             }
 
             // Add event for process completion
@@ -78,7 +82,7 @@ public class FCFS extends SchedulingAlgo {
             currentTime = endTime;
 
             // Remove the executed process from the list
-            processesList.remove(firstProcess);
+            clonedProcesses.remove(firstProcess);
         }
 
         return processTable;
@@ -86,11 +90,34 @@ public class FCFS extends SchedulingAlgo {
 
     private List<Process> getArrivedProcesses(int currentTime) {
         List<Process> arrivedProcesses = new ArrayList<>();
-        for (Process process : processesList) {
+        for (Process process : this.clonedProcesses) {
             if (process.getArrivalTime() <= currentTime) {
                 arrivedProcesses.add(process);
             }
         }
         return arrivedProcesses;
+    }
+
+    private List<Process> getCurrentProcesses(int currentTime) {
+        List<Process> arrivedProcesses = new ArrayList<>();
+        for (Process process : this.clonedProcesses) {
+            if (process.getArrivalTime() == currentTime) {
+                arrivedProcesses.add(process);
+            }
+        }
+        return arrivedProcesses;
+    }
+
+    @Override
+    public void addNewProcesses(List<Process> newProcesses) {
+        super.addNewProcesses(newProcesses);
+        cloneProcessList();
+    }
+
+    // Helper methods
+    private void cloneProcessList() {
+        this.clonedProcesses = processesList.stream()
+                .map(Process::clone)
+                .collect(Collectors.toList());
     }
 }
