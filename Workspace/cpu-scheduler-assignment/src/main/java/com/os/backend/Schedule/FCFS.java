@@ -46,7 +46,7 @@ public class FCFS extends SchedulingAlgo {
         ProcessTable processTable = new ProcessTable();
         int currentTime = 0;
 
-        while ( !this.clonedProcesses.isEmpty()) { // Continue until all processes are executed
+        while (!this.clonedProcesses.isEmpty()) { // Continue until all processes are executed
             // Get the processes that have arrived by the current time
             List<Process> arrivedProcesses = getArrivedProcesses(currentTime);
 
