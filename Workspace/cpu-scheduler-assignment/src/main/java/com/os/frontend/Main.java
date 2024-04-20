@@ -6,9 +6,11 @@ import com.os.frontend.start_window.StartWindowController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Main extends Application {
     private Backend backend;
@@ -20,11 +22,16 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("StartWindowView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Scheduler");
-        stage.setScene(scene);
-        stage.show();
-
         this.stage = stage;
+        stage.setScene(scene);
+        setIcon();
+        stage.show();
         ((StartWindowController)    fxmlLoader.getController()).setMain(this);
+    }
+
+    private void setIcon() {
+        Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/Images/processor.png")));
+        this.stage.getIcons().add(icon);
     }
 
     public void setBackend(Backend backend) {
