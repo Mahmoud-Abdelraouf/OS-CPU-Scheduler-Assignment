@@ -55,9 +55,10 @@ public class Bar extends AnchorPane implements Observer, Initializable {
 
                 //previousProcessListSize = processList.size();
             } else {
-                updateChartWithNewProcess(processList.get(processList.size()-1));
-                System.out.println(11);
-
+                while (previousProcessListSize < processList.size()) {
+                    updateChartWithNewProcess(processList.get(previousProcessListSize));
+                    previousProcessListSize++;
+                }
             }
             previousProcessListSize = processList.size();
 
@@ -88,11 +89,11 @@ public class Bar extends AnchorPane implements Observer, Initializable {
 
     private void updateChartWithNewProcess(Process process) {
         // Add the category for the new process
-        xAxis.getCategories().add("P" + (processList.size()));
+        xAxis.getCategories().add("P" + (previousProcessListSize + 1));
 
         // Create a new series for the new process
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
-        series.setName("P" + (processList.size())); // Set a unique name for each series
+        series.setName("P" + (previousProcessListSize + 1)); // Set a unique name for each series
         series.getData().add(new XYChart.Data<>(series.getName(), process.getRemainingTime()));
         //setBarColorForSeries(series, processList.indexOf(process));
 

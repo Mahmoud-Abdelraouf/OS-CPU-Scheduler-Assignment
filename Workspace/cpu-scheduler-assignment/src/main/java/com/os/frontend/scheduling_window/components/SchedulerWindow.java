@@ -44,6 +44,7 @@ public class SchedulerWindow extends StackPane implements Initializable {
     private int seconds;
     private Timeline timeline;
     private Main main;
+    private boolean systemStopped = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -136,10 +137,14 @@ public class SchedulerWindow extends StackPane implements Initializable {
     }
 
     public void addNewProcessToBackEnd(ActionEvent ignoredActionEvent) {
-        //pause the system to prevent any race conditions
-        backend.pauseSystem();
-        //stop the timer
-        this.timeline.stop();
+        boolean stoppedByUs = false;
+        if (!systemStopped) {
+            //pause the system to prevent any race conditions
+            backend.pauseSystem();
+            //stop the timer
+            this.timeline.stop();
+            stoppedByUs = true;
+        }
 
         Process newProcess = this.processBlockController.createProcess();
         // add the process to the backend
@@ -147,10 +152,12 @@ public class SchedulerWindow extends StackPane implements Initializable {
         // increment the number of the addNewProcess block
         this.processBlockController.incrementProcessNumber();
 
-        //continue the system
-        backend.continueSystem();
-        //continue the timer
-        this.timeline.play();
+        if (stoppedByUs) {
+            //continue the system
+            backend.continueSystem();
+            //continue the timer
+            this.timeline.play();
+        }
     }
 
     public void resetProcessBlock(ActionEvent ignoredActionEvent) {
@@ -160,22 +167,28 @@ public class SchedulerWindow extends StackPane implements Initializable {
 
 
     public void startStop(ActionEvent ignoredActionEvent) {
-        if (startStopButton.isSelected()){
+        if (startStopButton.isSelected()) {
             startStopButton.setText("Resume");
+            if (!systemStopped) {
                 timeline.stop();
-            backend.pauseSystem();
-        }
-        else {
+                backend.pauseSystem();
+            }
+            systemStopped = true;
+        } else {
             startStopButton.setText("Stop");
+            if (systemStopped) {
                 timeline.play();
-            backend.continueSystem();
+                backend.continueSystem();
+            }
+            systemStopped = false;
         }
     }
 
     public void setMain(Main main) {
         this.main = main;
     }
-    public void restartApp(){
+
+    public void restartApp() {
         main.restart();
     }
 }

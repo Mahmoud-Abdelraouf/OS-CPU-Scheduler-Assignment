@@ -32,7 +32,7 @@
                <Font name="Eras Medium ITC" size="15.0" />
             </font>
          </Label>
-         <Spinner fx:id="arrivalSpinner" onMousePressed="#updateFields" opacity="0.6" prefHeight="25.0" prefWidth="55.0" />
+         <Spinner fx:id="arrivalSpinner" onMouseReleased="#updateFields" opacity="0.6" prefHeight="25.0" prefWidth="55.0" />
       </VBox>
       <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="43.0" prefWidth="58.0">
          <Label alignment="CENTER" prefHeight="17.0" prefWidth="47.0" text="Burst" textAlignment="CENTER" textFill="#9a8d8d">
@@ -40,7 +40,7 @@
                <Font name="Eras Medium ITC" size="15.0" />
             </font>
          </Label>
-         <Spinner fx:id="burstSpinner" onMousePressed="#updateFields" opacity="0.6" prefHeight="25.0" prefWidth="55.0" />
+         <Spinner fx:id="burstSpinner" onMouseReleased="#updateFields" opacity="0.6" prefHeight="25.0" prefWidth="55.0" />
       </VBox>
       <VBox fx:id="priorityBlock" alignment="TOP_CENTER" fillWidth="false" prefHeight="43.0" prefWidth="63.0">
          <Label alignment="CENTER" prefHeight="17.0" prefWidth="47.0" text="Priority" textAlignment="CENTER" textFill="#9a8d8d">
@@ -48,7 +48,7 @@
                <Font name="Eras Medium ITC" size="15.0" />
             </font>
          </Label>
-         <Spinner fx:id="prioritySpinner" onMousePressed="#updateFields" opacity="0.6" prefHeight="25.0" prefWidth="55.0" />
+         <Spinner fx:id="prioritySpinner" onMouseReleased="#updateFields" opacity="0.6" prefHeight="25.0" prefWidth="55.0" />
       </VBox>
    </HBox>
 </VBox>
