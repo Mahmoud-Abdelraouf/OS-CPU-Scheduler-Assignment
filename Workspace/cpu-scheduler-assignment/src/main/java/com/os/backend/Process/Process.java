@@ -112,4 +112,15 @@ public class Process implements Cloneable{
             throw new AssertionError();
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Process process = (Process) o;
+        return processNumber == process.processNumber && arrivalTime == process.arrivalTime && burstTime == process.burstTime;
+    }
+
+
 }

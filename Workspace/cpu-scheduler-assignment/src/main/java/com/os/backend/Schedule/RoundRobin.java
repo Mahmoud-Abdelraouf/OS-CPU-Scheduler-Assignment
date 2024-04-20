@@ -38,9 +38,10 @@ public class RoundRobin extends SchedulingAlgo {
             this.clonedProcesses.removeAll(arrivedProcesses);
 
             //add arrivedProcesses to the table and mark them as arrived state
-            arrivedProcesses.forEach(process ->
-                    table.addExecutionEvent(process, currentTime, process.getProcessNumber(), ProcessState.ARRIVED)
-            );
+            arrivedProcesses.forEach(process -> {
+                Process toAdd = this.processesList.get(this.processesList.indexOf(process));
+                table.addExecutionEvent(toAdd, currentTime, toAdd.getProcessNumber(), ProcessState.ARRIVED);
+            });
 
             //add the arrived process to the queue
             queue.addAll(arrivedProcesses);
@@ -49,19 +50,24 @@ public class RoundRobin extends SchedulingAlgo {
             // the running process
             if (!queue.isEmpty()) {
                 Process runningProcess = queue.get(0);
+                Process runningProcessToAdd = this.processesList.get(this.processesList.indexOf(runningProcess));
+
                 if (counter == 0) {
                     //called for the first time --> add to table as started
-                    table.addExecutionEvent(runningProcess, currentTime, runningProcess.getProcessNumber(), ProcessState.STARTED);
+                    table.addExecutionEvent(runningProcessToAdd, currentTime, runningProcessToAdd.getProcessNumber(), ProcessState.STARTED);
                 } else {
                     // add the process as running
-                    table.addExecutionEvent(runningProcess, currentTime, runningProcess.getProcessNumber(), ProcessState.RUNNING);
+                    table.addExecutionEvent(runningProcessToAdd, currentTime, runningProcessToAdd.getProcessNumber(), ProcessState.RUNNING);
                 }
 
                 //----------------------------------------------------------------
                 //waiting processes
                 // add waiting (in queue) non-arrived processes to the table as Ready
                 queue.stream().filter(process -> !arrivedProcesses.contains(process) && !process.equals(runningProcess)).
-                        forEach(process -> table.addExecutionEvent(process, currentTime, process.getProcessNumber(), ProcessState.READY));
+                        forEach(process -> {
+                            Process toAdd = this.processesList.get(this.processesList.indexOf(process));
+                            table.addExecutionEvent(toAdd, currentTime, toAdd.getProcessNumber(), ProcessState.READY);
+                        });
 
                 //----------------------------------------------------------------
                 //update Variables
@@ -74,7 +80,7 @@ public class RoundRobin extends SchedulingAlgo {
                 if (counter == 0) {
                     // add the current running process as interrupt to the table in the next time
                     if(runningProcess.getRemainingTime() != 0) {
-                        table.addExecutionEvent(runningProcess, time + 1, runningProcess.getProcessNumber(), ProcessState.INTERRUPTED);
+                        table.addExecutionEvent(runningProcessToAdd, time + 1, runningProcessToAdd.getProcessNumber(), ProcessState.INTERRUPTED);
                     }
                     // remove the current running process from the queue
                     queue.remove(0);
@@ -91,7 +97,7 @@ public class RoundRobin extends SchedulingAlgo {
                     if(!queue.isEmpty() && queue.get(0).equals(runningProcess)) {
                         queue.remove(0);
                     }
-                    table.addExecutionEvent(runningProcess, time + 1, runningProcess.getProcessNumber(), ProcessState.COMPLETED);
+                    table.addExecutionEvent(runningProcessToAdd, time + 1, runningProcessToAdd.getProcessNumber(), ProcessState.COMPLETED);
                     counter = 0;
                 }
             }
