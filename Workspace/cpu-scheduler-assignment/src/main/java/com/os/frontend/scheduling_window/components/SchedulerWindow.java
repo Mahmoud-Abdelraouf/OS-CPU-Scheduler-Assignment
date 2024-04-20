@@ -153,10 +153,12 @@ public class SchedulerWindow extends StackPane implements Initializable {
 
     public void startStop(ActionEvent actionEvent) {
         if (startStopButton.isSelected()){
+            startStopButton.setText("Play");
                 timeline.stop();
             backend.pauseSystem();
         }
         else {
+            startStopButton.setText("Stop");
                 timeline.play();
             backend.continueSystem();
         }
