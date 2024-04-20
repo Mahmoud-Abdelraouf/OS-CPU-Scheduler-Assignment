@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -58,17 +59,19 @@ public class ProcessesTable extends AnchorPane implements Observer, Initializabl
     }
 
     private void updateLabels() {
+        DecimalFormat df = new DecimalFormat("#.##"); // Format for two digits after the decimal point
+
         double turnaroundAverage = processAtTimeList.stream()
                 .mapToInt(ProcessAtTime::getTurnaroundTime) // Map ProcessAtTime objects to turnaround times
                 .average() // Calculate the average of turnaround times
                 .orElse(0); // Default value if the list is empty
-        this.avgTurnaroundLabel.setText(Double.toString(turnaroundAverage));
+        this.avgTurnaroundLabel.setText(df.format(turnaroundAverage));
 
         double waitingAverage = processAtTimeList.stream()
                 .mapToInt(ProcessAtTime::getWaitingTime) // Map ProcessAtTime objects to waiting times
                 .average() // Calculate the average of waiting times
                 .orElse(0); // Default value if the list is empty
-        this.avgWaitingLabel.setText(Double.toString(waitingAverage));
+        this.avgWaitingLabel.setText(df.format(waitingAverage));
     }
 
     @Override
@@ -81,6 +84,8 @@ public class ProcessesTable extends AnchorPane implements Observer, Initializabl
         _TAColumn.setCellValueFactory(new PropertyValueFactory<>("turnaroundTime"));
         waitingColumn.setCellValueFactory(new PropertyValueFactory<>("waitingTime"));
         stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
+
+        table.getStyleClass().add("table");
 
     }
 

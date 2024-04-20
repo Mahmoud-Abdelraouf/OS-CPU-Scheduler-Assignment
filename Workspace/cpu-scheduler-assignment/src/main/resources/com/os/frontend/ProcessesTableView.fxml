@@ -19,15 +19,15 @@
     <padding>
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
     </padding>
-    <TableView fx:id="table" prefHeight="239.0" prefWidth="589.0">
+    <TableView fx:id="table" prefHeight="239.0" prefWidth="589.0" styleClass="table">
       <columns>
-          <TableColumn fx:id="stateColumn" prefWidth="34.0" text="State" />
-          <TableColumn fx:id="processColumn" prefWidth="57.0" text="Process" />
-          <TableColumn fx:id="arrivalColumn" text="Arrival Time" />
-          <TableColumn fx:id="burstColumn" prefWidth="67.0" text="Burst Time" />
-          <TableColumn fx:id="remainingColumn" prefWidth="102.0" text="Remaining Time" />
-          <TableColumn fx:id="_TAColumn" prefWidth="109.0" text="Turnaround Time" />
-          <TableColumn fx:id="waitingColumn" prefWidth="87.0" text="Waiting Time" />
+          <TableColumn fx:id="stateColumn" editable="false" prefWidth="46.0" text="State" />
+          <TableColumn fx:id="processColumn" editable="false" prefWidth="53.0" text="Process" />
+          <TableColumn fx:id="arrivalColumn" editable="false" text="Arrival" />
+          <TableColumn fx:id="burstColumn" editable="false" prefWidth="67.0" text="Burst" />
+          <TableColumn fx:id="remainingColumn" editable="false" prefWidth="102.0" text="Remaining" />
+          <TableColumn fx:id="_TAColumn" editable="false" prefWidth="109.0" text="Turnaround" />
+          <TableColumn fx:id="waitingColumn" editable="false" prefWidth="87.0" text="Waiting" />
       </columns>
       <columnResizePolicy>
          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

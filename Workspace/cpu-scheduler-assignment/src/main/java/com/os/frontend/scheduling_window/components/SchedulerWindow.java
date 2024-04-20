@@ -68,9 +68,13 @@ public class SchedulerWindow extends StackPane implements Initializable {
 
     private void barChartInit() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/os/frontend/Bar.fxml"));
-        barAndTableBox.getChildren().add(fxmlLoader.load());
+        Node node = fxmlLoader.load();
+        barAndTableBox.getChildren().add(node);
+        node.getStyleClass().add("table-box");
         // add to observers
         this.observers.add(fxmlLoader.getController());
+
+
     }
 
     private void tableInit() throws IOException {
