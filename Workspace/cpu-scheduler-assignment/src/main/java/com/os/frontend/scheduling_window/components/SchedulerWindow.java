@@ -36,6 +36,7 @@ public class SchedulerWindow extends StackPane implements Initializable {
     public VBox timerBox;
     public Label timeLabel;
     public ToggleButton startStopButton;
+    public Label schedulerType;
     private Backend backend;
     private GanttChart ganttChart;
     private ProcessBlockController processBlockController;
@@ -60,12 +61,14 @@ public class SchedulerWindow extends StackPane implements Initializable {
 
     private void ganttCharInit() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/os/frontend/GanttChartView.fxml"));
-        ganttChartBox.getChildren().add(fxmlLoader.load());
+        Node ganttChartNode = fxmlLoader.load();
+        ganttChartBox.getChildren().add(ganttChartNode);
         // add to observers
         this.observers.add(fxmlLoader.getController());
         this.ganttChart = fxmlLoader.getController();
         this.ganttChart.setHvalue(1);
 
+        VBox.setVgrow(ganttChartNode, javafx.scene.layout.Priority.ALWAYS);
     }
 
     private void barChartInit() throws IOException {
@@ -75,15 +78,17 @@ public class SchedulerWindow extends StackPane implements Initializable {
         node.getStyleClass().add("table-box");
         // add to observers
         this.observers.add(fxmlLoader.getController());
-
-
+        VBox.setVgrow(node, javafx.scene.layout.Priority.ALWAYS);
     }
 
     private void tableInit() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/os/frontend/ProcessesTableView.fxml"));
-        barAndTableBox.getChildren().add(fxmlLoader.load());
+        Node node = fxmlLoader.load();
+        barAndTableBox.getChildren().add(node);
         // add to observers
         this.observers.add(fxmlLoader.getController());
+        VBox.setVgrow(node, javafx.scene.layout.Priority.ALWAYS);
+
     }
 
     private void addProcessInit() throws IOException {
@@ -134,6 +139,9 @@ public class SchedulerWindow extends StackPane implements Initializable {
 
         //timer init
         timerInit();
+
+        this.schedulerType.setText(this.backend.getScheduler().getSchedulerName());
+
     }
 
     public void addNewProcessToBackEnd(ActionEvent ignoredActionEvent) {

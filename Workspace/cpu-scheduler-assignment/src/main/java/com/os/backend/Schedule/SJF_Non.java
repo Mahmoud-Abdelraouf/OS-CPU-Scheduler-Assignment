@@ -105,4 +105,9 @@ public class SJF_Non extends SchedulingAlgo {
                 .map(Process::clone)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public String getSchedulerName() {
+        return "Non-Preemptive Shortest Job First";
+    }
 }

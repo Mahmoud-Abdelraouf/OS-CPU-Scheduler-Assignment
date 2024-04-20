@@ -148,6 +148,10 @@ public class RoundRobin extends SchedulingAlgo {
         System.out.println(processTable);
     }
 
+    @Override
+    public String getSchedulerName() {
+        return "Round Robin";
+    }
 }
 
 

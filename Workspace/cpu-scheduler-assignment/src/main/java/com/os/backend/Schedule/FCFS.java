@@ -123,4 +123,9 @@ public class FCFS extends SchedulingAlgo {
                 .map(Process::clone)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public String getSchedulerName() {
+        return "First Come First Serve";
+    }
 }

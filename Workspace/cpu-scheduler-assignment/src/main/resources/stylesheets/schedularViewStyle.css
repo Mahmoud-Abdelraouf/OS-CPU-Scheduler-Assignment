@@ -12,6 +12,10 @@
     -fx-text-fill: #76ABAE;  /*Bright color for text */
 }
 
+#schedulerType{
+    -fx-text-fill: #6c8085;  /*Bright color for text */
+}
+
 #TimeId ,#timeLabel{
     -fx-text-fill: #76ABAE;  /*Bright color for text */
 }

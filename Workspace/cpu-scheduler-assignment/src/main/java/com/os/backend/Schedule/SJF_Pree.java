@@ -140,4 +140,9 @@ public class SJF_Pree extends SchedulingAlgo {
                 .map(Process::clone)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public String getSchedulerName() {
+        return "Preemptive Shortest Job First";
+    }
 }

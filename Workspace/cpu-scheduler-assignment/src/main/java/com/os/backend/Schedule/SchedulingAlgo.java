@@ -2,7 +2,6 @@ package com.os.backend.Schedule;
 import java.util.ArrayList;
 
 import com.os.backend.Process.Process;
-import com.os.backend.Process.ProcessExecutionEvent;
 import com.os.backend.Process.ProcessTable;
 
 import java.util.List;
@@ -28,4 +27,6 @@ public abstract class SchedulingAlgo {
     public void setProcessesList(List<Process> processesList) {
         this.processesList = processesList;
     }
+
+    public abstract String getSchedulerName();
 }
