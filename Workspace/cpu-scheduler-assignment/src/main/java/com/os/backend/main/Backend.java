@@ -20,6 +20,7 @@ public class Backend {
     private List<Process> processList;
     private ProcessTable table;
     private int time;
+    private Timeline timeline;
 
     public Backend(){
         this.system = new SystemScheduler(this);
@@ -34,7 +35,7 @@ public class Backend {
     public void startSchedule(){
         //TODO: Start timer
         // Create a timeline that triggers every second
-        Timeline timeline = new Timeline(
+        timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0),
                         event -> {
                             system.setCurrentRunningProcess(system.getCurrentProcess(this.getTable(), time));
@@ -104,6 +105,16 @@ public class Backend {
 
     public void addProcess(Process process) {
         scheduler.addNewProcesses(Collections.singletonList(process));
+        this.processList.add(process);
         this.table = scheduler.execute();
+    }
+
+    public void pauseSystem() {
+
+        timeline.stop();
+    }
+
+    public void continueSystem() {
+        startSchedule();
     }
 }

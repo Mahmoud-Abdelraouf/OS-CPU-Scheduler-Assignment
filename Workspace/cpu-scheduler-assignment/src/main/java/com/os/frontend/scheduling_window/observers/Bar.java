@@ -34,13 +34,15 @@ public class Bar extends AnchorPane implements Observer, Initializable {
 
     private ObservableList<String> categories;
 
-
+    private int previousProcessListSize;
 
     @Override
     public void update(SystemScheduler systemScheduler) {
         //bar.getData().clear();
 
-        while (barChart.getData().size() != processList.size()) {
+        if (previousProcessListSize < processList.size()) {
+            if (previousProcessListSize == 0) {
+
            /* System.out.println(barChart.getData().size());
             Process process = processList.get(barChart.getData().size());
             var series = new XYChart.Series();
@@ -48,8 +50,21 @@ public class Bar extends AnchorPane implements Observer, Initializable {
             series.getData().add(new XYChart.Data("", process.getRemainingTime()));
             barChart.getData().add(series);*/
 
-            initializeChart();
+                initializeChart();
+
+
+                //previousProcessListSize = processList.size();
+            } else {
+                updateChartWithNewProcess(processList.get(processList.size()-1));
+                System.out.println(11);
+
+            }
+            previousProcessListSize = processList.size();
+
         }
+
+
+        // the next code section should update the remaining time of the current process
 
         Process currentRunningProcess = systemScheduler.getCurrentRunningProcess();
         //updateChartWithNewProcess(currentRunningProcess);
@@ -60,7 +75,7 @@ public class Bar extends AnchorPane implements Observer, Initializable {
         // Update the y-value of the specific data point
         dataToUpdate.setYValue(currentRunningProcess.getRemainingTime());
 */
-        System.out.println(xAxis.getCategories().size());
+        System.out.println( "kololo");
     }
 
     private void updateChartWithNewProcess(Process process) {

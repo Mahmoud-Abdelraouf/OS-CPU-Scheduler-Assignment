@@ -7,8 +7,11 @@ import com.os.backend.Process.ProcessTable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SJF_Non extends SchedulingAlgo {
+    private List<Process> clonedProcesses;
+
     public static void main(String[] args) {
         // Create SJF_Non instance
         SJF_Non sjf = new SJF_Non();
@@ -39,7 +42,7 @@ public class SJF_Non extends SchedulingAlgo {
         ProcessTable processTable = new ProcessTable();
         int currentTime = 0;
 
-        while (!processesList.isEmpty()) { // Continue until all processes are executed
+        while (!this.clonedProcesses.isEmpty()) { // Continue until all processes are executed
             // Get the processes that have arrived by the current time
             List<Process> arrivedProcesses = getArrivedProcesses(currentTime);
 
@@ -74,7 +77,7 @@ public class SJF_Non extends SchedulingAlgo {
             currentTime = endTime;
 
             // Remove the executed process from the list
-            processesList.remove(shortestProcess);
+            clonedProcesses.remove(shortestProcess);
         }
 
         return processTable;
@@ -82,11 +85,24 @@ public class SJF_Non extends SchedulingAlgo {
 
     private List<Process> getArrivedProcesses(int currentTime) {
         List<Process> arrivedProcesses = new ArrayList<>();
-        for (Process process : processesList) {
+        for (Process process : this.clonedProcesses) {
             if (process.getArrivalTime() <= currentTime) {
                 arrivedProcesses.add(process);
             }
         }
         return arrivedProcesses;
+    }
+
+    @Override
+    public void addNewProcesses(List<Process> newProcesses) {
+        super.addNewProcesses(newProcesses);
+        cloneProcessList();
+    }
+
+    // Helper methods
+    private void cloneProcessList() {
+        this.clonedProcesses = processesList.stream()
+                .map(Process::clone)
+                .collect(Collectors.toList());
     }
 }

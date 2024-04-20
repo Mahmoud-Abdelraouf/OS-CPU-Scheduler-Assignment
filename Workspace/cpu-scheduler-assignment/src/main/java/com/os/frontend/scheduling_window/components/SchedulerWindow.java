@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -34,12 +35,14 @@ public class SchedulerWindow extends StackPane implements Initializable {
     public HBox addProcessBox;
     public VBox timerBox;
     public Label timeLabel;
+    public ToggleButton startStopButton;
     private Backend backend;
     private GanttChart ganttChart;
     private ProcessBlockController processBlockController;
     // used for attaching observers to the backend
     private final List<Observer> observers = new ArrayList<>(3);
     private int seconds;
+    private Timeline timeline;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -85,7 +88,7 @@ public class SchedulerWindow extends StackPane implements Initializable {
 
     private void timerInit() {
         // Create a timeline that triggers every second
-        Timeline timeline = new Timeline(
+        timeline = new Timeline(
                 new KeyFrame(Duration.seconds(0),
                         event -> {
                             // Update the label with the current time
@@ -138,5 +141,21 @@ public class SchedulerWindow extends StackPane implements Initializable {
     public void resetProcessBlock(ActionEvent ignoredActionEvent) {
         //reset the processBlock data except the number
         this.processBlockController.reset();
+    }
+
+    public void pauseSystem(ActionEvent actionEvent) {
+        backend.pauseSystem();
+    }
+
+    public void startStop(ActionEvent actionEvent) {
+        if (startStopButton.isSelected()){
+                timeline.stop();
+            backend.pauseSystem();
+        }
+        else {
+                timeline.play();
+            backend.continueSystem();
+        }
+
     }
 }
