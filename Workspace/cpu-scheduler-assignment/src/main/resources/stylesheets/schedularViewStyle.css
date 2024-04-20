@@ -87,3 +87,13 @@
     -fx-border-color: #76ABAE; /* 2l lon 2l metarshm color */
     -fx-border-width: 2px; /* Border width */
 }
+
+.restart-button:hover {
+    -fx-background-color: #140202; /* Main color on hover */
+    -fx-border-color: #5B8694; /* 2l lon 2l metarshm color on hover */
+}
+
+.restart-button:pressed {
+    -fx-background-color: #000000; /* Main color when pressed */
+    -fx-border-color: #76ABAE; /* 2l lon 2l metarshm color when pressed */
+}
