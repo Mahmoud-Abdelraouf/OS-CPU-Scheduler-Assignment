@@ -55,11 +55,13 @@ public class StartWindowController extends StackPane implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         startCPULabelAnimation();
         startSchedulingAlgorithmsLabel();
+        ProcessBlockController.resetProcessCounter();
         addProcessToList();
         hidePriorityOnProcesses(null);
 
         this.timeQuantumSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, Integer.MAX_VALUE, 1));
         hideQuantumSpinner();
+
 
 
     }

@@ -13,6 +13,7 @@ import java.io.IOException;
 public class Main extends Application {
     private Backend backend;
     private Stage stage;
+    private static String[] args;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -38,6 +39,7 @@ public class Main extends Application {
         SchedulerWindow schedulerWindowController = fxmlLoader.getController();
         //set the backend -->  attach observers automatically
         schedulerWindowController.setBackend(backend);
+        schedulerWindowController.setMain(this);
         //set the stage to the new scene
         this.stage.setScene(scene);
         //start scheduling
@@ -61,10 +63,27 @@ public class Main extends Application {
         //TODO: start scheduling
     }
     public static void main(String[] args) {
+        Main.args = args;
         launch();
     }
 
     public Backend backend() {
         return backend;
+    }
+
+    public void restart() {
+        this.stage.close();
+        // Clear any existing data or objects
+        this.backend = null;
+        this.stage = null;
+        System.gc();
+
+        // Create a new instance of Main and start it
+        try {
+            Main newMain = new Main();
+            newMain.start(new Stage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

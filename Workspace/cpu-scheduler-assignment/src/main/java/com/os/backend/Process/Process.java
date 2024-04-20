@@ -104,9 +104,7 @@ public class Process implements Cloneable{
             clone.processNumber = this.processNumber;
             clone.arrivalTime = this.arrivalTime;
             clone.burstTime = this.burstTime;
-            clone.remainingTime = this.remainingTime;
-            clone.waitingTime = this.waitingTime;
-            clone.turnaroundTime = this.turnaroundTime;
+            clone.remainingTime = clone.burstTime;
             return clone;
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();

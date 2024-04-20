@@ -111,6 +111,9 @@ public class ProcessBlockController extends AnchorPane implements Initializable 
         this.arrivalSpinner.getValueFactory().setValue(0);
         this.burstSpinner.getValueFactory().setValue(1);
         this.prioritySpinner.getValueFactory().setValue(0);
+
+        // to ensure that min values are assigned correctly to the controller
+        this.updateFields(null);
     }
 
     public void incrementProcessNumber() {
@@ -121,5 +124,9 @@ public class ProcessBlockController extends AnchorPane implements Initializable 
     public void setArrivalTime(int arrivalTime) {
         this.arrivalTime = arrivalTime;
         ((SpinnerValueFactory.IntegerSpinnerValueFactory) this.arrivalSpinner.getValueFactory()).setMin(arrivalTime);
+    }
+
+    public static void resetProcessCounter(){
+        counter = 1;
     }
 }

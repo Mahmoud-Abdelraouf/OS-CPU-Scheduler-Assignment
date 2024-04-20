@@ -43,6 +43,7 @@ public class SchedulerWindow extends StackPane implements Initializable {
     private final List<Observer> observers = new ArrayList<>(3);
     private int seconds;
     private Timeline timeline;
+    private Main main;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -135,11 +136,21 @@ public class SchedulerWindow extends StackPane implements Initializable {
     }
 
     public void addNewProcessToBackEnd(ActionEvent ignoredActionEvent) {
+        //pause the system to prevent any race conditions
+        backend.pauseSystem();
+        //stop the timer
+        this.timeline.stop();
+
         Process newProcess = this.processBlockController.createProcess();
         // add the process to the backend
         this.backend.addProcess(newProcess);
         // increment the number of the addNewProcess block
         this.processBlockController.incrementProcessNumber();
+
+        //continue the system
+        backend.continueSystem();
+        //continue the timer
+        this.timeline.play();
     }
 
     public void resetProcessBlock(ActionEvent ignoredActionEvent) {
@@ -147,13 +158,10 @@ public class SchedulerWindow extends StackPane implements Initializable {
         this.processBlockController.reset();
     }
 
-    public void pauseSystem(ActionEvent actionEvent) {
-        backend.pauseSystem();
-    }
 
-    public void startStop(ActionEvent actionEvent) {
+    public void startStop(ActionEvent ignoredActionEvent) {
         if (startStopButton.isSelected()){
-            startStopButton.setText("Play");
+            startStopButton.setText("Resume");
                 timeline.stop();
             backend.pauseSystem();
         }
@@ -162,6 +170,12 @@ public class SchedulerWindow extends StackPane implements Initializable {
                 timeline.play();
             backend.continueSystem();
         }
+    }
 
+    public void setMain(Main main) {
+        this.main = main;
+    }
+    public void restartApp(){
+        main.restart();
     }
 }
