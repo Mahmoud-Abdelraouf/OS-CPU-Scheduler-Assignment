@@ -26,6 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class StartWindowController extends StackPane implements Initializable {
 
@@ -201,7 +202,7 @@ public class StartWindowController extends StackPane implements Initializable {
     public void createProcesses(ActionEvent ignoredActionEvent) {
         List<Process> createdProcesses = processControllers.stream()
                 .map(ProcessBlockController::createProcess)
-                .toList();
+                .collect(Collectors.toList());
 
         //choose the desired algorithm
         String algorithm = ((ToggleButton) toggleGroup1.getSelectedToggle()).getText();

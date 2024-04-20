@@ -50,6 +50,7 @@ public class ProcessBlockController extends AnchorPane implements Initializable 
         p.setArrivalTime(arrivalTime);
         p.setBurstTime(burstTime);
         p.setProcessNumber(number);
+
         return p;
     }
 
@@ -112,6 +113,7 @@ public class ProcessBlockController extends AnchorPane implements Initializable 
 
     public void incrementProcessNumber(){
         this.number++;
+        this.nameLabel.setText(Integer.toString(this.number));
     }
 
     public void setArrivalTime(int arrivalTime) {
