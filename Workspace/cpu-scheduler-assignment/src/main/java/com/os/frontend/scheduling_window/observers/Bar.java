@@ -85,7 +85,7 @@ public class Bar extends AnchorPane implements Observer, Initializable {
         // Create a new series for the new process
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
         series.setName("P" + (processList.size())); // Set a unique name for each series
-        series.getData().add(new XYChart.Data<>(series.getName(), process.getBurstTime()));
+        series.getData().add(new XYChart.Data<>(series.getName(), process.getRemainingTime()));
         //setBarColorForSeries(series, processList.indexOf(process));
 
 
@@ -109,7 +109,7 @@ public class Bar extends AnchorPane implements Observer, Initializable {
 
     private void initializeChart() {
         xAxis.setLabel("Processes");
-        yAxis.setLabel("Burst Time");
+        yAxis.setLabel("Remaining Time");
 
         // Create a list to store the categories
         categories = FXCollections.observableArrayList();
@@ -127,7 +127,7 @@ public class Bar extends AnchorPane implements Observer, Initializable {
             int seriesIndex = processList.indexOf(process);
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             series.setName("P" + (seriesIndex + 1)); // Set a unique name for each series
-            series.getData().add(new XYChart.Data<>(series.getName(), process.getBurstTime()));
+            series.getData().add(new XYChart.Data<>(series.getName(), process.getRemainingTime()));
 
 
 
