@@ -69,12 +69,17 @@ public class Bar extends AnchorPane implements Observer, Initializable {
         Process currentRunningProcess = systemScheduler.getCurrentRunningProcess();
         //updateChartWithNewProcess(currentRunningProcess);
         int index = processList.indexOf(currentRunningProcess);
-/*
+
         XYChart.Series<String, Integer> seriesToUpdate = barChart.getData().get(index);
         XYChart.Data<String, Integer> dataToUpdate = seriesToUpdate.getData().get(seriesToUpdate.getData().size() -1 );
         // Update the y-value of the specific data point
-        dataToUpdate.setYValue(currentRunningProcess.getRemainingTime());
-*/
+        System.out.println(dataToUpdate.getYValue());
+
+        //if((dataToUpdate.getYValue() >  0)) {
+        if(currentRunningProcess.getRemainingTime() >0){
+        dataToUpdate.setYValue(currentRunningProcess.getRemainingTime() - 1);
+        }
+
         System.out.println( "kololo");
     }
 
