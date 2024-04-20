@@ -6,8 +6,11 @@ import com.os.backend.Process.ProcessState;
 import com.os.backend.Process.ProcessTable;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SJF_Pree extends SchedulingAlgo {
+    private List<Process> clonedProcesses;
+
     public static void main(String[] args) {
         // Create some sample processes
         Process p1 = new Process(1, 0, 5);
@@ -37,7 +40,7 @@ public class SJF_Pree extends SchedulingAlgo {
         PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getRemainingTime).thenComparing(Process::getArrivalTime));
         int currentTime = 0;
 
-        while (!processesList.isEmpty()) { // Continue until all processes are executed
+        while (!clonedProcesses.isEmpty()) { // Continue until all processes are executed
             // Get the processes that have arrived by the current time
             List<Process> arrivedProcesses = getArrivedProcesses(currentTime);
 
@@ -48,13 +51,19 @@ public class SJF_Pree extends SchedulingAlgo {
             }
 
             // Add the arrived processes to the ready queue
-            readyQueue.addAll(arrivedProcesses);
+            for (Process arrivedProcess : arrivedProcesses) {
+                if (!readyQueue.contains(arrivedProcess)) {
+                    readyQueue.add(arrivedProcess);
+                }
+            }
 
             // Get the process with the shortest burst time
             Process runningProcess = readyQueue.poll();
 
+
             // Ensure that a process is available for execution
             assert runningProcess != null;
+            runningProcess.decrementRemainingTime();
 
             // Add event for process arrival
             processTable.addExecutionEvent(runningProcess, currentTime, runningProcess.getProcessNumber(), ProcessState.ARRIVED);
@@ -62,19 +71,19 @@ public class SJF_Pree extends SchedulingAlgo {
             // Add event for process start
             processTable.addExecutionEvent(runningProcess, currentTime, runningProcess.getProcessNumber(), ProcessState.STARTED);
 
-            Set<Integer> processedProcesses = new HashSet<>(); // Set to keep track of processed process numbers
+
 
             int burstTime = runningProcess.getRemainingTime();
             int endTime = 0;
-            for (int i = currentTime + 1; i <= burstTime; i++) {
+
+            while(runningProcess.getRemainingTime() != 0){
                 arrivedProcesses.clear();
-                arrivedProcesses.addAll(getArrivedProcesses(currentTime + i));
+                arrivedProcesses.addAll(getArrivedProcesses(++currentTime));
 
                 // Add only the new arrived processes to the ready queue
                 for (Process arrivedProcess : arrivedProcesses) {
-                    if (!processedProcesses.contains(arrivedProcess.getProcessNumber())) {
+                    if (!readyQueue.contains(arrivedProcess)) {
                         readyQueue.add(arrivedProcess);
-                        processedProcesses.add(arrivedProcess.getProcessNumber());
                     }
                 }
 
@@ -82,26 +91,28 @@ public class SJF_Pree extends SchedulingAlgo {
                     Process nextProcess = readyQueue.peek();
                     if (nextProcess != null && nextProcess != runningProcess) {
                         // Process is interrupted
-                        processTable.addExecutionEvent(runningProcess, i, runningProcess.getProcessNumber(), ProcessState.INTERRUPTED);
+                        processTable.addExecutionEvent(runningProcess, currentTime, runningProcess.getProcessNumber(), ProcessState.INTERRUPTED);
                         assert readyQueue.peek() != null;
-                        processedProcesses.remove(readyQueue.peek().getProcessNumber());
                         runningProcess = readyQueue.poll();
                         assert runningProcess != null;
-                        processTable.addExecutionEvent(runningProcess, i, runningProcess.getProcessNumber(), ProcessState.ARRIVED);
-                        processTable.addExecutionEvent(runningProcess, i, runningProcess.getProcessNumber(), ProcessState.STARTED);
-                        burstTime = runningProcess.getRemainingTime();
+                        runningProcess.decrementRemainingTime();
+                        processTable.addExecutionEvent(runningProcess, currentTime, runningProcess.getProcessNumber(), ProcessState.ARRIVED);
+                        processTable.addExecutionEvent(runningProcess, currentTime, runningProcess.getProcessNumber(), ProcessState.STARTED);
                     } else {
                         // Process continues running
-                        processTable.addExecutionEvent(runningProcess, i, runningProcess.getProcessNumber(), ProcessState.RUNNING);
+                        processTable.addExecutionEvent(runningProcess, currentTime, runningProcess.getProcessNumber(), ProcessState.RUNNING);
+                        runningProcess.decrementRemainingTime();
                     }
                 }
-                endTime = i;
             }
 
-            processTable.addExecutionEvent(runningProcess, endTime, runningProcess.getProcessNumber(), ProcessState.COMPLETED);
+            processTable.addExecutionEvent(runningProcess, currentTime, runningProcess.getProcessNumber(), ProcessState.COMPLETED);
 
+            // Remove the executed process from ready queue
+            readyQueue.remove(runningProcess);
             // Remove the executed process from the list
-            processesList.remove(runningProcess);
+            clonedProcesses.remove(runningProcess);
+            currentTime++;
         }
 
         return processTable;
@@ -109,11 +120,24 @@ public class SJF_Pree extends SchedulingAlgo {
 
     private List<Process> getArrivedProcesses(int currentTime) {
         List<Process> arrivedProcesses = new ArrayList<>();
-        for (Process process : processesList) {
+        for (Process process : clonedProcesses) {
             if (process.getArrivalTime() <= currentTime) {
                 arrivedProcesses.add(process);
             }
         }
         return arrivedProcesses;
+    }
+
+    @Override
+    public void addNewProcesses(List<Process> newProcesses) {
+        super.addNewProcesses(newProcesses);
+        cloneProcessList();
+    }
+
+    // Helper methods
+    private void cloneProcessList() {
+        this.clonedProcesses = processesList.stream()
+                .map(Process::clone)
+                .collect(Collectors.toList());
     }
 }
