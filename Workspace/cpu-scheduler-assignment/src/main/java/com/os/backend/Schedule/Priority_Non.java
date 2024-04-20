@@ -5,8 +5,10 @@ import com.os.backend.Process.Process;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Priority_Non extends SchedulingAlgo {
+    private List<Process> clonedProcesses;
 
     public Priority_Non() {
     }
@@ -17,9 +19,9 @@ public class Priority_Non extends SchedulingAlgo {
         ProcessTable processTable = new ProcessTable();
 
         int currentTime = 0;
-        while (!processesList.isEmpty()) { // Continue until all processes are executed
+        while (!clonedProcesses.isEmpty()) { // Continue until all processes are executed
             // Sort the processes by arrival time (assuming lower arrival time means higher priority)
-            processesList.sort((p1, p2) -> {
+            clonedProcesses.sort((p1, p2) -> {
                 if (p1.getArrivalTime() != p2.getArrivalTime()) {
                     return Integer.compare(p1.getArrivalTime(), p2.getArrivalTime());
                 } else {
@@ -33,7 +35,7 @@ public class Priority_Non extends SchedulingAlgo {
             });
 
             // Get the next process to execute
-            Process process = processesList.get(0);
+            Process process = clonedProcesses.get(0);
 
             // If the process has not arrived yet, update the current time
             if (process.getArrivalTime() > currentTime) {
@@ -59,12 +61,25 @@ public class Priority_Non extends SchedulingAlgo {
             currentTime = endTime;
 
             // Remove the executed process from the list
-            processesList.remove(process);
+            clonedProcesses.remove(process);
         }
 
 
         return processTable;
 
+    }
+
+    @Override
+    public void addNewProcesses(List<Process> newProcesses) {
+        super.addNewProcesses(newProcesses);
+        cloneProcessList();
+    }
+
+    // Helper methods
+    private void cloneProcessList() {
+        this.clonedProcesses = processesList.stream()
+                .map(Process::clone)
+                .collect(Collectors.toList());
     }
 
     @Override
