@@ -78,7 +78,9 @@ public class ProcessBlockController extends AnchorPane implements Initializable 
 
     public void showPriority() {
         isPriorityActive = true;
-        hBox.getChildren().add(priorityBlock);
+        if (!hBox.getChildren().contains(priorityBlock)) {
+            hBox.getChildren().add(priorityBlock);
+        }
     }
 
     // Static method to remove process block
@@ -111,13 +113,13 @@ public class ProcessBlockController extends AnchorPane implements Initializable 
         this.prioritySpinner.getValueFactory().setValue(0);
     }
 
-    public void incrementProcessNumber(){
+    public void incrementProcessNumber() {
         this.number++;
         this.nameLabel.setText(Integer.toString(this.number));
     }
 
     public void setArrivalTime(int arrivalTime) {
         this.arrivalTime = arrivalTime;
-        ((SpinnerValueFactory.IntegerSpinnerValueFactory)this.arrivalSpinner.getValueFactory()).setMin(arrivalTime);
+        ((SpinnerValueFactory.IntegerSpinnerValueFactory) this.arrivalSpinner.getValueFactory()).setMin(arrivalTime);
     }
 }
