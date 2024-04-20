@@ -28,14 +28,14 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
     @Override
     public void update(SystemScheduler system) {
         Process currentProcess = system.getCurrentRunningProcess();
-        int index = currentProcess.getProcessNumber();
 
         VBox vbox;
 
         if (currentProcess == null) {
             vbox = addIdlebox();
         } else {
-           vbox =  addProcessBox(index);
+             int index = currentProcess.getProcessNumber();
+            vbox =  addProcessBox(index);
         }
 
         ganttBox.getChildren().add(vbox);

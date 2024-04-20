@@ -40,7 +40,7 @@ public class ProcessesTable extends AnchorPane implements Observer, Initializabl
     @Override
     public void update(SystemScheduler systemScheduler) {
 
-        processAtTimeList = systemScheduler.getCurrentProcessesTable();
+        processAtTimeList = systemScheduler.getProcessesAtTime();
 
         //Init the priority column
         if (!priorityInit) {
