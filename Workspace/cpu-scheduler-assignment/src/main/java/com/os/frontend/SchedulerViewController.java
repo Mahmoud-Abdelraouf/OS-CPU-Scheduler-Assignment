@@ -358,11 +358,11 @@ public class SchedulerViewController implements Initializable {
         TranslateTransition moveOutTransition = new TranslateTransition(Duration.seconds(1), CPUScheduler);
         moveOutTransition.setFromY(-20); // Starting position
         moveOutTransition.setToY(0); // Move out to original position
-
+/*
         // Chain the two transitions
         moveInTransition.setOnFinished(event -> moveOutTransition.play());
         moveOutTransition.setOnFinished(event -> moveInTransition.play());
-
+*/
         // Start the initial animation
         moveInTransition.play();
     }
