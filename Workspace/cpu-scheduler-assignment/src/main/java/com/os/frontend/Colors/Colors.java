@@ -49,7 +49,62 @@ public class Colors {
             Color.DARKGOLDENROD,
             Color.DARKKHAKI,
             Color.LIGHTSEAGREEN,
-            // Add more colors as needed
+            Color.DARKSLATEGRAY,        // Dark Slate Gray
+            Color.DEEPPINK,             // Deep Pink
+            Color.FORESTGREEN,          // Forest Green
+            Color.HOTPINK,              // Hot Pink
+            Color.MEDIUMBLUE,           // Medium Blue
+            Color.OLIVE,                // Olive
+            Color.PLUM,                 // Plum
+            Color.ROYALBLUE,            // Royal Blue
+            Color.SIENNA,               // Sienna
+            Color.SLATEGRAY,            // Slate Gray
+            Color.TOMATO,               // Tomato
+            Color.WHEAT,                // Wheat
+            Color.DARKOLIVEGREEN,       // Dark Olive Green
+            Color.DARKORCHID,           // Dark Orchid
+            Color.DARKSLATEBLUE,        // Dark Slate Blue
+            Color.DIMGRAY,              // Dim Gray
+            Color.LIGHTGOLDENRODYELLOW, // Light Goldenrod Yellow
+            Color.LIGHTSLATEGRAY,       // Light Slate Gray
+            Color.MEDIUMAQUAMARINE,     // Medium Aquamarine
+            Color.MEDIUMSEAGREEN,       // Medium Sea Green
+            Color.MEDIUMSLATEBLUE,      // Medium Slate Blue
+            Color.MEDIUMSPRINGGREEN,    // Medium Spring Green
+            Color.MEDIUMTURQUOISE,      // Medium Turquoise
+            Color.MEDIUMVIOLETRED,      // Medium Violet Red
+            Color.MIDNIGHTBLUE,         // Midnight Blue
+            Color.OLIVEDRAB,            // Olive Drab
+            Color.ORANGERED,            // Orange Red
+            Color.ORCHID,               // Orchid
+            Color.PALEGOLDENROD,        // Pale Goldenrod
+            Color.PALEGREEN,            // Pale Green
+            Color.PALETURQUOISE,        // Pale Turquoise
+            Color.PALEVIOLETRED,        // Pale Violet Red
+            Color.PAPAYAWHIP,           // Papaya Whip
+            Color.PEACHPUFF,            // Peach Puff
+            Color.PERU,                 // Peru
+            Color.POWDERBLUE,           // Powder Blue
+            Color.ROSYBROWN,            // Rosy Brown
+            Color.SADDLEBROWN,          // Saddle Brown
+            Color.SANDYBROWN,           // Sandy Brown
+            Color.SEAGREEN,             // Sea Green
+            Color.SEASHELL,             // Sea Shell
+            Color.SKYBLUE,              // Sky Blue
+            Color.SLATEBLUE,            // Slate Blue
+            Color.SNOW,                 // Snow
+            Color.SPRINGGREEN,          // Spring Green
+            Color.STEELBLUE,            // Steel Blue
+            Color.TAN,                  // Tan
+            Color.THISTLE,              // Thistle
+            Color.TOMATO,               // Tomato
+            Color.TURQUOISE,            // Turquoise
+            Color.VIOLET,               // Violet
+            Color.WHEAT,                // Wheat
+            Color.WHITESMOKE,           // White Smoke
+            Color.YELLOWGREEN,          // Yellow Green
+            Color.DARKGRAY               // Dark Gray
+
     };
 
     public static String getColor(int index) {
