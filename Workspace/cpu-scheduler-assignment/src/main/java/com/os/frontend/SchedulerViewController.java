@@ -137,7 +137,9 @@ public class SchedulerViewController implements Initializable {
     private void initializeChart() {
         xAxis.setLabel("Processes");
         yAxis.setLabel("Burst Time");
-
+        String labelStyle = "-fx-text-fill: #76ABAE;";
+        xAxis.setStyle(labelStyle);
+        yAxis.setStyle(labelStyle);
         // Create a list to store the categories
         ObservableList<String> categories = FXCollections.observableArrayList();
 

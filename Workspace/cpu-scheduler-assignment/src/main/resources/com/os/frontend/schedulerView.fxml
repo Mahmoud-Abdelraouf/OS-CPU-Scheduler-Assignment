@@ -68,7 +68,7 @@
       </VBox>
       <ToggleButton fx:id="startStopButton" mnemonicParsing="false" onAction="#startStop" styleClass="button-class" text="Stop" />
       <VBox.margin>
-         <Insets top="30.0" />
+         <Insets top="50.0" />
       </VBox.margin>
    </HBox>
    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">

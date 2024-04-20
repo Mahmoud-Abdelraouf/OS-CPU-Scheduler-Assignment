@@ -77,10 +77,10 @@
         </ScrollPane>
         <BarChart fx:id="barChart" layoutX="493.0" layoutY="186.0" prefHeight="266.0" prefWidth="366.0" style="-fx-background-color: #323264; -fx-color: #156578;" stylesheets="@../../../stylesheets/schedulerViewStylesheet.css" AnchorPane.leftAnchor="492.80000000000007" AnchorPane.rightAnchor="164.60000000000002">
             <xAxis>
-                <CategoryAxis autoRanging="false" endMargin="0.5" label="Processes" startMargin="1.0" tickLabelFill="WHITE" tickLabelGap="0.0" tickLength="5.0" fx:id="xAxis" />
+                <CategoryAxis autoRanging="false" endMargin="0.5" label="Processes" startMargin="1.0" tickLabelFill="#76abae" tickLabelGap="0.0" tickLength="5.0" fx:id="xAxis" />
             </xAxis>
             <yAxis>
-                <NumberAxis fx:id="yAxis" label="Remaining Time" side="LEFT" tickLabelFill="WHITE" />
+                <NumberAxis fx:id="yAxis" label="Remaining Time" side="LEFT" tickLabelFill="#76abae" />
             </yAxis>
         </BarChart>
         <HBox alignment="CENTER" layoutX="450.3999938964844" layoutY="498.0" pickOnBounds="false" prefHeight="30.0" prefWidth="1071.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
