@@ -66,4 +66,9 @@ public class Priority_Non extends SchedulingAlgo {
         return processTable;
 
     }
+
+    @Override
+    public String getSchedulerName() {
+        return "Non-Preemptive Priority";
+    }
 }

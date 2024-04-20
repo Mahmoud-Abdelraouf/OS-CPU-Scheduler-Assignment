@@ -2,11 +2,11 @@
 /* secondary color -> #31363F*/
 /* 2l lon 2l metarshm -> #76ABAE*/
 /* bright color -> #EEEEEE*/
-.root{
+.root {
     -fx-background-color: #1C1C1C;
 }
 
-#processesList{
+#processesList {
     -fx-background-color: black;
 
 }
@@ -24,9 +24,9 @@
     -fx-background-color: #E74C3C; /* Red color */
     -fx-text-fill: #EEE;
 
-/*    -fx-background-radius: 10px; *//* Border radius */
+    /*    -fx-background-radius: 10px; *//* Border radius */
     -fx-background-radius: 0 10 10 0;
-/*    -fx-background-insets: 0 10 0 0;*/
+    /*    -fx-background-insets: 0 10 0 0;*/
 }
 
 #processesList .remove-button:hover {
@@ -80,7 +80,7 @@
 /* Change Confirm Button style suggestion */
 #confirmButton {
     /* -fx-background-color: #aaa; */ /* Secondary color */
-/*    -fx-text-fill: #222831; *//* Bright color for text */
+    /*    -fx-text-fill: #222831; *//* Bright color for text */
 }
 
 
@@ -132,11 +132,14 @@
 /* FlowPaneStyle.css */
 #processesList {
     -fx-background-color: #222831; /* Main color */
+    -fx-background-radius: 10px;
     -fx-padding: 10px; /* Padding */
-    -fx-border-color: #76ABAE; /* Border color */
+    /*-fx-border-color: #76ABAE; !* Border color *!*/
+    -fx-border-color: transparent;
     -fx-border-width: 3px; /* Border width */
     -fx-border-radius: 10px; /* Border radius */
 }
+
 /* PaneStyle.css */
 #processListHBox {
     -fx-border-width: 0; /* Cancel border */
@@ -151,12 +154,11 @@
 #controlButtons {
     -fx-spacing: 10px; /* Margin between children */
 }
+
 /* StartWindowView.css */
 #processesListScrollPane {
     -fx-background-color: #222831; /* Main color */
 }
-
-
 
 
 /****************************/
@@ -178,4 +180,71 @@
 
 #timeQuantumSpinner:focused {
     -fx-border-color: #007bff; /* Border color when focused */
+}
+
+/*----------------------------------------------------------------
+ * Scroll pane styling
+ */
+.scroll-pane {
+    -fx-background-color: #76ABAE;
+    -fx-background-radius: 10px;
+    -fx-padding: 2px;
+    -fx-border-radius: 10px; /* Border radius */
+    -fx-border-color: transparent; /* 2l lon 2l metarshm color */
+    -fx-border-width: 2px; /* Border width */
+}
+
+.scroll-pane .viewport {
+    -fx-background-color: #76ABAE; /* Match ScrollPane background color */
+    -fx-background-radius: 10px; /* Match ScrollPane border radius */
+}
+
+/* Thumb */
+/* Set the thumb's color and size */
+.scroll-pane .scroll-bar:vertical *.thumb,
+.scroll-pane .scroll-bar:horizontal *.thumb {
+    -fx-background-color: linear-gradient(to bottom, #222831, #557d7e, #76abae); /* Customize thumb color */
+    -fx-background-radius: 20px; /* Customize thumb radius */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0); /* Add a drop shadow */
+}
+
+/* Set the thumb's hover color */
+.scroll-pane .scroll-bar:vertical *.thumb:hover,
+.scroll-pane .scroll-bar:horizontal *.thumb:hover {
+    -fx-background-color: #222831; /* Customize thumb hover color */
+}
+
+/* Set the thumb's presser color */
+.scroll-pane .scroll-bar:vertical *.thumb:pressed,
+.scroll-pane .scroll-bar:horizontal *.thumb:pressed {
+    -fx-background-color: #222831; /* Customize thumb hover color */
+}
+
+/* tracks */
+/* Hide the arrows and the track background */
+.scroll-pane .scroll-bar:vertical,
+.scroll-pane .scroll-bar:horizontal {
+    -fx-padding: 0; /* Remove padding */
+    -fx-background-color: transparent;
+    -fx-pref-height: 2px; /* Set the preferred height */
+}
+
+.scroll-pane .scroll-bar:vertical *.increment-arrow,
+.scroll-pane .scroll-bar:vertical *.decrement-arrow,
+.scroll-pane .scroll-bar:horizontal *.increment-arrow,
+.scroll-pane .scroll-bar:horizontal *.decrement-arrow,
+.scroll-pane .scroll-bar:horizontal *.increment-arrow:hover,
+.scroll-pane .scroll-bar:horizontal *.decrement-arrow:hover,
+.scroll-pane .scroll-bar:horizontal *.increment-arrow:pressed,
+.scroll-pane .scroll-bar:horizontal *.decrement-arrow:pressed,
+.scroll-pane .scroll-bar:vertical .track,
+.scroll-pane .scroll-bar:horizontal .track {
+    -fx-background-color: transparent; /* Hide arrows and track */
+    -fx-border-color: transparent;
+}
+
+
+.scroll-pane.scroll-bar{
+    -fx-background-color: transparent; /* Hide arrows and track */
+    -fx-border-color: transparent;
 }

@@ -136,4 +136,9 @@ public class Priority_Pree extends SchedulingAlgo {
         // Print the process table
         System.out.println(table);
     }
+
+    @Override
+    public String getSchedulerName() {
+        return "Preemptive Priority";
+    }
 }

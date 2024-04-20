@@ -67,7 +67,7 @@ public class SystemScheduler{
                 for(Process p : backend.getProcessList()){
                     if (p.getProcessNumber() == e.getProcessNumber()) {
                         p.decrementRemainingTime();
-                        p.setTurnaroundTime(p.getTurnaroundTime() + 1);
+                        p.setTurnaroundTime(p.getBurstTime()- p.getRemainingTime() + p.getWaitingTime());
                         continue;
                     }
                     updateTimeForProcess(p, time);
