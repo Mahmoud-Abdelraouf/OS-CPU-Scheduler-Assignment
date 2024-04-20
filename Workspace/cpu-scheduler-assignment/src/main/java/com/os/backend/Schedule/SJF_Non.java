@@ -64,17 +64,18 @@ public class SJF_Non extends SchedulingAlgo {
             // Add event for process start
             processTable.addExecutionEvent(shortestProcess, currentTime, shortestProcess.getProcessNumber(), ProcessState.STARTED);
 
-            // Simulate process execution
-            int endTime = currentTime + shortestProcess.getBurstTime();
-            for (int i = currentTime + 1; i <= endTime; i++) {
-                processTable.addExecutionEvent(shortestProcess, i, shortestProcess.getProcessNumber(), ProcessState.RUNNING);
+           shortestProcess.decrementRemainingTime();
+
+            while (shortestProcess.getRemainingTime() != 0) {
+                processTable.addExecutionEvent(shortestProcess, ++currentTime, shortestProcess.getProcessNumber(), ProcessState.RUNNING);
+                shortestProcess.decrementRemainingTime();
             }
 
             // Add event for process completion
-            processTable.addExecutionEvent(shortestProcess, endTime, shortestProcess.getProcessNumber(), ProcessState.COMPLETED);
+            processTable.addExecutionEvent(shortestProcess, currentTime, shortestProcess.getProcessNumber(), ProcessState.COMPLETED);
 
             // Update current time
-            currentTime = endTime;
+            currentTime++;
 
             // Remove the executed process from the list
             clonedProcesses.remove(shortestProcess);

@@ -37,10 +37,10 @@ public class Priority_Non extends SchedulingAlgo {
             // Get the next process to execute
             Process process = clonedProcesses.get(0);
 
-            // If the process has not arrived yet, update the current time
-            if (process.getArrivalTime() > currentTime) {
-                currentTime = process.getArrivalTime();
-            }
+//            // If the process has not arrived yet, update the current time
+//            if (process.getArrivalTime() > currentTime) {
+//                currentTime = process.getArrivalTime();
+//            }
 
             // Add event for process arrival
             processTable.addExecutionEvent(process, currentTime, process.getProcessNumber(), ProcessState.ARRIVED);
@@ -48,17 +48,18 @@ public class Priority_Non extends SchedulingAlgo {
             // Add event for process start
             processTable.addExecutionEvent(process, currentTime, process.getProcessNumber(), ProcessState.STARTED);
 
-            // Simulate process execution
-            int endTime = currentTime + process.getBurstTime();
-            for (int i = currentTime + 1; i <= endTime; i++) {
-                processTable.addExecutionEvent(process, i, process.getProcessNumber(), ProcessState.RUNNING);
+            process.decrementRemainingTime();
+
+            while (process.getRemainingTime() != 0) {
+                processTable.addExecutionEvent(process, ++currentTime, process.getProcessNumber(), ProcessState.RUNNING);
+                process.decrementRemainingTime();
             }
 
             // Add event for process completion
-            processTable.addExecutionEvent(process, endTime, process.getProcessNumber(), ProcessState.COMPLETED);
+            processTable.addExecutionEvent(process, currentTime, process.getProcessNumber(), ProcessState.COMPLETED);
 
             // Update current time
-            currentTime = endTime;
+            currentTime++;
 
             // Remove the executed process from the list
             clonedProcesses.remove(process);
