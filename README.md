@@ -1,87 +1,51 @@
-# تعظيم سلام من غير كلام عزبة محسن ناس تمام
-# مفيش صاحب بيتصاحب مفيش راجل بقى راجل
-# هنتعامل ويتعامل طلع سلاحك متكامل
-# هتعورني أعورك هنبوظلك منظرك
-#
-# جايب ورا تصبح مرة ملكش قيمه وسط البشرية
-# واقف سندال بجدارة هتبقي راجل مية المية
-# بلاش فشخرة منظرة ما اتهرشت كل الحكاية
-# والحكايه م البداية اسمعوا يا خلق ياهو
-# صاحب راجل صاحب فاجر صاحب بيزقك في مشاكل
-#
-# أولاد سليم اللبانين في أي حته مسمعين
-#
-# تعظيم سلام من غير كلام عزبة محسن ناس تمام
-# رجاله علي حق مش صوت وبق لو هتصيع عندنا تتدق
-# إحنا رجاله منهيبوش منخافوش منكشوش
-# وقت الجد إحنا نصد أي حد ماسك خرطوش
-#
-# الناس تعبانة قرفانة من العيشة طهقانة
-# نعمل ايه ولا ايه دا الخسيس أصبح فيها بيه
-# دا المكتوب على الجبين هنرضو بيه ونمشوه
-# بدمع العين علي الخدين اللي مايصلي معانا عالزين
-#
-# سمعنا يا غاندي
-#
-# دنية مواني على الملأ قلوبنا فيها بتنحرق
-# غلبان وعايش في الغلا مسكين وعشه بينزلق
-# ومين يحس بالتاني أحلام شبابنا بتتسرق
-#
-#
-# زمان عجيب مالوش حبيب مالوش طبيب بيداوي
-# هنروح علي فين ونشكي لمين زمن مليان بالبلاوي
-#
-#
-# يا ولاد آدم مهيش دايمه دي قيامة قايمة
-# هنهرب فين من رب الكون اللي خالقنا
-# في ناس غلابه وناس ديابه عايشين فيها
-# وشوش كدابه وشوش خاينه وعامة بريئة
-# انزل يا فارس يا حميدة غني وقول عليها
-#
-# لما اللي منك يجرحك طب قولي مين هيفرحك
-# بعد اما تتعب ماتلاقيش في الدنيا حاجه تريحك
-# كنت بعامل الناس بضمير والتقدير خسرني كتير
-# بس خلاص فهمت اللعبة هلعبها معاكوا على كبير
-#
-# صاحب جنيه هتصبح بيه اقولك ايه وتقولي ايه
-# قلوب الناس بتنفجر دا الخسيس عامل دكر
-# مفيش رحمة أعمى النظر فاكر نفسه هينتصر
-# ورب الكون مابيسيبش هيجيله يوم وينكسر
-#
-#
-# أولاد سليم اللبانين هنا ع الرجوله متأسسين
-# اللعب دولي في المتين شبيك لبيك يفضلوا جامدين
-# فريق حمل متصيتين وهرمي المسا لناس جامدين
-# وهرمي المسا لناس جامدين
-#
-#
-# من العوايد هندسة وعزبة محسن مؤسسة
-# على الرجوله متأسسة
-# هنا الأفعال مش قولنا وقال هنا التقال ظابطين مجال
-# شباب رجال أطفال وعيال احنا قلوب بتهد جبال
-#
-#
-# رزق سليم يعني الزعيم فنمره عشره راجل تقيل
-# باعت مسا لللبانين لكل بفة وكل مجال
-# عزبة محسن ناس تقال والمهرجان فوق الخيال
-# اللبانين مسمعين مسيطرين في كل وادي
-# إبراهيم سليم يعني الأمير سمعني السقفه ع الهادي
-#
-# محمد سليم يعني الكبير
-# راجل جدع كبير سنه كل العنتيله بتخاف منه
-# أحمد سليم الإمبراطور فأي حتة ثابت حضور
-# يوسف سليم راجل تقيل
-# ومحمد أحمد اللبان صيته واصل كل مكان
-# وعلي سليم يعني اللبان واللبانين في ابو سليمان
-# وابو سليمان في البرلمان ناس رجاله مافهمش جبان
-#
-# هتولع نار فالمهرجان رزق سليم باعت قرار
-# باسم الباشا رجب الجزار بيقول حارس راجل تارس
-# خالد جمعه يعني الفارس
-# رزق سليم ابو آية والارزاق بالنوايا
-#
-# صاحبنا كتير تعبنا كتير من الصحاب شايفين الويل
-# مصاص دماء بينتشر ودي الحقيقه يا بشر
-# وفي الختام يحلى الكلام في التوزيعات رقصنا جبال
-# حسن البرنس غنى وكتب وأي حد قدامه اتشطب
-# أحمد الطويل معني الأدب وأشرف الصيني ولد جدع
+# CPU Scheduler Project
+
+## Overview
+This project aims to implement a CPU Scheduler application that supports various scheduling algorithms. The application allows users to simulate the execution of processes with different scheduling algorithms, visualize the scheduling process through a Gantt Chart, and calculate average waiting time and average turnaround time.
+
+## Supported Schedulers
+1. First-Come, First-Served (FCFS)
+2. Shortest Job First (SJF) - Preemptive and Non-Preemptive
+3. Priority - Preemptive and Non-Preemptive (Lower priority numbers indicate higher priority)
+4. Round Robin
+
+## Features
+- Dynamic addition of processes during execution
+- Live scheduling with each time unit mapped to 1 second
+- Real-time update of remaining burst time for processes
+- Option to run existing processes without live scheduling
+- Graphical User Interface (GUI) desktop application
+
+## Usage
+1. Download the executable file from the provided link.
+2. Launch the application.
+3. Select the desired scheduling algorithm.
+4. Enter the necessary information for each process according to the selected algorithm.
+5. Optionally, add new processes dynamically during execution.
+6. Run the scheduler to visualize the scheduling process and view the Gantt Chart.
+7. Review the calculated average waiting time and average turnaround time.
+
+## Screenshots
+![Screenshot 1](screenshots/screenshot1.png)
+![Screenshot 2](screenshots/screenshot2.png)
+
+## Requirements
+- Java Runtime Environment (JRE)
+- Operating System: Windows, macOS, or Linux
+
+## Build Instructions
+1. Clone the repository: `git clone <repository-url>`
+2. Navigate to the project directory: `cd cpu-scheduler`
+3. Build the project: `mvn package`
+
+## Contributors
+- [Name 1](https://github.com/user1)
+- [Name 2](https://github.com/user2)
+- [Name 3](https://github.com/user3)
+- [Name 4](https://github.com/user4)
+- [Name 5](https://github.com/user5)
+- [Name 6](https://github.com/user6)
+- [Name 7](https://github.com/user7)
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

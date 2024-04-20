@@ -85,6 +85,7 @@ public class SystemScheduler{
         for(Process process : processList){
             result.add(new ProcessAtTime(process, time, backend.getTable()));
         }
+        time++;
         return result;
     }
 

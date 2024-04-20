@@ -3,9 +3,6 @@ package com.os.frontend.scheduling_window.observers;
 import com.os.backend.Process.Process;
 import com.os.backend.main.SystemScheduler;
 import com.os.frontend.Colors.Colors;
-import com.os.frontend.scheduling_window.observers.Observer;
-import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -24,7 +20,8 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
 
     public HBox ganttBox;
     public ScrollPane scrollPane;
-    private int time =0;
+    private int time = 0;
+
     @Override
     public void update(SystemScheduler system) {
         Process currentProcess = system.getCurrentRunningProcess();
@@ -34,31 +31,36 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
         if (currentProcess == null) {
             vbox = addIdlebox();
         } else {
-            int index = currentProcess.getProcessNumber()-1;
-            vbox =  addProcessBox(index);
+            int index = currentProcess.getProcessNumber() - 1;
+            vbox = addProcessBox(index);
         }
 
         ganttBox.getChildren().add(vbox);
 
 
     }
-    private void enlargeGanntBox (){
+
+    private void enlargeGanntBox() {
         scrolViewChange();
 
 
     }
 
 
-
-    private void scrolViewChange(){
-        if (time>19){
+    private void scrolViewChange() {
+        if (time > 19) {
             //ScrollPane sp = this;
             this.scrollPane.setHvalue(1);
 
-        ganttBox.setPrefWidth(ganttBox.getPrefWidth()+10);}
+            ganttBox.setPrefWidth(ganttBox.getPrefWidth() + 10);
+        }else{
+            this.scrollPane.setHvalue(0);
+        }
+        this.scrollPane.setHbarPolicy(ScrollBarPolicy.ALWAYS);
 
     }
-    public  VBox addProcessBox(int index ){
+
+    public VBox addProcessBox(int index) {
         VBox vbox = new VBox();
         vbox.setPrefHeight(75);
         vbox.setPrefWidth(50);
@@ -67,32 +69,30 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
         box.setPrefHeight(55);
         box.setPrefWidth(50);
         String colorStyle = Colors.getColor(index);
-        box.setStyle("-fx-background-color:"+  colorStyle);
+        box.setStyle("-fx-background-color:" + colorStyle);
 
-        Label label = new Label("P" + (index+1));               // index +1 عشان هو هنا P1
+        Label label = new Label("P" + (index + 1));               // index +1 عشان هو هنا P1
         label.setStyle("-fx-font-size: 15; -fx-font-weight: bold");
         box.getChildren().add(label);
 
 
-        Label timestamp = new Label(""+this.time++);
+        Label timestamp = new Label("" + this.time++);
         timestamp.setStyle("-fx-font-size: 10; ");
-        timestamp.setStyle("-fx-background-color:"+  colorStyle);
+        timestamp.setStyle("-fx-background-color:" + colorStyle);
         timestamp.setPadding(new Insets(0, 2, 0, 2));
-        vbox.getChildren().addAll(box,timestamp);
+        vbox.getChildren().addAll(box, timestamp);
         vbox.setAlignment(Pos.CENTER_LEFT);
-        vbox.setStyle("-fx-padding: 0 2 0 2 ; -fx-background-color:"+  colorStyle);
+        vbox.setStyle("-fx-padding: 0 2 0 2 ; -fx-background-color:" + colorStyle);
 
 
         enlargeGanntBox();
-
-
 
 
         return vbox;
 
     }
 
-    public  VBox addIdlebox( ){
+    public VBox addIdlebox() {
         VBox vbox = new VBox();
         vbox.setPrefHeight(75);
         vbox.setPrefWidth(50);
@@ -106,16 +106,16 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
         box.getChildren().add(label);
 
 
-        Label timestamp = new Label(""+this.time++);
+        Label timestamp = new Label("" + this.time++);
         timestamp.setStyle("-fx-font-size: 10; ");
         timestamp.setPadding(new Insets(0, 2, 0, 2));
 
-        vbox.getChildren().addAll(box,timestamp);
+        vbox.getChildren().addAll(box, timestamp);
         vbox.setAlignment(Pos.CENTER_LEFT);
         vbox.setStyle("-fx-padding: 0 2 0 2;-fx-background-color:  #ccefbf");
 
 
-        enlargeGanntBox ();
+        enlargeGanntBox();
 
 
         return vbox;
@@ -131,7 +131,6 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
         ganttBox.setStyle("-fx-background-color: #30305f; -fx-border-color: #30305f;");
         return ganttBox;
     }
-
 
 
     @Override
