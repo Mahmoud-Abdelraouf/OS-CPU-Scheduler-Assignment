@@ -11,11 +11,8 @@ public class SJF_Pree extends SchedulingAlgo {
     public static void main(String[] args) {
         // Create some sample processes
         Process p1 = new Process(1, 0, 5);
-        p1.setRemainingTime(4);
         Process p2 = new Process(2, 1, 3);
-        p2.setRemainingTime(2);
         Process p3 = new Process(3, 2, 2);
-        p3.setRemainingTime(2);
         Process p4 = new Process(4, 3, 5);
 
         // Add the processes to the SJF preemptive scheduling algorithm
