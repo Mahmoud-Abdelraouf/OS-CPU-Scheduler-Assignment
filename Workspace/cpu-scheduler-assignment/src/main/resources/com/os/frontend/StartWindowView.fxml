@@ -22,8 +22,8 @@
       </Label>
    </StackPane>
    <HBox fx:id="processListHBox" alignment="TOP_CENTER" spacing="30.0">
-      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" nodeOrientation="LEFT_TO_RIGHT" stylesheets="@StartWindowView.css">
-         <FlowPane fx:id="processesList" hgap="10.0" prefHeight="331.0" prefWidth="796.0" stylesheets="@StartWindowView.css" vgap="10.0">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="335.0" prefWidth="800.0" stylesheets="@StartWindowView.css">
+         <FlowPane fx:id="processesList" hgap="10.0" prefHeight="326.0" prefWidth="796.0" stylesheets="@StartWindowView.css" vgap="10.0">
             <Button fx:id="plusButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMousePressed="#addNewProcess" prefHeight="120.0" prefWidth="245.0" text="+">
                <font>
                   <Font size="50.0" />
