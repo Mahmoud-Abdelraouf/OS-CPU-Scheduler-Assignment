@@ -6,8 +6,11 @@ import com.os.backend.Process.ProcessState;
 import com.os.backend.Process.ProcessTable;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SJF_Pree extends SchedulingAlgo {
+    private List<Process> clonedProcesses;
+
     public static void main(String[] args) {
         // Create some sample processes
         Process p1 = new Process(1, 0, 5);
@@ -40,7 +43,7 @@ public class SJF_Pree extends SchedulingAlgo {
         PriorityQueue<Process> readyQueue = new PriorityQueue<>(Comparator.comparingInt(Process::getRemainingTime).thenComparing(Process::getArrivalTime));
         int currentTime = 0;
 
-        while (!processesList.isEmpty()) { // Continue until all processes are executed
+        while (!clonedProcesses.isEmpty()) { // Continue until all processes are executed
             // Get the processes that have arrived by the current time
             List<Process> arrivedProcesses = getArrivedProcesses(currentTime);
 
@@ -111,7 +114,7 @@ public class SJF_Pree extends SchedulingAlgo {
             // Remove the executed process from ready queue
             readyQueue.remove(runningProcess);
             // Remove the executed process from the list
-            processesList.remove(runningProcess);
+            clonedProcesses.remove(runningProcess);
             currentTime++;
         }
 
@@ -120,11 +123,24 @@ public class SJF_Pree extends SchedulingAlgo {
 
     private List<Process> getArrivedProcesses(int currentTime) {
         List<Process> arrivedProcesses = new ArrayList<>();
-        for (Process process : processesList) {
+        for (Process process : clonedProcesses) {
             if (process.getArrivalTime() <= currentTime) {
                 arrivedProcesses.add(process);
             }
         }
         return arrivedProcesses;
+    }
+
+    @Override
+    public void addNewProcesses(List<Process> newProcesses) {
+        super.addNewProcesses(newProcesses);
+        cloneProcessList();
+    }
+
+    // Helper methods
+    private void cloneProcessList() {
+        this.clonedProcesses = processesList.stream()
+                .map(Process::clone)
+                .collect(Collectors.toList());
     }
 }
