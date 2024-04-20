@@ -69,17 +69,17 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
         String colorStyle = Colors.getColor(index);
         box.setStyle("-fx-background-color:"+  colorStyle);
         vbox.setStyle("-fx-background-color:"+  colorStyle);
-        Label label = new Label("P" + (index));
+        Label label = new Label("P" + (index+1));               // index +1 عشان هو هنا P1
         label.setStyle("-fx-font-size: 12; -fx-font-weight: bold");
         box.getChildren().add(label);
 
-        time++;
-        Label timestamp = new Label(""+this.time);
+
+        Label timestamp = new Label(""+this.time++);
         timestamp.setStyle("-fx-font-size: 10; ");
-        timestamp.setPadding(new Insets(0, 2, 0, 0));
+        timestamp.setPadding(new Insets(0, 2, 0, 2));
 
         vbox.getChildren().addAll(box,timestamp);
-        vbox.setAlignment(Pos.CENTER_RIGHT);
+        vbox.setAlignment(Pos.CENTER_LEFT);
 
 
         enlargeGanntBox();
@@ -105,13 +105,13 @@ public class GanttChart extends ScrollPane implements Observer, Initializable {
         label.setStyle("-fx-font-size: 12; -fx-font-weight: bold");
         box.getChildren().add(label);
 
-        time++;
-        Label timestamp = new Label(""+this.time);
+
+        Label timestamp = new Label(""+this.time++);
         timestamp.setStyle("-fx-font-size: 10; ");
-        timestamp.setPadding(new Insets(0, 2, 0, 0));
+        timestamp.setPadding(new Insets(0, 2, 0, 2));
 
         vbox.getChildren().addAll(box,timestamp);
-        vbox.setAlignment(Pos.CENTER_RIGHT);
+        vbox.setAlignment(Pos.CENTER_LEFT);
 
 
         enlargeGanntBox ();

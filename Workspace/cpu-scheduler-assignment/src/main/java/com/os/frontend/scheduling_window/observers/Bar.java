@@ -69,13 +69,21 @@ public class Bar extends AnchorPane implements Observer, Initializable {
         Process currentRunningProcess = systemScheduler.getCurrentRunningProcess();
         //updateChartWithNewProcess(currentRunningProcess);
         int index = processList.indexOf(currentRunningProcess);
-/*
-        XYChart.Series<String, Integer> seriesToUpdate = barChart.getData().get(index);
-        XYChart.Data<String, Integer> dataToUpdate = seriesToUpdate.getData().get(seriesToUpdate.getData().size() -1 );
-        // Update the y-value of the specific data point
-        dataToUpdate.setYValue(currentRunningProcess.getRemainingTime());
-*/
-        System.out.println( "kololo");
+
+        if (index != -1) {
+            XYChart.Series<String, Integer> seriesToUpdate = barChart.getData().get(index);
+            XYChart.Data<String, Integer> dataToUpdate = seriesToUpdate.getData().get(seriesToUpdate.getData().size() - 1);
+            // Update the y-value of the specific data point
+            System.out.println(dataToUpdate.getYValue());
+
+            //if((dataToUpdate.getYValue() >  0)) {
+            if (currentRunningProcess.getRemainingTime() >= 0) {
+                dataToUpdate.setYValue(currentRunningProcess.getRemainingTime());
+            }
+
+            System.out.println("APOLO");
+        }
+        else System.out.println("KALOLO");
     }
 
     private void updateChartWithNewProcess(Process process) {
@@ -85,7 +93,7 @@ public class Bar extends AnchorPane implements Observer, Initializable {
         // Create a new series for the new process
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
         series.setName("P" + (processList.size())); // Set a unique name for each series
-        series.getData().add(new XYChart.Data<>(series.getName(), process.getBurstTime()));
+        series.getData().add(new XYChart.Data<>(series.getName(), process.getRemainingTime()));
         //setBarColorForSeries(series, processList.indexOf(process));
 
 
@@ -109,7 +117,7 @@ public class Bar extends AnchorPane implements Observer, Initializable {
 
     private void initializeChart() {
         xAxis.setLabel("Processes");
-        yAxis.setLabel("Burst Time");
+        yAxis.setLabel("Remaining Time");
 
         // Create a list to store the categories
         categories = FXCollections.observableArrayList();
@@ -127,7 +135,7 @@ public class Bar extends AnchorPane implements Observer, Initializable {
             int seriesIndex = processList.indexOf(process);
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             series.setName("P" + (seriesIndex + 1)); // Set a unique name for each series
-            series.getData().add(new XYChart.Data<>(series.getName(), process.getBurstTime()));
+            series.getData().add(new XYChart.Data<>(series.getName(), process.getRemainingTime()));
 
 
 
