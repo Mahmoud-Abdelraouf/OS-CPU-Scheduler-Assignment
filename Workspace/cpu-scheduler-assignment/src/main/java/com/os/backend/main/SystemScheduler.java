@@ -48,7 +48,7 @@ public class SystemScheduler{
         if(process.getArrivalTime() < time && process.getRemainingTime() != 0){
             // increment waiting
             process.setWaitingTime(process.getWaitingTime() + 1);
-            process.setTurnaroundTime(process.getWaitingTime() + process.getBurstTime());
+            process.setTurnaroundTime(process.getWaitingTime() + (process.getBurstTime() - process.getRemainingTime()));
         }
 
 
@@ -63,15 +63,17 @@ public class SystemScheduler{
             if( e.getState() == ProcessState.RUNNING || e.getState() == ProcessState.STARTED) {
                 // 1. update remaining time for current process
                 // assuming remaining time is initially equal to burst time
-                Process tempCurrentRunningProcess = e.getProcess();
-                tempCurrentRunningProcess.setRemainingTime(tempCurrentRunningProcess.getRemainingTime() - 1);
                 // 2. update waiting time for other processes
                 for(Process p : backend.getProcessList()){
-                    if (p == tempCurrentRunningProcess) continue;
+                    if (p.getProcessNumber() == e.getProcessNumber()) {
+                        p.decrementRemainingTime();
+                        p.setTurnaroundTime(p.getTurnaroundTime() + 1);
+                        continue;
+                    }
                     updateTimeForProcess(p, time);
                 }
                 // 3. return current running process
-                return e.getProcess();
+                return backend.getProcessList().get(e.getProcessNumber()-1);
             }
         }
         return null;
