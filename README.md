@@ -31,7 +31,7 @@ This project aims to implement a CPU Scheduler application that supports various
 
 ## Requirements
 - Java Runtime Environment (JRE)
-- Operating System: Windows, macOS, or Linux
+- Operating System: Windows
 
 ## Build Instructions
 1. Clone the repository: `git clone <repository-url>`
@@ -39,13 +39,9 @@ This project aims to implement a CPU Scheduler application that supports various
 3. Build the project: `mvn package`
 
 ## Contributors
-- [Name 1](https://github.com/user1)
-- [Name 2](https://github.com/user2)
-- [Name 3](https://github.com/user3)
-- [Name 4](https://github.com/user4)
-- [Name 5](https://github.com/user5)
-- [Name 6](https://github.com/user6)
-- [Name 7](https://github.com/user7)
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- [Karim Ibrahim](https://github.com/Karim-308)
+- [Eslam Mohamed](https://github.com/SemoMoh)
+- [Mahmoud Abdelraouf](https://github.com/Mahmoud-Abdelraouf)
+- [Abdelrahman Elsayed](https://github.com/d3cypherd)
+- [Adham Khaled](https://github.com/adhamkhaled312)
+- [Ahmed Khaled](https://github.com/Ahmed-Khaled-Abdelmaksod)
